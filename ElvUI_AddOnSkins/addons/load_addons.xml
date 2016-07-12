@@ -11,4 +11,5 @@
 	<Script file="AuctionatorAtlantiss.lua"/>
 	<Script file="spy.lua"/>
 	<Script file="clique.lua"/>
+	<Script file="Poisoner.lua"/>
 </Ui>

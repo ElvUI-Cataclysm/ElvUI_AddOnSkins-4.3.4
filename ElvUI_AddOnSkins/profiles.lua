@@ -39,5 +39,6 @@ V.addOnSkins = {
 	AuctionatorAtlantiss = true,
 	spy = true,
 	clique = true,
+	Poisoner = true,
 	Blizzard_WorldStateFrame = true,
 };
