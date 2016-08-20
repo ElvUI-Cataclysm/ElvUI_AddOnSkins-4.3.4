@@ -40,5 +40,6 @@ V.addOnSkins = {
 	spy = true,
 	clique = true,
 	Poisoner = true,
+	weakAuras = true,
 	Blizzard_WorldStateFrame = true,
 };

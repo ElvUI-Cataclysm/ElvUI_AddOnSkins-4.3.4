@@ -12,4 +12,5 @@
 	<Script file="spy.lua"/>
 	<Script file="clique.lua"/>
 	<Script file="Poisoner.lua"/>
+	<Script file="weakAuras.lua"/>
 </Ui>
