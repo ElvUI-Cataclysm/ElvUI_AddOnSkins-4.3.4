@@ -31,6 +31,7 @@ V.addOnSkins = {
 	ACP = true,
 	AuctionatorAtlantiss = true,
 	Blizzard_WorldStateFrame = true,
+	BugSack = true,
 	Clique = true,
 	DBM = true,
 	FlightMap = true,
@@ -42,4 +43,5 @@ V.addOnSkins = {
 	Skada = true,
 	Spy = true,
 	WeakAuras = true,
+	WowLua = true,
 };
