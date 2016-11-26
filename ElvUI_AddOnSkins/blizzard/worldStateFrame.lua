@@ -2,12 +2,12 @@ local E, L, V, P, G, _ = unpack(ElvUI);
 local addon = E:GetModule("AddOnSkins");
 
 local captureBarCreate, captureBarUpdate;
-function addon:Blizzard_WorldStateFrame(...)
+function addon:Blizzard_WorldStateFrame()
 	captureBarCreate = function(id)
 		local bar = _G["WorldStateCaptureBar"..id];
 		bar:SetSize(173, 16);
-		bar:ClearAllPoints()
-		bar:SetPoint("CENTER", UIParent, "CENTER", 0, 360);
+	--	bar:ClearAllPoints()
+	--	bar:SetPoint("CENTER", UIParent, "CENTER", 0, 360);
 		bar:CreateBackdrop("Default");
 		
 		_G["WorldStateCaptureBar"..id.."LeftBar"]:SetSize(85, 16);
@@ -67,7 +67,11 @@ function addon:Blizzard_WorldStateFrame(...)
 			middleBar:SetWidth(neutralPercent/100*barSize);
 		end
 		bar.oldValue = position;
-		_G["WorldStateCaptureBar"..id].spark:SetPoint("CENTER", "WorldStateCaptureBar"..id, "LEFT", position, 0);
+		if(bar.spark) then
+			bar.spark:SetPoint("CENTER", "WorldStateCaptureBar"..id, "LEFT", position, 0);
+		else
+			captureBarCreate(id);
+		end
 	end
 	
 	hooksecurefunc(ExtendedUI["CAPTUREPOINT"], "create", captureBarCreate);
