@@ -8,4 +8,4 @@ function addon:Omen()
 	OmenBarList:SetTemplate("Default");
 end
 
---addon:RegisterSkin("Omen", addon.Omen);
+addon:RegisterSkin("Omen", addon.Omen);
