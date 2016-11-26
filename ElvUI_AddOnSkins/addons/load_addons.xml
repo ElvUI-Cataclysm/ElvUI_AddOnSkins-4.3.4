@@ -1,16 +1,18 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="ACP.lua"/>
-	<Script file="dbm.lua"/>
-	<Script file="postal.lua"/>
 	<Script file="_NPCScan.lua"/>
-	<Script file="omen.lua"/>
-	<Script file="recount.lua"/>
-	<Script file="overachiever.lua"/>
-	<Script file="flightMap.lua"/>
-	<Script file="skada.lua"/>
+	<Script file="ACP.lua"/>
 	<Script file="AuctionatorAtlantiss.lua"/>
-	<Script file="spy.lua"/>
+	<Script file="bugSack.lua"/>
 	<Script file="clique.lua"/>
+	<Script file="dbm.lua"/>
+	<Script file="flightMap.lua"/>
+	<Script file="omen.lua"/>
+	<Script file="overachiever.lua"/>
 	<Script file="Poisoner.lua"/>
+	<Script file="postal.lua"/>
+	<Script file="recount.lua"/>
+	<Script file="skada.lua"/>
+	<Script file="spy.lua"/>
 	<Script file="weakAuras.lua"/>
+	<Script file="wowLua.lua"/>
 </Ui>

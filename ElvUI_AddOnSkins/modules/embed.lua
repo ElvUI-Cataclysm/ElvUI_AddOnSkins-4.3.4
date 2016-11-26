@@ -169,6 +169,7 @@ if(addon:CheckAddOn("Omen")) then
 		db.profile.Bar.Spacing = 1;
 		db.profile.Background.EdgeSize = 1;
 		db.profile.Background.BarInset = 2;
+		db.profile.TitleBar.Height = 22;
 		db.profile.TitleBar.UseSameBG = true;
 		db.profile.ShowWith.UseShowWith = false;
 		db.profile.Locked = true;
