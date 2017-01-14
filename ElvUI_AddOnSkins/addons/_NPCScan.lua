@@ -1,4 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI);
 local addon = E:GetModule("AddOnSkins");
 
 if(not addon:CheckAddOn("_NPCScan")) then return; end
@@ -32,12 +32,12 @@ function addon:_NPCScan()
 	--Interface Options
 	S:HandleButton(_NPCScanTest)
 	_NPCScanConfigAlert:StripTextures()
-	
+
 	S:HandleCheckBox(_NPCScanConfigCacheWarningsCheckbox)
 	S:HandleCheckBox(_NPCScanConfigPrintTimeCheckbox)
 	S:HandleCheckBox(_NPCScanConfigUnmuteCheckbox)
 	S:HandleCheckBox(_NPCScanSearchAchievementAddFoundCheckbox)
-	
+
 	S:HandleDropDownBox(_NPCScanConfigSoundDropdown)
 
 	for i = 1, 3 do
@@ -47,7 +47,6 @@ function addon:_NPCScan()
 	S:HandleEditBox(_NPCScanSearchNpcName)
 	S:HandleEditBox(_NPCScanSearchNpcID)
 	S:HandleEditBox(_NPCScanSearchNpcWorld)
-
 end
 
 addon:RegisterSkin("_NPCScan", addon._NPCScan);

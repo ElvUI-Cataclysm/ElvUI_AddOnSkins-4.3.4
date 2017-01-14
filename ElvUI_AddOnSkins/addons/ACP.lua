@@ -1,4 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI);
 local addon = E:GetModule("AddOnSkins");
 
 if(not addon:CheckAddOn("ACP")) then return; end
@@ -11,7 +11,7 @@ function addon:ACP()
 			local collapse = _G["ACP_AddonListEntry" .. i .. "Collapse"]
 			checkbox:SetPoint("LEFT", 5, 0)
 			checkbox:Size(26)
-	
+
 			if not collapse:IsShown() then
 				checkbox:SetPoint("LEFT", 15, 0)
 				checkbox:Size(20)
@@ -52,7 +52,6 @@ function addon:ACP()
 	ACP_AddonList_ReloadUI:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -160, 8)
 	ACP_AddonListBottomClose:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -50, 8)
 	ACP_AddonList:SetScale(UIParent:GetScale())
-
 end
 
 addon:RegisterSkin("ACP", addon.ACP);

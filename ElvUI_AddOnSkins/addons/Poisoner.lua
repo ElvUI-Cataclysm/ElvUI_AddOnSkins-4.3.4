@@ -1,20 +1,20 @@
-local E, L, V, P, G, _ = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI);
 local addon = E:GetModule("AddOnSkins");
 
 if(not addon:CheckAddOn("Poisoner")) then return; end
 
 function addon:Poisoner(event)
 	local S = E:GetModule("Skins");
-	
+
 	--Options Menu
 	PoisonerOptions_SettingsFrame:StripTextures()
 	PoisonerOptions_SettingsFrame:SetTemplate("Transparent")
-	
+
 	S:HandleButton(PoisonerOptions_MenuSortingButton)
 	S:HandleButton(PoisonerOptions_SettingsSave)
 	S:HandleButton(PoisonerOptions_SettingsClose)
 	S:HandleButton(PoisonerOptions_ResetFBPosition)
-	
+
 	S:HandleCheckBox(PoisonerOptions_ChkBox_Enable)
 	S:HandleCheckBox(PoisonerOptions_ChkBox_MBShow)
 	S:HandleCheckBox(PoisonerOptions_ChkBox_FBShow)
@@ -50,7 +50,7 @@ function addon:Poisoner(event)
 	S:HandleCheckBox(PoisonerOptions_ChkBox_AutoBuy_Prompt)
 	S:HandleCheckBox(PoisonerOptions_ChkBox_AutoBuy_Check)
 	S:HandleCheckBox(PoisonerOptions_ChkBox_QuickButton_Lock)
-	
+
 	S:HandleSliderFrame(PoisonerOptions_FB_ScaleSlider)
 	S:HandleSliderFrame(PoisonerOptions_FB_AlphaSlider)
 	S:HandleSliderFrame(PoisonerOptions_Menu_ScaleSlider)
@@ -65,7 +65,7 @@ function addon:Poisoner(event)
 	S:HandleSliderFrame(PoisonerOptions_Slider_WP)
 	S:HandleSliderFrame(PoisonerOptions_QB_ScaleSlider)
 	S:HandleSliderFrame(PoisonerOptions_QB_AlphaSlider)
-	
+
 	S:HandleDropDownBox(Poisoner_DropDownMenu_Mainhand)
 	S:HandleDropDownBox(Poisoner_DropDownMenu_Offhand)
 	S:HandleDropDownBox(Poisoner_DropDownMenu_Throwweapon)
@@ -78,7 +78,7 @@ function addon:Poisoner(event)
 	S:HandleDropDownBox(Poisoner_DropDownMenu_Mainhand_ALT)
 	S:HandleDropDownBox(Poisoner_DropDownMenu_Offhand_ALT)
 	S:HandleDropDownBox(Poisoner_DropDownMenu_Throwweapon_ALT)
-	
+
 	Poisoner_DropDownMenu_MainhandButton:SetWidth(25)
 	Poisoner_DropDownMenu_OffhandButton:SetWidth(25)
 	Poisoner_DropDownMenu_ThrowweaponButton:SetWidth(25)
@@ -91,13 +91,13 @@ function addon:Poisoner(event)
 	Poisoner_DropDownMenu_Mainhand_ALTButton:SetWidth(25)
 	Poisoner_DropDownMenu_Offhand_ALTButton:SetWidth(25)
 	Poisoner_DropDownMenu_Throwweapon_ALTButton:SetWidth(25)
-	
+
 	PoisonerOptions_SettingsFrameTab1:Point('TOPLEFT', PoisonerOptions_SettingsFrame, 'BOTTOMLEFT', 0, 2)
-	
+
 	for i = 1, 5 do
 		S:HandleTab(_G['PoisonerOptions_SettingsFrameTab'..i])
 	end
-	
+
 	--Menu Orientation Button
 	PoisonerOptions_OrientationButton:StripTextures()
 	PoisonerOptions_OrientationButton.backdrop = CreateFrame("Frame", nil, PoisonerOptions_OrientationButton)
@@ -110,29 +110,29 @@ function addon:Poisoner(event)
 	PoisonerOptions_OrientationButton.icon:SetPoint("TOPLEFT", PoisonerOptions_OrientationButton, "TOPLEFT", 0, 0)
 	PoisonerOptions_OrientationButton.icon:SetPoint("BOTTOMRIGHT", PoisonerOptions_OrientationButton, "BOTTOMRIGHT", 0, 0)
 	PoisonerOptions_OrientationButton.icon:SetTexture("Interface\\Icons\\Spell_Nature_CorrosiveBreath")
-	
+
 	--Missing Poisons Weapons Frame
 	PoisonerTimer_IconFrame:SetWidth(145)
 	PoisonerTimer_IconFrame:SetHeight(49)
-	
+
 	PoisonerTimer_Mainhand:CreateBackdrop()
 	PoisonerTimer_Mainhand:SetWidth(45)
 	PoisonerTimer_Mainhand:SetHeight(45)
 	PoisonerTimer_Mainhand:Point("TOPLEFT", PoisonerTimer_IconFrame, "TOPLEFT", 2, -2)
 	PoisonerTimer_MainhandIcon:SetTexCoord(unpack(E.TexCoords))
-	
+
 	PoisonerTimer_Offhand:CreateBackdrop()
 	PoisonerTimer_Offhand:SetWidth(45)
 	PoisonerTimer_Offhand:SetHeight(45)
 	PoisonerTimer_Offhand:Point("TOP", PoisonerTimer_IconFrame, "TOP", 0, -2)
 	PoisonerTimer_OffhandIcon:SetTexCoord(unpack(E.TexCoords))
-	
+
 	PoisonerTimer_Throwweapon:CreateBackdrop()
 	PoisonerTimer_Throwweapon:SetWidth(45)
 	PoisonerTimer_Throwweapon:SetHeight(45)
 	PoisonerTimer_Throwweapon:Point("TOPRIGHT", PoisonerTimer_IconFrame, "TOPRIGHT", -2, -2)
 	PoisonerTimer_ThrowweaponIcon:SetTexCoord(unpack(E.TexCoords))
-	
+
 	--Free Button
 	Poisoner_FreeButton:StripTextures()
 	Poisoner_FreeButton:CreateBackdrop()
@@ -141,7 +141,7 @@ function addon:Poisoner(event)
 	Poisoner_FreeButton:GetNormalTexture():SetTexCoord(unpack(E.TexCoords))
 	Poisoner_FreeButton:GetPushedTexture():SetTexture("Interface\\Icons\\Spell_Nature_CorrosiveBreath")
 	Poisoner_FreeButton:GetPushedTexture():SetTexCoord(unpack(E.TexCoords))
-	
+
 	--Quick Button
 	Poisoner_QuickButton:StripTextures()
 	Poisoner_QuickButton:CreateBackdrop()

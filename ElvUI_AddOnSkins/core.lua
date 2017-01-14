@@ -1,5 +1,5 @@
 ﻿local addonName = ...;
-local E, L, V, P, G, _ = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI);
 local EP = LibStub("LibElvUIPlugin-1.0", true);
 local addon = E:NewModule("AddOnSkins", "AceHook-3.0", "AceEvent-3.0");
 
@@ -21,14 +21,14 @@ local function getOptions()
 	local function GenerateOptionTable(skinName, order)
 		local text = trim(skinName:gsub("^Blizzard_(.+)","%1"):gsub("(%l)(%u%l)","%1 %2"));
 		local options = {
-			type = "toggle",
 			order = order,
+			type = "toggle",
 			name = text,
-			desc = L["TOGGLESKIN_DESC"],
+			desc = L["TOGGLESKIN_DESC"]
 		};
 		return options;
 	end
-	
+
 	local options = {
 		order = 100,
 		type = "group",
@@ -213,35 +213,35 @@ local function getOptions()
 						disabled = function() return E.db.addOnSkins.embed.embedType ~= "DOUBLE" end,
 					},
 					leftWidth = {
-						type = "range",
 						order = 5,
+						type = "range",
 						name = "Embed Left Window Width",
 						min = 100,
 						max = 300,
 						step = 1,
 					},
 					hideChat = {
-						name = "Hide Chat Frame",
 						order = 6,
 						type = "select",
+						name = "Hide Chat Frame",
 						values = E:GetModule("EmbedSystem"):GetChatWindowInfo(),
 						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end,
 					},
 					rightChat = {
+						order = 7,
 						type = "toggle",
 						name = "Embed into Right Chat Panel",
-						order = 7,
 					},
 					belowTop = {
-						type = "toggle",
-						name = "Embed Below Top Tab",
 						order = 8,
-					},
-				},
-			},
-		},
+						type = "toggle",
+						name = "Embed Below Top Tab"
+					}
+				}
+			}
+		}
 	}
-	
+
 	local order, blizzorder = 0, 0;
 	for skinName, _ in addon:OrderedPairs(addon.register) do
 		if(find(skinName, "Blizzard_")) then
@@ -252,7 +252,7 @@ local function getOptions()
 			order = order + 1;
 		end
 	end
-	
+
 	E.Options.args.addOnSkins = options;
 end
 
@@ -309,7 +309,7 @@ function addon:RegisterSkin(skinName, skinFunc, ...)
 		if(not event) then
 			break;
 		end
-		
+
 		if(type(event) == "number") then
 			priority = event;
 		else
@@ -346,12 +346,12 @@ function addon:RegisteredSkin(skinName, priority, func, events)
 			end
 		end
 	end
-	
+
 	if(not self.skins[skinName]) then
 		self.skins[skinName] = {};
 	end
 	self.skins[skinName][priority] = func;
-	
+
 	for event, _ in pairs(events) do
 		if(not find(event, "%[")) then
 			if(not self.events[event]) then
@@ -397,13 +397,13 @@ end
 
 function addon:Initialize()
 	EP:RegisterPlugin(addonName, getOptions);
-	
+
 	for skin, alldata in pairs(self.register) do
 		for _, data in pairs(alldata) do
 			self:RegisteredSkin(skin, data.priority, data.func, data.events);
 		end
 	end
-	
+
 	for skin, funcs in pairs(self.skins) do
 		if self:CheckOption(skin) then
 			for _, func in ipairs(funcs) do

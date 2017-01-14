@@ -1,4 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI);
 local addon = E:GetModule("AddOnSkins");
 
 if(not addon:CheckAddOn("Skada")) then return; end
@@ -15,13 +15,13 @@ function addon:Skada()
 		options.titleoptions.args.color = nil
 		options.windowoptions = nil
 	end)
-	
+
 	hooksecurefunc(SkadaDisplayBar, 'ApplySettings', function(self, win)
 		local skada = win.bargroup
 		skada:SetSpacing(1)
 		skada:SetFrameLevel(5)
 		skada:SetBackdrop(nil)
-		
+
 		if(win.db.enabletitle) then
 			skada.button:SetBackdrop(nil);
 			if(not skada.button.backdrop) then
@@ -54,14 +54,14 @@ function addon:Skada()
 			end
 		end
 	end)
-	
+
 	local module = E:GetModule("EmbedSystem");
 	hooksecurefunc(Skada, "CreateWindow", function()
 		if(module:CheckAddOn("Skada")) then
 			module:Skada();
 		end
 	end);
-	
+
 	hooksecurefunc(Skada, "DeleteWindow", function()
 		if(module:CheckAddOn("Skada")) then
 			module:Skada();

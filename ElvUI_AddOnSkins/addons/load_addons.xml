@@ -2,6 +2,7 @@
 	<Script file="_NPCScan.lua"/>
 	<Script file="ACP.lua"/>
 	<Script file="AuctionatorAtlantiss.lua"/>
+	<Script file="bindPad.lua"/>
 	<Script file="bugSack.lua"/>
 	<Script file="clique.lua"/>
 	<Script file="dbm.lua"/>

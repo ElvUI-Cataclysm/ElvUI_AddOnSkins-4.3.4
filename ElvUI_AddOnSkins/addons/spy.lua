@@ -1,4 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI);
 local addon = E:GetModule("AddOnSkins");
 
 if(not addon:CheckAddOn("Spy")) then return; end
@@ -14,7 +14,6 @@ function addon:Spy()
 	Spy_AlertWindow:Point('TOP', UIParent, 'TOP', 0, -130)
 
 	S:HandleCloseButton(Spy_MainWindow.CloseButton);
-
 end
 
 addon:RegisterSkin("Spy", addon.Spy);
