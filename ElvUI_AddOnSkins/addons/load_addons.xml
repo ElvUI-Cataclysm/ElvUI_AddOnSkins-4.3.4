@@ -7,6 +7,7 @@
 	<Script file="clique.lua"/>
 	<Script file="dbm.lua"/>
 	<Script file="flightMap.lua"/>
+	<Script file="mageNuggets.lua"/>
 	<Script file="omen.lua"/>
 	<Script file="overachiever.lua"/>
 	<Script file="Poisoner.lua"/>

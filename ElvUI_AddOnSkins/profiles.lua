@@ -36,6 +36,7 @@ V.addOnSkins = {
 	Clique = true,
 	DBM = true,
 	FlightMap = true,
+	MageNuggets = true,
 	Omen = true,
 	Overachiever = true,
 	Poisoner = true,
