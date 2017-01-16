@@ -1,6 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="_NPCScan.lua"/>
 	<Script file="ACP.lua"/>
+	<Script file="autoEquipQuestItem.lua"/>
 	<Script file="AuctionatorAtlantiss.lua"/>
 	<Script file="bindPad.lua"/>
 	<Script file="bugSack.lua"/>
