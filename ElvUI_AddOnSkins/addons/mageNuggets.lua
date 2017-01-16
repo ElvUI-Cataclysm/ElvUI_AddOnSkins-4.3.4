@@ -20,27 +20,85 @@ function addon:MageNuggets()
 	MNicyveins_FrameTexture:SetDrawLayer("ARTWORK");
 	MNicyveins_FrameTexture:SetTexCoord(unpack(E.TexCoords));
 	MNicyveins_FrameTexture:SetInside();
+	MNicyveins_FrameText:FontTemplate();
+
+	MNcombust_Frame:SetTemplate("Default");
+	MNcombust_FrameTexture:SetDrawLayer("ARTWORK");
+	MNcombust_FrameTexture:SetTexCoord(unpack(E.TexCoords));
+	MNcombust_FrameTexture:SetInside();
+	MNcombust_FrameText:FontTemplate();
+
+	MNcritMass_Frame:SetTemplate("Default");
+	MNcritMass_FrameTexture:SetDrawLayer("ARTWORK");
+	MNcritMass_FrameTexture:SetTexCoord(unpack(E.TexCoords));
+	MNcritMass_FrameTexture:SetInside();
+	MNcritMass_FrameText:FontTemplate();
 
 	MNarcanepower_Frame:SetTemplate("Default");
 	MNarcanepower_FrameTexture:SetDrawLayer("ARTWORK");
 	MNarcanepower_FrameTexture:SetTexCoord(unpack(E.TexCoords));
 	MNarcanepower_FrameTexture:SetInside();
+	MNarcanepower_FrameText:FontTemplate();
 
 	MNlust_Frame:SetTemplate("Default");
 	MNlust_FrameTexture:SetDrawLayer("ARTWORK");
 	MNlust_FrameTexture:SetTexCoord(unpack(E.TexCoords));
 	MNlust_FrameTexture:SetInside();
+	MNlust_FrameText:FontTemplate();
 
-	MageNugLB_Frame:SetTemplate("Default");
-	MageNugLB_FrameTexture:SetDrawLayer("ARTWORK");
-	MageNugLB_FrameTexture:SetTexCoord(unpack(E.TexCoords));
-	MageNugLB_FrameTexture:SetInside();
-	MageNugLB_Frame_Text:FontTemplate();
+	MNmoonFire_Frame:SetTemplate("Default");
+	MNmoonFire_FrameTexture:SetDrawLayer("ARTWORK");
+	MNmoonFire_FrameTexture:SetTexCoord(unpack(E.TexCoords));
+	MNmoonFire_FrameTexture:SetInside();
+	MNmoonFire_FrameText:FontTemplate();
+
+	MNinsectSwarm_Frame:SetTemplate("Default");
+	MNinsectSwarm_FrameTexture:SetDrawLayer("ARTWORK");
+	MNinsectSwarm_FrameTexture:SetTexCoord(unpack(E.TexCoords));
+	MNinsectSwarm_FrameTexture:SetInside();
+	MNinsectSwarm_FrameText:FontTemplate();
+
+	MNPyromaniac_Frame:SetTemplate("Default");
+	MNPyromaniac_FrameTexture:SetDrawLayer("ARTWORK");
+	MNPyromaniac_FrameTexture:SetTexCoord(unpack(E.TexCoords));
+	MNPyromaniac_FrameTexture:SetInside();
+
+	MNstarSurge_Frame:SetTemplate("Default");
+	MNstarSurge_FrameTexture:SetDrawLayer("ARTWORK");
+	MNstarSurge_FrameTexture:SetTexCoord(unpack(E.TexCoords));
+	MNstarSurge_FrameTexture:SetInside();
+	MNstarSurge_FrameText:FontTemplate();
 
 	MNimpGem_Frame:SetTemplate("Default");
 	MNimpGem_FrameTexture:SetDrawLayer("ARTWORK");
 	MNimpGem_FrameTexture:SetTexCoord(unpack(E.TexCoords));
 	MNimpGem_FrameTexture:SetInside();
+
+	MageNugLB_Frame:SetTemplate("Default");
+	MageNugLB_FrameTexture:SetDrawLayer("ARTWORK");
+	MageNugLB_FrameTexture:SetTexCoord(unpack(E.TexCoords));
+	MageNugLB_FrameTexture:SetInside();
+	MageNugLB_Frame_Text:FontTemplate(nil, 20, "OUTLINE");
+
+	for i = 1, 4 do
+		local frame = _G["MageNugLB"..i.."_Frame"]
+		local bar = _G["MageNugLB"..i.."_Frame_Bar"]
+
+		frame:ClearAllPoints()
+		frame:SetBackdrop(nil)
+		_G["MageNugLB"..i.."_Frame_Text"]:SetDrawLayer("OVERLAY", 8)
+		_G["MageNugLB"..i.."_Frame_Text"]:FontTemplate();
+		_G["MageNugLB"..i.."_Frame_Text2"]:SetDrawLayer("OVERLAY", 8)
+		_G["MageNugLB"..i.."_Frame_Text2"]:FontTemplate();
+
+		bar:SetStatusBarTexture(E["media"].normTex);
+		bar:CreateBackdrop()
+	end
+
+	MageNugLB1_Frame:SetPoint("BOTTOMLEFT", MageNugLB_Frame, "BOTTOMRIGHT", 6, -1)
+	MageNugLB2_Frame:SetPoint("BOTTOM", MageNugLB1_Frame, "TOP", 0, 4)
+	MageNugLB3_Frame:SetPoint("BOTTOM", MageNugLB2_Frame, "TOP", 0, 4)
+	MageNugLB4_Frame:SetPoint("BOTTOM", MageNugLB3_Frame, "TOP", 0, 4)
 
 	MageNugClearcast_Frame:SetTemplate("Default");
 	MageNugClearcast_FrameTexture:SetDrawLayer("ARTWORK");
@@ -82,7 +140,6 @@ function addon:MageNuggets()
 	MageNugManaGem_Frame_Text2:FontTemplate(nil, 12, "OUTLINE");
 	MageNugManaGem_Frame_Text2:ClearAllPoints()
 	MageNugManaGem_Frame_Text2:SetPoint("CENTER", MageNugManaGem_Frame_Bar, "CENTER", 0, -11)
-
 
 	MageNugAB_Frame:SetTemplate("Default");
 	MageNugAB_FrameTexture:SetDrawLayer("ARTWORK");
@@ -140,17 +197,24 @@ function addon:MageNuggets()
 		local icon = _G["MageNugCD"..i.."_Frame_Texture"]
 		local text = _G["MageNugCD"..i.."_Frame_Text"]
 		local text2 = _G["MageNugCD"..i.."_Frame_Text2"]
-	
+
 		frame:CreateBackdrop("Default");
 		frame.backdrop:SetOutside(icon);
+		frame:ClearAllPoints()
 		icon:SetTexCoord(unpack(E.TexCoords));
 		bar:Point("LEFT", frame.backdrop, "RIGHT", E.Spacing*3, 0)
 		bar:SetStatusBarTexture(E["media"].normTex);
 		E:RegisterStatusBar(bar);
 		bar:CreateBackdrop("Default");
+		bar.backdrop:SetOutside()
 		text:FontTemplate(nil, 10, "OUTLINE");
 		text2:FontTemplate(nil, 10, "OUTLINE");
 	end
+
+	MageNugCD1_Frame:SetPoint("BOTTOMLEFT", MageNugCD_Frame, "BOTTOMRIGHT", 6, -1)
+	MageNugCD2_Frame:SetPoint("BOTTOM", MageNugCD1_Frame, "TOP", 0, 4)
+	MageNugCD3_Frame:SetPoint("BOTTOM", MageNugCD2_Frame, "TOP", 0, 4)
+	MageNugCD4_Frame:SetPoint("BOTTOM", MageNugCD3_Frame, "TOP", 0, 4)
 
 	MageNugPolyFrame:SetTemplate("Transparent");
 	MageNugPolyFrame:CreateBackdrop("Default");
