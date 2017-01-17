@@ -39,6 +39,7 @@ V.addOnSkins = {
 	AutoEquipQuestItem = true,
 	MageNuggets = true,
 	Omen = true,
+	OneClickEnchantScroll = true,
 	Overachiever = true,
 	PallyPower = true,
 	Poisoner = true,
