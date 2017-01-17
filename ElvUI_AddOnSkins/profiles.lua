@@ -40,6 +40,7 @@ V.addOnSkins = {
 	MageNuggets = true,
 	Omen = true,
 	Overachiever = true,
+	PallyPower = true,
 	Poisoner = true,
 	Postal = true,
 	Recount = true,

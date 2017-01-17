@@ -11,6 +11,7 @@
 	<Script file="mageNuggets.lua"/>
 	<Script file="omen.lua"/>
 	<Script file="overachiever.lua"/>
+	<Script file="pallyPower.lua"/>
 	<Script file="Poisoner.lua"/>
 	<Script file="postal.lua"/>
 	<Script file="recount.lua"/>
