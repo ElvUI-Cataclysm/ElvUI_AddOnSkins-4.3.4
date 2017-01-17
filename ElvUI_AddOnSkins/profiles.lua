@@ -47,4 +47,5 @@ V.addOnSkins = {
 	Spy = true,
 	WeakAuras = true,
 	WowLua = true,
+	VanasKoS = true
 };
