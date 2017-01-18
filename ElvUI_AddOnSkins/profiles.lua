@@ -45,6 +45,7 @@ V.addOnSkins = {
 	Poisoner = true,
 	Postal = true,
 	Recount = true,
+	SexyCooldown = true,
 	Skada = true,
 	Spy = true,
 	KHunterTimers = true,

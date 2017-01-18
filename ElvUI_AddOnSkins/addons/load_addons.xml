@@ -16,6 +16,7 @@
 	<Script file="Poisoner.lua"/>
 	<Script file="postal.lua"/>
 	<Script file="recount.lua"/>
+	<Script file="sexyCooldown.lua"/>
 	<Script file="skada.lua"/>
 	<Script file="spy.lua"/>
 	<Script file="kHunterTimers.lua"/>
