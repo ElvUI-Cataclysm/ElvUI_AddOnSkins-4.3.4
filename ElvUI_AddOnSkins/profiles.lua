@@ -47,6 +47,7 @@ V.addOnSkins = {
 	Recount = true,
 	Skada = true,
 	Spy = true,
+	KHunterTimers = true,
 	TotemTimers = true,
 	WeakAuras = true,
 	WowLua = true,
