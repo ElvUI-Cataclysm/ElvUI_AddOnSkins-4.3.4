@@ -29,6 +29,7 @@ V.addOnSkins = {
 	_NPCScan = true,
 	ACP = true,
 	AuctionatorAtlantiss = true,
+	Archy = true,
 	BindPad = true,
 	Blizzard_WorldStateFrame = true,
 	BugSack = true,
