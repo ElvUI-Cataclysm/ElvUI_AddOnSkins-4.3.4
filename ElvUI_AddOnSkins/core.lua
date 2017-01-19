@@ -33,6 +33,7 @@ local function getOptions()
 		order = 100,
 		type = "group",
 		name = L["AddOn Skins"],
+		childGroups = "tab",
 		args = {
 			addOns = {
 				order = 1,
@@ -41,7 +42,7 @@ local function getOptions()
 				guiInline = true,
 				get = function(info) return E.private.addOnSkins[info[#info]]; end,
 				set = function(info, value) E.private.addOnSkins[info[#info]] = value; E:StaticPopup_Show("PRIVATE_RL"); end,
-				args = {},
+				args = {}
 			},
 			blizzard = {
 				order = 2,
@@ -50,16 +51,20 @@ local function getOptions()
 				guiInline = true,
 				get = function(info) return E.private.addOnSkins[info[#info]]; end,
 				set = function(info, value) E.private.addOnSkins[info[#info]] = value; E:StaticPopup_Show("PRIVATE_RL"); end,
-				args = {},
+				args = {}
 			},
 			misc = {
 				order = 3,
 				type = "group",
 				name = L["Misc Options"],
-				guiInline = true,
 				args = {
-					skadaGroup = {
+					header = {
 						order = 1,
+						type = "header",
+						name = L["Misc Options"]
+					},
+					skadaGroup = {
+						order = 2,
 						type = "group",
 						name = L["Skada"],
 						get = function(info) return E.db.addOnSkins[info[#info]]; end,
@@ -106,7 +111,7 @@ local function getOptions()
 						}
 					},
 					dbmGroup = {
-						order = 2,
+						order = 3,
 						type = "group",
 						name = L["DBM"],
 						get = function(info) return E.db.addOnSkins[info[#info]]; end,
@@ -147,7 +152,7 @@ local function getOptions()
 						}
 					},
 					waGroup = {
-						order = 3,
+						order = 4,
 						type = "group",
 						name = L["WeakAuras"],
 						get = function(info) return E.db.addOnSkins[info[#info]]; end,
@@ -162,7 +167,7 @@ local function getOptions()
 							weakAuraIconCooldown = {
 								order = 2,
 								type = "toggle",
-								name = L["Icon Cooldown"]
+								name = L["WeakAura Cooldowns"]
 							}
 						}
 					}
@@ -171,27 +176,32 @@ local function getOptions()
 			embed = {
 				order = 4,
 				type = "group",
-				name = "Embed Settings",
+				name = L["Embed Settings"],
 				get = function(info) return E.db.addOnSkins.embed[ info[#info] ] end,
 				set = function(info, value) E.db.addOnSkins.embed[ info[#info] ] = value; E:GetModule("EmbedSystem"):Check() end,
 				args = {
-					desc = {
+					header = {
 						order = 1,
+						type = "header",
+						name = L["Embed Settings"],
+					},
+					desc = {
+						order = 2,
 						type = "description",
-						name = "Settings to control Embedded AddOns: Available Embeds: Omen | Skada | Recount ",
+						name = L["Settings to control Embedded AddOns:\n\nAvailable Embeds: Omen | Skada | Recount"],
 					},
 					embedType = {
-						order = 2,
+						order = 3,
 						type = "select",
 						name = L["Embed Type"],
 						values = {
 							["DISABLE"] = L["Disable"],
 							["SINGLE"] = L["Single"],
 							["DOUBLE"] = L["Double"]
-						},
+						}
 					},
 					left = {
-						order = 3,
+						order = 4,
 						type = "select",
 						name = L["Left Panel"],
 						values = {
@@ -199,10 +209,10 @@ local function getOptions()
 							["Omen"] = "Omen",
 							["Skada"] = "Skada"
 						},
-						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end,
+						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
 					},
 					right = {
-						order = 4,
+						order = 5,
 						type = "select",
 						name = L["Right Panel"],
 						values = {
@@ -210,32 +220,32 @@ local function getOptions()
 							["Omen"] = "Omen",
 							["Skada"] = "Skada"
 						},
-						disabled = function() return E.db.addOnSkins.embed.embedType ~= "DOUBLE" end,
+						disabled = function() return E.db.addOnSkins.embed.embedType ~= "DOUBLE" end
 					},
 					leftWidth = {
-						order = 5,
+						order = 6,
 						type = "range",
-						name = "Embed Left Window Width",
+						name = L["Embed Left Window Width"],
 						min = 100,
 						max = 300,
-						step = 1,
+						step = 1
 					},
 					hideChat = {
-						order = 6,
+						order = 7,
 						type = "select",
-						name = "Hide Chat Frame",
+						name = L["Hide Chat Frame"],
 						values = E:GetModule("EmbedSystem"):GetChatWindowInfo(),
-						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end,
+						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
 					},
 					rightChat = {
-						order = 7,
-						type = "toggle",
-						name = "Embed into Right Chat Panel",
-					},
-					belowTop = {
 						order = 8,
 						type = "toggle",
-						name = "Embed Below Top Tab"
+						name = L["Embed into Right Chat Panel"]
+					},
+					belowTop = {
+						order = 9,
+						type = "toggle",
+						name = L["Embed Below Top Tab"]
 					}
 				}
 			}
