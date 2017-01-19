@@ -1,8 +1,10 @@
 local E, L, V, P, G = unpack(ElvUI);
-local S = E:GetModule("Skins");
+local addon = E:GetModule("AddOnSkins");
 
-local function LoadSkin()
-	if(not E.private.addOnSkins.WowLua) then return; end
+if(not addon:CheckAddOn("WowLua")) then return; end
+
+function addon:WowLua()
+	local S = E:GetModule("Skins");
 
 	WowLuaFrame:StripTextures();
 	WowLuaFrame:SetTemplate("Transparent");
@@ -58,4 +60,4 @@ local function LoadSkin()
 	WowLuaFrameOutputDownButton:Size(18);
 end
 
-S:AddCallbackForAddon("WowLua", "WowLua", LoadSkin);
+addon:RegisterSkin("WowLua", addon.WowLua);

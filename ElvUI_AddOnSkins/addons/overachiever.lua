@@ -1,10 +1,11 @@
 local E, L, V, P, G = unpack(ElvUI);
 local addon = E:GetModule("AddOnSkins");
-local S = E:GetModule("Skins");
 
 if(not addon:CheckAddOn("Overachiever")) then return; end
 
 function addon:Overachiever(event, name)
+	local S = E:GetModule("Skins");
+
 	if(name == "Overachiever_Tabs" or IsAddOnLoaded("Overachiever_Tabs")) then
 		for i = 4, 6 do
 			S:HandleTab(_G["AchievementFrameTab" .. i]);

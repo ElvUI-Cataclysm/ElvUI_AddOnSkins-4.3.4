@@ -1,9 +1,11 @@
 local E, L, V, P, G = unpack(ElvUI);
-local S = E:GetModule("Skins");
+local addon = E:GetModule("AddOnSkins");
 
-local function LoadSkin()
-	if(not E.private.addOnSkins.BugSack) then return; end
+if(not addon:CheckAddOn("BugSack")) then return; end
 
+function addon:BugSack()
+	local S = E:GetModule("Skins");
+	
 	local function BugSack_OpenSack()
 		if(BugSackFrame.isSkinned) then return; end
 		BugSackFrame:StripTextures();
@@ -35,4 +37,4 @@ local function LoadSkin()
 	hooksecurefunc(BugSack, "OpenSack", BugSack_OpenSack);
 end
 
-S:AddCallbackForAddon("BugSack", "BugSack", LoadSkin);
+addon:RegisterSkin("BugSack", addon.BugSack);
