@@ -43,6 +43,7 @@ V.addOnSkins = {
 	PallyPower = true,
 	Poisoner = true,
 	Postal = true,
+	QuestCompletist = true,
 	Recount = true,
 	SexyCooldown = true,
 	Skada = true,

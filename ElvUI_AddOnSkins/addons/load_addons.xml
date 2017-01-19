@@ -5,6 +5,7 @@
 	<Script file="AuctionatorAtlantiss.lua"/>
 	<Script file="bindPad.lua"/>
 	<Script file="bugSack.lua"/>
+	<Script file="questCompletist.lua"/>
 	<Script file="clique.lua"/>
 	<Script file="dbm.lua"/>
 	<Script file="flightMap.lua"/>
