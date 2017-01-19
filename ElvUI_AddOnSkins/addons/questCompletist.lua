@@ -7,18 +7,19 @@ function addon:QuestCompletist()
 	local S = E:GetModule("Skins");
 
 	local tooltips = {
-		'qcMapTooltip',
-		'qcQuestInformationTooltip',
-		'qcToastTooltip',
-		'qcQuestReputationTooltip',
-		'qcNewDataAlertTooltip',
-		'qcMutuallyExclusiveAlertTooltip',
+		"qcMapTooltip",
+		"qcQuestInformationTooltip",
+		"qcToastTooltip",
+		"qcQuestReputationTooltip",
+		"qcNewDataAlertTooltip",
+		"qcMutuallyExclusiveAlertTooltip",
 	}
 
 	for _, object in pairs(tooltips) do
 		if _G[object] then
-			_G[object]:SetFrameStrata('DIALOG')
-			_G[object]:SetTemplate("Transparent")
+			_G[object]:SetFrameStrata("DIALOG")
+			_G[object]:SetBackdrop(nil)
+			_G[object]:CreateBackdrop("Transparent")
 		end
 	end
 
@@ -32,7 +33,7 @@ function addon:QuestCompletist()
 
 	S:HandleEditBox(qcSearchBox)
 	qcSearchBox:Size(160, 20)
-	
+
 	S:HandleButton(qcOptionsButton)
 	S:HandleButton(qcCategoryDropdownButton)
 
@@ -41,7 +42,7 @@ function addon:QuestCompletist()
 
 	S:HandleSliderFrame(qcMenuSlider, 16)
 
-	qcMenuSlider:Point('TOPLEFT', 303, -90)
+	qcMenuSlider:Point("TOPLEFT", 303, -90)
 	qcMenuSlider:Height(256)
 
 	S:HandleCheckBox(qcIO_M_SHOW_ICONS)
