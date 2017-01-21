@@ -19,83 +19,38 @@ function addon:Titan()
 		Titan_Bar__Display_AuxBar2:StripTextures()
 		Titan_Bar__Display_AuxBar2:SetTemplate("Transparent", true)
 
-		if(TitanPanelGoldButtonIcon) then
-			TitanPanelGoldButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
+		local Icons = {
+			"TitanPanelGoldButtonIcon",
+			"TitanPanelDefenseButtonIcon",
+			"TitanPanelBroker_PortalsButtonIcon",
+			"TitanPanelMNButtonIcon",
+			"TitanPanelCOButtonIcon",
+			"TitanPanelALButtonIcon",
+			"TitanPanelHPButtonIcon",
+			"TitanPanelSKButtonIcon",
+			"TitanPanelFAButtonIcon",
+			"TitanPanelAYButtonIcon",
+			"TitanPanelAYButtonIcon",
+			"TitanPanelBSButtonIcon",
+			"TitanPanelENButtonIcon",
+			"TitanPanelEGButtonIcon",
+			"TitanPanelJCButtonIcon",
+			"TitanPanelLWButtonIcon",
+			"TitanPanelTLButtonIcon",
+			"TitanPanelFHButtonIcon",
+			"TitanPanelSPButtonIcon"
+		};
 
-		if(TitanPanelDefenseButtonIcon) then
-			TitanPanelDefenseButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelMNButtonIcon) then
-			TitanPanelMNButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelCOButtonIcon) then
-			TitanPanelCOButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelALButtonIcon) then
-			TitanPanelALButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelHPButtonIcon) then
-			TitanPanelHPButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelSKButtonIcon) then
-			TitanPanelSKButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelFAButtonIcon) then
-			TitanPanelFAButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelAYButtonIcon) then
-			TitanPanelAYButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelBSButtonIcon) then
-			TitanPanelBSButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelENButtonIcon) then
-			TitanPanelENButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelEGButtonIcon) then
-			TitanPanelEGButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelJCButtonIcon) then
-			TitanPanelJCButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelLWButtonIcon) then
-			TitanPanelLWButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelTLButtonIcon) then
-			TitanPanelTLButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-
-		if(TitanPanelFHButtonIcon) then
-			TitanPanelFHButtonIcon:SetTexCoord(unpack(E.TexCoords));
-		end
-		
-
-		if(TitanPanelSPButtonIcon) then
-			TitanPanelSPButtonIcon:SetTexCoord(unpack(E.TexCoords));
+		for i = 1, #Icons do
+			if(_G[Icons[i]]) then
+				_G[Icons[i]]:SetTexCoord(unpack(E.TexCoords));
+			end
 		end
 
 		for i = 0, 9 do
 			if(_G["TitanPanelA"..i.."ButtonIcon"]) then
 				_G["TitanPanelA"..i.."ButtonIcon"]:SetTexCoord(unpack(E.TexCoords));
 			end
-		end
-
-		if(TitanPanelBroker_PortalsButtonIcon) then
-			TitanPanelBroker_PortalsButtonIcon:SetTexCoord(unpack(E.TexCoords));
 		end
 	end)
 end
