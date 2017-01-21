@@ -50,6 +50,7 @@ V.addOnSkins = {
 	Skada = true,
 	Spy = true,
 	KHunterTimers = true,
+	Titan = true,
 	TotemTimers = true,
 	WeakAuras = true,
 	WowLua = true,

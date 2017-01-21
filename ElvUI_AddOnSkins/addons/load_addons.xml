@@ -22,6 +22,7 @@
 	<Script file="skada.lua"/>
 	<Script file="spy.lua"/>
 	<Script file="kHunterTimers.lua"/>
+	<Script file="titanPanel.lua"/>
 	<Script file="totemTimers.lua"/>
 	<Script file="weakAuras.lua"/>
 	<Script file="wowLua.lua"/>
