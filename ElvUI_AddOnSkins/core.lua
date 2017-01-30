@@ -66,7 +66,7 @@ local function getOptions()
 				}
 			},
 			misc = {
-				order = 3,
+				order = 2,
 				type = "group",
 				name = L["Misc Options"],
 				args = {
@@ -194,7 +194,7 @@ local function getOptions()
 				}
 			},
 			embed = {
-				order = 4,
+				order = 3,
 				type = "group",
 				name = L["Embed Settings"],
 				get = function(info) return E.db.addOnSkins.embed[ info[#info] ] end,
