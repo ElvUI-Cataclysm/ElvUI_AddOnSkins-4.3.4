@@ -35,23 +35,35 @@ local function getOptions()
 		name = L["AddOn Skins"],
 		childGroups = "tab",
 		args = {
-			addOns = {
+			skins = {
 				order = 1,
 				type = "group",
-				name = L["AddOn Skins"],
-				guiInline = true,
-				get = function(info) return E.private.addOnSkins[info[#info]]; end,
-				set = function(info, value) E.private.addOnSkins[info[#info]] = value; E:StaticPopup_Show("PRIVATE_RL"); end,
-				args = {}
-			},
-			blizzard = {
-				order = 2,
-				type = "group",
-				name = L["Blizzard Skins"],
-				guiInline = true,
-				get = function(info) return E.private.addOnSkins[info[#info]]; end,
-				set = function(info, value) E.private.addOnSkins[info[#info]] = value; E:StaticPopup_Show("PRIVATE_RL"); end,
-				args = {}
+				name = L["Skins"],
+				args = {
+					header = {
+						order = 1,
+						type = "header",
+						name = L["Skins"]
+					},
+					addOns = {
+						order = 2,
+						type = "group",
+						name = L["AddOn Skins"],
+						guiInline = true,
+						get = function(info) return E.private.addOnSkins[info[#info]]; end,
+						set = function(info, value) E.private.addOnSkins[info[#info]] = value; E:StaticPopup_Show("PRIVATE_RL"); end,
+						args = {}
+					},
+					blizzard = {
+						order = 3,
+						type = "group",
+						name = L["Blizzard Skins"],
+						guiInline = true,
+						get = function(info) return E.private.addOnSkins[info[#info]]; end,
+						set = function(info, value) E.private.addOnSkins[info[#info]] = value; E:StaticPopup_Show("PRIVATE_RL"); end,
+						args = {}
+					}
+				}
 			},
 			misc = {
 				order = 3,
@@ -66,7 +78,8 @@ local function getOptions()
 					skadaGroup = {
 						order = 2,
 						type = "group",
-						name = L["Skada"],
+						name = "Skada",
+						guiInline = true,
 						get = function(info) return E.db.addOnSkins[info[#info]]; end,
 						set = function(info, value) E.db.addOnSkins[info[#info]] = value; Skada:UpdateDisplay(); end,
 						disabled = function() return not addon:CheckAddOn("Skada"); end,
@@ -113,7 +126,8 @@ local function getOptions()
 					dbmGroup = {
 						order = 3,
 						type = "group",
-						name = L["DBM"],
+						name = "DBM",
+						guiInline = true,
 						get = function(info) return E.db.addOnSkins[info[#info]]; end,
 						set = function(info, value) E.db.addOnSkins[info[#info]] = value; DBM.Bars:ApplyStyle(); DBM.BossHealth:UpdateSettings(); end,
 						disabled = function() return not addon:CheckAddOn("DBM-Core"); end,
@@ -121,29 +135,34 @@ local function getOptions()
 							dbmBarHeight = {
 								order = 1,
 								type = "range",
-								name = "Bar Height",
+								name = L["Bar Height"],
 								min = 6, max = 60,
 								step = 1
 							},
-							dbmFont = {
+							spacer = {
 								order = 2,
+								type = "description",
+								name = ""
+							},
+							dbmFont = {
+								order = 3,
 								type = "select",
 								dialogControl = "LSM30_Font",
 								name = L["Font"],
 								values = AceGUIWidgetLSMlists.font
 							},
 							dbmFontSize = {
-								order = 3,
+								order = 4,
 								type = "range",
 								name = L["Font Size"],
 								min = 6, max = 22, step = 1
 							},
 							dbmFontOutline = {
-								order = 4,
+								order = 5,
 								type = "select",
 								name = L["Font Outline"],
 								values = {
-									["NONE"] = L["None"],
+									["NONE"] = NONE,
 									["OUTLINE"] = "OUTLINE",
 									["MONOCHROMEOUTLINE"] = "MONOCROMEOUTLINE",
 									["THICKOUTLINE"] = "THICKOUTLINE"
@@ -154,7 +173,8 @@ local function getOptions()
 					waGroup = {
 						order = 4,
 						type = "group",
-						name = L["WeakAuras"],
+						name = "WeakAuras",
+						guiInline = true,
 						get = function(info) return E.db.addOnSkins[info[#info]]; end,
 						set = function(info, value) E.db.addOnSkins[info[#info]] = value; E:StaticPopup_Show("PRIVATE_RL"); end,
 						disabled = function() return not addon:CheckAddOn("WeakAuras"); end,
@@ -188,10 +208,26 @@ local function getOptions()
 					desc = {
 						order = 2,
 						type = "description",
-						name = L["Settings to control Embedded AddOns:\n\nAvailable Embeds: Omen | Skada | Recount"],
+						name = L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"]
+					},
+					rightChat = {
+						order = 3,
+						type = "toggle",
+						name = L["Embed into Right Chat Panel"]
+					},
+					belowTop = {
+						order = 4,
+						type = "toggle",
+						name = L["Embed Below Top Tab"]
+					},
+					spacer = {
+						order = 5,
+						type = "description",
+						name = "",
+						width = "full"
 					},
 					embedType = {
-						order = 3,
+						order = 6,
 						type = "select",
 						name = L["Embed Type"],
 						values = {
@@ -201,7 +237,7 @@ local function getOptions()
 						}
 					},
 					left = {
-						order = 4,
+						order = 7,
 						type = "select",
 						name = L["Left Panel"],
 						values = {
@@ -212,7 +248,7 @@ local function getOptions()
 						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
 					},
 					right = {
-						order = 5,
+						order = 8,
 						type = "select",
 						name = L["Right Panel"],
 						values = {
@@ -223,7 +259,7 @@ local function getOptions()
 						disabled = function() return E.db.addOnSkins.embed.embedType ~= "DOUBLE" end
 					},
 					leftWidth = {
-						order = 6,
+						order = 9,
 						type = "range",
 						name = L["Embed Left Window Width"],
 						min = 100,
@@ -231,21 +267,11 @@ local function getOptions()
 						step = 1
 					},
 					hideChat = {
-						order = 7,
+						order = 10,
 						type = "select",
 						name = L["Hide Chat Frame"],
 						values = E:GetModule("EmbedSystem"):GetChatWindowInfo(),
 						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
-					},
-					rightChat = {
-						order = 8,
-						type = "toggle",
-						name = L["Embed into Right Chat Panel"]
-					},
-					belowTop = {
-						order = 9,
-						type = "toggle",
-						name = L["Embed Below Top Tab"]
 					}
 				}
 			}
@@ -255,10 +281,10 @@ local function getOptions()
 	local order, blizzorder = 0, 0;
 	for skinName, _ in addon:OrderedPairs(addon.register) do
 		if(find(skinName, "Blizzard_")) then
-			options.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder);
+			options.args.skins.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder);
 			blizzorder = blizzorder + 1;
 		else
-			options.args.addOns.args[skinName] = GenerateOptionTable(skinName, order);
+			options.args.skins.args.addOns.args[skinName] = GenerateOptionTable(skinName, order);
 			order = order + 1;
 		end
 	end

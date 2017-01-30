@@ -5,8 +5,8 @@
 ## Notes: AddOn skins for ElvUI :)
 ## RequiredDeps: ElvUI
 
-locales\load_locales.xml
-profiles.lua
+Locales.lua
+Settings.lua
 core.lua
 addons\load_addons.xml
 blizzard\load_blizzard.xml
