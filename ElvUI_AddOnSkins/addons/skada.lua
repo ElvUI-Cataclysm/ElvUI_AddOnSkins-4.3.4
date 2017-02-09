@@ -1,6 +1,8 @@
 local E, L, V, P, G = unpack(ElvUI);
 local addon = E:GetModule("AddOnSkins");
 
+local ipairs = ipairs;
+
 if(not addon:CheckAddOn("Skada")) then return; end
 
 function addon:Skada()
@@ -51,6 +53,17 @@ function addon:Skada()
 				skada.backdrop:SetPoint("LEFT", skada.button, "LEFT", -E.Border, 0);
 				skada.backdrop:SetPoint("RIGHT", skada.button, "RIGHT", E.Border, 0);
 				skada.backdrop:SetPoint("TOP", skada.button, "BOTTOM", 0, win.db.enabletitle and -(E.Spacing) or win.db.barheight + E.Border);
+			end
+		end
+
+		for i, data in ipairs(win.dataset) do
+			if(data.id) then
+				local barid = data.id;
+				local bar = win.bargroup:GetBar(barid);
+
+				if(data.class and win.db.classicons and CLASS_ICON_TCOORDS[data.class]) then
+					bar:SetIconWithCoord("Interface\\WorldStateFrame\\Icons-Classes", CLASS_ICON_TCOORDS[data.class]);
+				end
 			end
 		end
 	end)
