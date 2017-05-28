@@ -5,6 +5,10 @@ local S = E:GetModule("Skins")
 local function LoadSkin()
 	if(not E.private.addOnSkins.Recount) then return end
 
+	function Recount:ShowReset()
+		AS:AcceptFrame(L["Reset Recount?"], function(self) Recount:ResetData() self:GetParent():Hide() end)
+	end
+
 	local function SkinFrame(frame)
 		frame:SetBackdrop(nil)
 
@@ -30,16 +34,7 @@ local function LoadSkin()
 		frame.CloseButton:SetPoint("RIGHT", header, -6, 0)
 	end
 
-	local RecountFrames = {
-		Recount.MainWindow,
-		--Recount.ConfigWindow,
-		--Recount.GraphWindow,
-		--Recount.DetailWindow
-	}
-
-	for _, frame in pairs(RecountFrames) do
-		if frame then SkinFrame(frame) end
-	end
+	SkinFrame(Recount.MainWindow)
 
 	local buttons = {
 		Recount.MainWindow.CloseButton,
@@ -48,10 +43,7 @@ local function LoadSkin()
 		Recount.MainWindow.ResetButton,
 		Recount.MainWindow.FileButton,
 		Recount.MainWindow.ConfigButton,
-		Recount.MainWindow.ReportButton,
-		--Recount.ConfigWindow.CloseButton,
-		--Recount.GraphWindow.CloseButton,
-		--Recount.DetailWindow.CloseButton
+		Recount.MainWindow.ReportButton
 	}
 
 	for i = 1, #buttons do
@@ -91,6 +83,16 @@ local function LoadSkin()
 			S:HandleEditBox(Recount_ReportWindow.Whisper)
 
 			Recount_ReportWindow.isSkinned = true
+		end
+	end)
+
+	hooksecurefunc(Recount, "ShowConfig", function()
+		if not Recount.ConfigWindow.isSkinned then
+			SkinFrame(Recount.ConfigWindow)
+
+			AS:Desaturate(Recount.ConfigWindow.CloseButton)
+
+			Recount.ConfigWindow.isSkinned = true
 		end
 	end)
 end
