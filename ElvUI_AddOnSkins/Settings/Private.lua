@@ -16,6 +16,7 @@ V.addOnSkins = {
 	BuyEmAll = true,
 	Clique = true,
 	DBM = true,
+	Doom_CooldownPulse = true,
 	EveryGoldToBanker = true,
 	ExtVendor = true,
 	FishingBuddy = true,

@@ -23,6 +23,7 @@ local addonList = {
 	"BuyEmAll",
 	"Clique",
 	"DBM",
+	"Doom_CooldownPulse",
 	"EveryGoldToBanker",
 	"ExtVendor",
 	"FishingBuddy",
