@@ -13,6 +13,7 @@
 	<Script file="BuyEmAll.lua"/>
 	<Script file="Clique.lua"/>
 	<Script file="DBM.lua"/>
+	<Script file="EveryGoldToBanker.lua"/>
 	<Script file="ExtVendor.lua"/>
 	<Script file="FishingBuddy.lua"/>
 	<Script file="FlightMap.lua"/>
