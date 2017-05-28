@@ -1,0 +1,45 @@
+﻿local E, L, V, P, G = unpack(ElvUI)
+
+V.addOnSkins = {
+	-- Addon Skins
+	_NPCScan = true,
+	AckisRecipeList = true,
+	ACP = true,
+	AdvancedTradeSkillWindow = true,
+	Archy = true,
+	Atlas = true,
+	AtlasLoot = true,
+	AtlasQuest = true,
+	AutoEquipQuestItem = true,
+	BindPad = true,
+	BugSack = true,
+	Clique = true,
+	DBM = true,
+	FishingBuddy = true,
+	FlightMap = true,
+	KarniCrap = true,
+	KHunterTimers = true,
+	LightHeaded = true,
+	MageNuggets = true,
+	Omen = true,
+	OneClickEnchantScroll = true,
+	Overachiever = true,
+	PallyPower = true,
+	PlateBuffs = true,
+	Poisoner = true,
+	Postal = true,
+	QuestCompletist = true,
+	Recount = true,
+	SexyCooldown = true,
+	Skada = true,
+	Spy = true,
+	Titan = true,
+	TotemTimers = true,
+	TradeskillInfo = true,
+	VanasKoS = true,
+	WeakAuras = true,
+	WowLua = true,
+
+	--Blizzard Skins
+	Blizzard_WorldStateFrame = true
+}
