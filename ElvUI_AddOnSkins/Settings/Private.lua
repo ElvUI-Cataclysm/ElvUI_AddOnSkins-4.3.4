@@ -17,6 +17,7 @@ V.addOnSkins = {
 	DBM = true,
 	FishingBuddy = true,
 	FlightMap = true,
+	InspectEquip = true,
 	KarniCrap = true,
 	KHunterTimers = true,
 	LightHeaded = true,

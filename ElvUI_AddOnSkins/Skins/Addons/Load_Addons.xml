@@ -14,6 +14,7 @@
 	<Script file="DBM.lua"/>
 	<Script file="FishingBuddy.lua"/>
 	<Script file="FlightMap.lua"/>
+	<Script file="InspectEquip.lua"/>
 	<Script file="KarniCrap.lua"/>
 	<Script file="KHunterTimers.lua"/>
 	<Script file="LightHeaded.lua"/>

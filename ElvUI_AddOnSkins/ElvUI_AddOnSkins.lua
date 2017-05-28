@@ -24,6 +24,7 @@ local addonList = {
 	"DBM",
 	"FishingBuddy",
 	"FlightMap",
+	"InspectEquip",
 	"KarniCrap",
 	"KHunterTimers",
 	"LightHeaded",
