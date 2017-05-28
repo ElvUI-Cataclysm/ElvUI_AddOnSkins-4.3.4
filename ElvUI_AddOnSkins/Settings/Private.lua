@@ -16,6 +16,7 @@ V.addOnSkins = {
 	BuyEmAll = true,
 	Clique = true,
 	DBM = true,
+	ExtVendor = true,
 	FishingBuddy = true,
 	FlightMap = true,
 	InspectEquip = true,
