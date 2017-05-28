@@ -10,6 +10,7 @@
 	<Script file="AutoEquipQuestItem.lua"/>
 	<Script file="BindPad.lua"/>
 	<Script file="BugSack.lua"/>
+	<Script file="BuyEmAll.lua"/>
 	<Script file="Clique.lua"/>
 	<Script file="DBM.lua"/>
 	<Script file="FishingBuddy.lua"/>

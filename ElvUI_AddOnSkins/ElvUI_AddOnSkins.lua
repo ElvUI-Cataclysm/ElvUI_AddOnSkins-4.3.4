@@ -20,6 +20,7 @@ local addonList = {
 	"AutoEquipQuestItem",
 	"BindPad",
 	"BugSack",
+	"BuyEmAll",
 	"Clique",
 	"DBM",
 	"FishingBuddy",

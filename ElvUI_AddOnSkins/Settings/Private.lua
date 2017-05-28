@@ -13,6 +13,7 @@ V.addOnSkins = {
 	AutoEquipQuestItem = true,
 	BindPad = true,
 	BugSack = true,
+	BuyEmAll = true,
 	Clique = true,
 	DBM = true,
 	FishingBuddy = true,
