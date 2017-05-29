@@ -26,6 +26,7 @@ local addonList = {
 	"Doom_CooldownPulse",
 	"EveryGoldToBanker",
 	"ExtVendor",
+	"Factionizer",
 	"FishingBuddy",
 	"FlightMap",
 	"InspectEquip",

@@ -19,6 +19,7 @@ V.addOnSkins = {
 	Doom_CooldownPulse = true,
 	EveryGoldToBanker = true,
 	ExtVendor = true,
+	Factionizer = true,
 	FishingBuddy = true,
 	FlightMap = true,
 	InspectEquip = true,
