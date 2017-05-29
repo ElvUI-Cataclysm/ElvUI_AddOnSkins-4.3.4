@@ -2,7 +2,7 @@ local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.ExtVendor) then return end
+	if(not E.private.addOnSkins.ExtVendor or not E.private.skins.blizzard.merchant) then return end
 
 	MerchantFrame:Size(720, 525)
 
