@@ -16,6 +16,56 @@ local function LoadSkin()
 	S:HandleButton(ExtVendor_SellJunkPopupYesButton)
 	S:HandleButton(ExtVendor_SellJunkPopupNoButton)
 
+	for i = 13, 20 do
+		local item = _G["MerchantItem" .. i]
+		local itemButton = _G["MerchantItem" .. i .. "ItemButton"]
+		local iconTexture = _G["MerchantItem" .. i .. "ItemButtonIconTexture"]
+		local moneyFrame = _G["MerchantItem" .. i .. "MoneyFrame"]
+		local altCurrencyFrame = _G["MerchantItem"..i.."AltCurrencyFrame"]
+		local altCurrencyItem1 = _G["MerchantItem" .. i .. "AltCurrencyFrameItem1"]
+		local altCurrencyTex1 = _G["MerchantItem" .. i .. "AltCurrencyFrameItem1Texture"]
+		local altCurrencyTex2 = _G["MerchantItem" .. i .. "AltCurrencyFrameItem2Texture"]
+
+		item:StripTextures(true)
+		item:CreateBackdrop("Default")
+
+		itemButton:StripTextures()
+		itemButton:StyleButton()
+		itemButton:SetTemplate("Default", true)
+		itemButton:Size(40)
+		itemButton:Point("TOPLEFT", 2, -2)
+
+		iconTexture:SetTexCoord(unpack(E.TexCoords))
+		iconTexture:SetInside()
+
+		altCurrencyItem1:Point("LEFT", altCurrencyFrame, "LEFT", 15, 4)
+
+		altCurrencyTex1:SetTexCoord(unpack(E.TexCoords))
+		altCurrencyTex2:SetTexCoord(unpack(E.TexCoords))
+
+		moneyFrame:ClearAllPoints()
+		moneyFrame:Point("BOTTOMLEFT", itemButton, "BOTTOMRIGHT", 3, 0)
+	end
+
+	hooksecurefunc("MerchantFrame_UpdateMerchantInfo", function()
+		for i = 13, 20 do
+			local itemButton = _G["MerchantItem" .. i .. "ItemButton"]
+			local itemName = _G["MerchantItem" .. i .. "Name"]
+
+			if(itemButton.link) then
+				local _, _, quality = GetItemInfo(itemButton.link)
+				local r, g, b = GetItemQualityColor(quality)
+
+				itemName:SetTextColor(r, g, b)
+				if(quality > 1) then
+					itemButton:SetBackdropBorderColor(r, g, b)
+				else
+					itemButton:SetBackdropBorderColor(unpack(E["media"].bordercolor))
+				end
+			end
+		end
+	end)
+
 	-- Options
 	ExtVendorConfigContainer:StripTextures()
 
