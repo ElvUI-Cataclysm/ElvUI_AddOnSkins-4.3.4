@@ -24,6 +24,7 @@
 	<Script file="KHunterTimers.lua"/>
 	<Script file="LightHeaded.lua"/>
 	<Script file="MageNuggets.lua"/>
+	<Script file="MinimalArchaeology.lua"/>
 	<Script file="Omen.lua"/>
 	<Script file="OneClickEnchantScroll.lua"/>
 	<Script file="Overachiever.lua"/>

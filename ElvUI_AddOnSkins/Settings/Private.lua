@@ -27,6 +27,7 @@ V.addOnSkins = {
 	KHunterTimers = true,
 	LightHeaded = true,
 	MageNuggets = true,
+	MinimalArchaeology = true,
 	Omen = true,
 	OneClickEnchantScroll = true,
 	Overachiever = true,

@@ -34,6 +34,7 @@ local addonList = {
 	"KHunterTimers",
 	"LightHeaded",
 	"MageNuggets",
+	"MinimalArchaeology",
 	"Omen",
 	"OneClickEnchantScroll",
 	"Overachiever",
