@@ -78,4 +78,4 @@ local function LoadSkin()
 	hooksecurefunc(ExtendedUI["CAPTUREPOINT"], "update", captureBarUpdate)
 end
 
-S:RegisterSkin("WorldStateFrame", LoadSkin)
+S:AddCallback("WorldStateFrame", LoadSkin)

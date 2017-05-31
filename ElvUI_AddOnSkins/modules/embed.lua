@@ -395,4 +395,8 @@ function module:Initialize()
 	end
 end
 
-E:RegisterModule(module:GetName())
+local function InitializeCallback()
+	module:Initialize()
+end
+
+E:RegisterModule(module:GetName(), InitializeCallback)
