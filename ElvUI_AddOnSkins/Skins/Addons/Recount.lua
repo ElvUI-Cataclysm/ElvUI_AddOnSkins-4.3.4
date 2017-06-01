@@ -74,13 +74,11 @@ local function LoadSkin()
 			S:HandleButton(Recount_ReportWindow.ReportButton)
 			S:HandleSliderFrame(Recount_ReportWindow_Slider)
 
-			if Recount_ReportWindow.CloseButton then
-				Recount_ReportWindow.CloseButton:GetNormalTexture():SetDesaturated(true)
-				Recount_ReportWindow.CloseButton:GetHighlightTexture():SetDesaturated(true)
-			end
+			AS:Desaturate(Recount_ReportWindow.CloseButton)
 
-			Recount_ReportWindow.Whisper:StripTextures()
+			Recount_ReportWindow.Whisper:StripTextures(true)
 			S:HandleEditBox(Recount_ReportWindow.Whisper)
+			Recount_ReportWindow.Whisper:Height(16)
 
 			Recount_ReportWindow.isSkinned = true
 		end
