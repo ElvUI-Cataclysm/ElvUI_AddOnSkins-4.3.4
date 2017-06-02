@@ -28,6 +28,7 @@ V.addOnSkins = {
 	LightHeaded = true,
 	MageNuggets = true,
 	MinimalArchaeology = true,
+	OgriLazy = true,
 	Omen = true,
 	OneClickEnchantScroll = true,
 	Overachiever = true,

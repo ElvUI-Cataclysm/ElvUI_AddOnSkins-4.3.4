@@ -35,6 +35,7 @@ local addonList = {
 	"LightHeaded",
 	"MageNuggets",
 	"MinimalArchaeology",
+	"Ogri'Lazy",
 	"Omen",
 	"OneClickEnchantScroll",
 	"Overachiever",

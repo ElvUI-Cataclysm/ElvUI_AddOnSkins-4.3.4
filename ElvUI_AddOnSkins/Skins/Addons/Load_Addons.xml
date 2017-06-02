@@ -25,6 +25,7 @@
 	<Script file="LightHeaded.lua"/>
 	<Script file="MageNuggets.lua"/>
 	<Script file="MinimalArchaeology.lua"/>
+	<Script file="OgriLazy.lua"/>
 	<Script file="Omen.lua"/>
 	<Script file="OneClickEnchantScroll.lua"/>
 	<Script file="Overachiever.lua"/>
