@@ -1,5 +1,10 @@
 local E, L, V, P, G = unpack(ElvUI)
+local AS = E:GetModule("AddOnSkins")
 local S = E:GetModule("Skins")
+
+local _G = _G
+
+local SquareButton_SetIcon = SquareButton_SetIcon
 
 local function LoadSkin()
 	if(not E.private.addOnSkins.Spy) then return end
@@ -23,21 +28,26 @@ local function LoadSkin()
 	Spy.MainWindow.Title:FontTemplate(nil, 12)
 
 	S:HandleCloseButton(Spy_MainWindow.CloseButton)
-	Spy_MainWindow.CloseButton.text:Point("CENTER")
-	Spy_MainWindow.CloseButton:Size(18)
+	Spy_MainWindow.CloseButton:Size(32)
+	Spy_MainWindow.CloseButton:Point("TOPRIGHT", 2, -6)
 
-	S:HandleCloseButton(Spy_MainWindow.ClearButton)
-	Spy_MainWindow.ClearButton.text:SetText("c")
-	Spy_MainWindow.ClearButton.text:Point("CENTER", 0, 2)
-	Spy_MainWindow.ClearButton:Size(18)
+	S:HandleNextPrevButton(Spy_MainWindow.RightButton)
+	SquareButton_SetIcon(Spy_MainWindow.RightButton, "RIGHT")
+	Spy_MainWindow.RightButton:Size(16)
+	Spy_MainWindow.RightButton:Point("TOPRIGHT", -27, -14)
 
-	S:HandleCloseButton(Spy_MainWindow.LeftButton)
-	Spy_MainWindow.LeftButton.text:SetText("<")
-	Spy_MainWindow.LeftButton:Size(18)
+	S:HandleNextPrevButton(Spy_MainWindow.LeftButton)
+	SquareButton_SetIcon(Spy_MainWindow.LeftButton, "LEFT")
+	Spy_MainWindow.LeftButton:Size(16)
+	Spy_MainWindow.LeftButton:Point("RIGHT", Spy_MainWindow.RightButton, "LEFT", -3, 0)
 
-	S:HandleCloseButton(Spy_MainWindow.RightButton)
-	Spy_MainWindow.RightButton.text:SetText(">")
-	Spy_MainWindow.RightButton:Size(18)
+	S:HandleButton(Spy_MainWindow.ClearButton)
+	Spy_MainWindow.ClearButton:Size(16)
+	Spy_MainWindow.ClearButton:Point("RIGHT", Spy_MainWindow.LeftButton, "LEFT", -3, 0)
+	Spy_MainWindow.ClearButton.texture = Spy_MainWindow.ClearButton:CreateTexture(nil, "OVERLAY")
+	Spy_MainWindow.ClearButton.texture:SetTexture("Interface\\Buttons\\UI-GroupLoot-Pass-Up")
+	Spy_MainWindow.ClearButton.texture:SetInside()
+	AS:Desaturate(Spy_MainWindow.ClearButton)
 
 	Spy_MainWindow.DragBottomLeft:SetNormalTexture(nil)
 	Spy_MainWindow.DragBottomRight:SetNormalTexture(nil)

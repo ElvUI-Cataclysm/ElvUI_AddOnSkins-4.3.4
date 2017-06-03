@@ -36,7 +36,8 @@ local function LoadSkin()
 	S:HandleButton(DoneSettingButton)
 
 	S:HandleCloseButton(MinimizeButton)
-	MinimizeButton.backdrop:SetAllPoints()
+	MinimizeButton:Size(30)
+	MinimizeButton:Point("TOPLEFT", 262, 2)
 end
 
 S:AddCallbackForAddon("EveryGoldToBanker", "EveryGoldToBanker", LoadSkin)

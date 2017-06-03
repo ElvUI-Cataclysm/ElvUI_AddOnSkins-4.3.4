@@ -7,10 +7,11 @@ local function LoadSkin()
 	Relic_View:SetTemplate("Transparent")
 	Relic_View:SetScale(GetCVar("uiScale"))
 
+	Relic_ViewCaption:Point("TOPLEFT", 7, -5)
+
 	S:HandleCloseButton(Relic_ViewCloseButton)
-	Relic_ViewCloseButton:Point("TOPLEFT", 3, -3)
-	Relic_ViewCloseButton:Size(16)
-	Relic_ViewCloseButton.backdrop:SetAllPoints()
+	Relic_ViewCloseButton:Size(32)
+	Relic_ViewCloseButton:Point("TOPLEFT", 157, 5)
 
 	for i = 1, 4 do
 		local Relic = _G["Relic_View_Set"..i]

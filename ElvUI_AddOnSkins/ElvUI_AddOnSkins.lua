@@ -93,6 +93,7 @@ local function getOptions()
 				order = 1,
 				type = "group",
 				name = L["Skins"],
+				childGroups = "tab",
 				args = {
 					header = {
 						order = 1,
@@ -103,23 +104,32 @@ local function getOptions()
 						order = 2,
 						type = "group",
 						name = L["AddOn Skins"],
-						guiInline = true,
 						get = function(info) return E.private.addOnSkins[info[#info]] end,
 						set = function(info, value) E.private.addOnSkins[info[#info]] = value E:StaticPopup_Show("PRIVATE_RL") end,
-						args = {}
+						args = {
+							header = {
+								order = 1,
+								type = "header",
+								name = L["AddOn Skins"]
+							}
+						}
 					},
 					blizzard = {
 						order = 3,
 						type = "group",
 						name = L["Blizzard Skins"],
-						guiInline = true,
 						get = function(info) return E.private.addOnSkins[info[#info]] end,
 						set = function(info, value) E.private.addOnSkins[info[#info]] = value E:StaticPopup_Show("PRIVATE_RL") end,
 						args = {
+							header = {
+								order = 1,
+								type = "header",
+								name = L["Blizzard Skins"]
+							},
 							Blizzard_WorldStateFrame = {
 								type = "toggle",
-								name = "WorldStateFrame",
-								desc = L["TOGGLESKIN_DESC"],
+								name = L["WorldState Frame"],
+								desc = L["TOGGLESKIN_DESC"]
 							}
 						}
 					}
@@ -128,24 +138,48 @@ local function getOptions()
 			misc = {
 				order = 2,
 				type = "group",
-				name = L["Misc Options"],
+				name = GAMEOPTIONS_MENU,
+				childGroups = "tab",
 				args = {
 					header = {
 						order = 1,
 						type = "header",
-						name = L["Misc Options"]
+						name = GAMEOPTIONS_MENU
 					},
-					skadaGroup = {
+					general = {
 						order = 2,
 						type = "group",
+						name = L["General"],
+						args = {
+							header = {
+								order = 1,
+								type = "header",
+								name = L["General"]
+							},
+							useOriginalCloseButton = {
+								order = 1,
+								type = "toggle",
+								name = L["Original Close Button"],
+								get = function(info) return E.db.addOnSkins.useOriginalCloseButton end,
+								set = function(info, value) E.db.addOnSkins.useOriginalCloseButton = value; E:StaticPopup_Show("CONFIG_RL") end,
+							}
+						}
+					},
+					skadaGroup = {
+						order = 3,
+						type = "group",
 						name = "Skada",
-						guiInline = true,
 						get = function(info) return E.db.addOnSkins[info[#info]] end,
 						set = function(info, value) E.db.addOnSkins[info[#info]] = value Skada:UpdateDisplay() end,
 						disabled = function() return not AS:CheckAddOn("Skada") end,
 						args = {
-							skadaTemplate = {
+							header = {
 								order = 1,
+								type = "header",
+								name = "Skada"
+							},
+							skadaTemplate = {
+								order = 2,
 								type = "select",
 								name = L["Skada Template"],
 								values = {
@@ -155,18 +189,18 @@ local function getOptions()
 								}
 							},
 							skadaTemplateGloss = {
-								order = 2,
+								order = 3,
 								type = "toggle",
 								name = L["Skada Template Gloss"],
 								disabled = function() return E.db.addOnSkins.skadaTemplate == "Transparent" or E.db.addOnSkins.skadaTemplate == "NONE" or not AS:CheckAddOn("Skada") end
 							},
 							spacer = {
-								order = 3,
+								order = 4,
 								type = "description",
 								name = ""
 							},
 							skadaTitleTemplate = {
-								order = 4,
+								order = 5,
 								type = "select",
 								name = L["Skada Title Template"],
 								values = {
@@ -176,7 +210,7 @@ local function getOptions()
 								}
 							},
 							skadaTitleTemplateGloss = {
-								order = 5,
+								order = 6,
 								type = "toggle",
 								name = L["Skada Title Template Gloss"],
 								disabled = function() return E.db.addOnSkins.skadaTitleTemplate == "Transparent" or E.db.addOnSkins.skadaTitleTemplate == "NONE" or not AS:CheckAddOn("Skada") end
@@ -184,41 +218,45 @@ local function getOptions()
 						}
 					},
 					dbmGroup = {
-						order = 3,
+						order = 4,
 						type = "group",
 						name = "DBM",
-						guiInline = true,
 						get = function(info) return E.db.addOnSkins[info[#info]] end,
 						set = function(info, value) E.db.addOnSkins[info[#info]] = value DBM.Bars:ApplyStyle() DBM.BossHealth:UpdateSettings() end,
 						disabled = function() return not AS:CheckAddOn("DBM-Core") end,
 						args = {
-							dbmBarHeight = {
+							header = {
 								order = 1,
+								type = "header",
+								name = "DBM"
+							},
+							dbmBarHeight = {
+								order = 2,
 								type = "range",
 								name = L["Bar Height"],
 								min = 6, max = 60,
 								step = 1
 							},
 							spacer = {
-								order = 2,
+								order = 3,
 								type = "description",
 								name = ""
 							},
 							dbmFont = {
-								order = 3,
+								order = 4,
 								type = "select",
 								dialogControl = "LSM30_Font",
 								name = L["Font"],
 								values = AceGUIWidgetLSMlists.font
 							},
 							dbmFontSize = {
-								order = 4,
+								order = 5,
 								type = "range",
 								name = L["Font Size"],
 								min = 6, max = 22, step = 1
 							},
 							dbmFontOutline = {
-								order = 5,
+								order = 6,
 								type = "select",
 								name = L["Font Outline"],
 								values = {
@@ -231,21 +269,25 @@ local function getOptions()
 						}
 					},
 					waGroup = {
-						order = 4,
+						order = 5,
 						type = "group",
 						name = "WeakAuras",
-						guiInline = true,
 						get = function(info) return E.db.addOnSkins[info[#info]] end,
 						set = function(info, value) E.db.addOnSkins[info[#info]] = value E:StaticPopup_Show("PRIVATE_RL") end,
 						disabled = function() return not AS:CheckAddOn("WeakAuras") end,
 						args = {
-							weakAuraAuraBar = {
+							header = {
 								order = 1,
+								type = "header",
+								name = "WeakAuras"
+							},
+							weakAuraAuraBar = {
+								order = 2,
 								type = "toggle",
 								name = L["AuraBar Backdrop"]
 							},
 							weakAuraIconCooldown = {
-								order = 2,
+								order = 3,
 								type = "toggle",
 								name = L["WeakAura Cooldowns"]
 							}

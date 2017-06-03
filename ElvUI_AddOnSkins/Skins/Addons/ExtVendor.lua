@@ -10,6 +10,7 @@ local function LoadSkin()
 	S:HandleEditBox(MerchantFrameSearchBox)
 
 	S:HandleItemButton(MerchantFrameSellJunkButton)
+	MerchantFrameSellJunkButton:Point("TOPLEFT", 26, -27)
 
 	ExtVendor_SellJunkPopup:SetTemplate("Transparent")
 

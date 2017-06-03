@@ -1,4 +1,5 @@
 local E, L, V, P, G = unpack(ElvUI);
+local AS = E:GetModule("AddOnSkins")
 local S = E:GetModule("Skins");
 
 local function LoadSkin()
@@ -12,18 +13,8 @@ local function LoadSkin()
 	AtlasFrameCloseButton:Point("TOPRIGHT", AtlasFrame, "TOPRIGHT", -5, -7);
 	AtlasFrameLockButton:Point("RIGHT", AtlasFrameCloseButton, "LEFT", 12, 0);
 	S:HandleCloseButton(AtlasFrameCloseButton);
-	S:HandleCloseButton(AtlasFrameLockButton, nil, " ");
 
-	AtlasLockNorm:SetTexCoord(.36, .65, .32, .73);
-	AtlasLockNorm:SetInside(AtlasFrameLockButton, 10, 10);
-	AtlasLockPush:SetTexCoord(.36, .60, .38, .76)
-	AtlasLockPush:SetInside(AtlasFrameLockButton, 10, 10)
-
-	S:SecureHook("Atlas_UpdateLock", function()
-		AtlasLockNorm:SetDesaturated(true);
-		AtlasLockPush:SetDesaturated(true);
-	end);
-	Atlas_UpdateLock();
+	AS:Desaturate(AtlasFrameLockButton)
 
 	S:HandleButton(Atlas_JournalEncounter_InstanceButton)
 	Atlas_JournalEncounter_InstanceButton.icon = Atlas_JournalEncounter_InstanceButton:CreateTexture(nil, "OVERLAY");

@@ -7,6 +7,7 @@ local function LoadSkin()
 
 	local addon = LibStub("AceAddon-3.0"):GetAddon("AtlasLoot")
 	if not addon then return end
+
 	local function AL_OnShow(self)
 		if self.IsPointsDone then return end
 
