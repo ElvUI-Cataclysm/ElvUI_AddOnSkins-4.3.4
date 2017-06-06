@@ -87,6 +87,17 @@ function S:HandleCloseButton(f, point, text)
 		end
 	else
 		f:StripTextures()
+
+		if f:GetNormalTexture() then
+			f:SetNormalTexture("")
+			f.SetNormalTexture = E.noop
+		end
+
+		if f:GetPushedTexture() then
+			f:SetPushedTexture("")
+			f.SetPushedTexture = E.noop
+		end
+
 		if not text then
 			text = "x"
 		end
