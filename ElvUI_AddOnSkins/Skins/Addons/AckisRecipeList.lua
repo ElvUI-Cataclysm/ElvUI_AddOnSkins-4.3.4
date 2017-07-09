@@ -10,7 +10,7 @@ local SquareButton_SetIcon = SquareButton_SetIcon
 local function LoadSkin()
 	if(not E.private.addOnSkins.AckisRecipeList) then return; end
 
-	local addon = LibStub("AceAddon-3.0"):GetAddon("Ackis Recipe List")
+	local addon = LibStub("AceAddon-3.0"):GetAddon("Ackis Recipe List", true)
 	if not addon then return end
 
 	local function HandleScrollBar(frame)
@@ -234,15 +234,12 @@ local function LoadSkin()
 				E:GetModule("Tooltip"):SetStyle(self)
 			end)
 
-			--[[local LibQTip = LibStub("LibQTip-1.0")
-			if LibQTip and not S:IsHooked(LibQTip, "Acquire") then
-				S:RawHook(LibQTip, "Acquire", function(self, key)
-					local tooltip = self.activeTooltips[key]
-					if tooltip then
-						E:GetModule("Tooltip"):SetStyle(tooltip)
-					end
-				end)
-			end]]
+			hooksecurefunc(LibStub("LibQTip-1.0"), "Acquire", function(self, key)
+				local tooltip = self.activeTooltips[key]
+				if tooltip then
+					E:GetModule("Tooltip"):SetStyle(tooltip)
+				end
+			end)
 		end
 
 		hooksecurefunc(ARL_MainPanel, "ToggleState", function(self)
@@ -317,7 +314,7 @@ local function LoadSkin()
 						end
 					end
 				elseif menu == "rep" then
-					for expNum = 0, 2 do
+					for expNum = 0, 3 do
 						for i = 1, menuEntry["expansion"..expNum]:GetNumChildren() do
 							local child = select(i, menuEntry["expansion"..expNum]:GetChildren())
 							if child and child:IsObjectType("CheckButton") and child.text then
@@ -340,6 +337,7 @@ local function LoadSkin()
 			ExpansionButton(ARL_MainPanel.filter_menu["rep"].toggle_expansion0);
 			ExpansionButton(ARL_MainPanel.filter_menu["rep"].toggle_expansion1);
 			ExpansionButton(ARL_MainPanel.filter_menu["rep"].toggle_expansion2);
+			ExpansionButton(ARL_MainPanel.filter_menu["rep"].toggle_expansion3);
 		end)
 	end)
 

@@ -1,7 +1,6 @@
-local addonName = ...
 local E, L, V, P, G = unpack(ElvUI)
-local addon = E:GetModule("AddOnSkins")
 local module = E:NewModule("EmbedSystem")
+local addon = E:GetModule("AddOnSkins")
 
 local _G = _G
 local pairs, tonumber = pairs, tonumber
@@ -12,7 +11,7 @@ local hooksecurefunc = hooksecurefunc
 local NUM_CHAT_WINDOWS = NUM_CHAT_WINDOWS
 
 function module:GetChatWindowInfo()
-	local chatTabInfo = { ["NONE"] = NONE }
+	local chatTabInfo = {["NONE"] = NONE}
 	for i = 1, NUM_CHAT_WINDOWS do
 		chatTabInfo["ChatFrame"..i] = _G["ChatFrame"..i.."Tab"]:GetText()
 	end
@@ -153,6 +152,7 @@ if(addon:CheckAddOn("Recount")) then
 
 		Recount_MainWindow:StartSizing("BOTTOMLEFT")
 		Recount_MainWindow:StopMovingOrSizing()
+		Recount:ResizeMainWindow()
 	end
 end
 
@@ -363,8 +363,8 @@ end
 
 function module:Init()
 	if(not self.embedCreated) then
-		self.left = CreateFrame("Frame", addonName.."_Embed_LeftWindow", UIParent)
-		self.right = CreateFrame("Frame", addonName.."_Embed_RightWindow", self.left)
+		self.left = CreateFrame("Frame", "ElvUI_AddOnSkins_Embed_LeftWindow", UIParent)
+		self.right = CreateFrame("Frame", "ElvUI_AddOnSkins_Embed_RightWindow", self.left)
 
 		self.embedCreated = true
 

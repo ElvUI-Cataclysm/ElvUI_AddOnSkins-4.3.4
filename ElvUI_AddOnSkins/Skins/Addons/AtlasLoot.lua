@@ -55,22 +55,23 @@ local function LoadSkin()
 
 		self.IsPointsDone = true
 	end
-
-	AtlasLootCompareFrame_ScrollFrameMainFilterScrollChildFrame:StripTextures()
-	AtlasLootCompareFrame_ScrollFrameItemFrame:StripTextures()
-	AtlasLootCompareFrame_ScrollFrameMainFilter:StripTextures()
+	
+	AtlasLootDefaultFrame:HookScript("OnShow", AL_OnShow)
+	AtlasLootDefaultFrame:StripTextures()
+	AtlasLootDefaultFrame:SetTemplate("Transparent")
 
 	AtlasLootPanel:StripTextures()
 	AtlasLootPanel:SetTemplate("Transparent")
-
-	AtlasLootDefaultFrame:StripTextures()
-	AtlasLootDefaultFrame:SetTemplate("Transparent")
 
 	AtlasLootCompareFrame:StripTextures()
 	AtlasLootCompareFrame:SetTemplate("Transparent")
 
 	AtlasLootItemsFrame:StripTextures()
 	AtlasLootItemsFrame:SetTemplate("Default")
+
+	AtlasLootCompareFrame_ScrollFrameMainFilterScrollChildFrame:StripTextures()
+	AtlasLootCompareFrame_ScrollFrameItemFrame:StripTextures()
+	AtlasLootCompareFrame_ScrollFrameMainFilter:StripTextures()
 
 	S:HandleButton(AtlasLoot_AtlasInfoFrame_ToggleALButton)
 	S:HandleButton(AtlasLootPanelSearch_SearchButton)
@@ -134,8 +135,6 @@ local function LoadSkin()
 	S:HandleScrollBar(AtlasLootCompareFrame_ScrollFrameItemFrameScrollBar)
 	S:HandleScrollBar(AtlasLootCompareFrame_WishlistScrollFrameScrollBar)
 
-	AtlasLootDefaultFrame:HookScript("OnShow", AL_OnShow)
-
 	AtlasLootCompareFrame:HookScript("OnUpdate", function(self)
 		for i = 1, 9 do 
 			if _G["AtlasLootCompareFrameSortButton_"..i] then
@@ -176,7 +175,7 @@ local function LoadSkin()
 	end)
 
 	AtlasLootPanel:SetWidth(AtlasLootDefaultFrame:GetWidth())
-	AtlasLootPanel.SetWidth = function() end
+	AtlasLootPanel.SetWidth = E.noop
 
 	for i = 1, 15 do
 		_G["AtlasLootCompareFrameMainFilterButton"..i]:StripTextures()

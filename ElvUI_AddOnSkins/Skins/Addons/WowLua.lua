@@ -48,7 +48,7 @@ local function LoadSkin()
 		if(object:GetDisabledTexture()) then
 			object:GetDisabledTexture():SetTexCoord(.1, .92, .14, .92);
 		end
-		object:StyleButton();
+		object:StyleButton(nil, true);
 	end
 
 	S:HandleNextPrevButton(WowLuaFrameOutputUpButton);
