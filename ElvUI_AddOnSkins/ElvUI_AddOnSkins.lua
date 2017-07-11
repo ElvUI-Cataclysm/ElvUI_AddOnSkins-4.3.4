@@ -45,6 +45,7 @@ local addonList = {
 	"Postal",
 	"QuestCompletist",
 	"Recount",
+	"RaidRoll",
 	"SexyCooldown",
 	"Skada",
 	"Spy",

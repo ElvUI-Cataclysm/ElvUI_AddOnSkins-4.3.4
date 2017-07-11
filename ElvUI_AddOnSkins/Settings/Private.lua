@@ -38,6 +38,7 @@ V.addOnSkins = {
 	Postal = true,
 	QuestCompletist = true,
 	Recount = true,
+	RaidRoll = true,
 	SexyCooldown = true,
 	Skada = true,
 	Spy = true,

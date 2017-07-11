@@ -35,6 +35,7 @@
 	<Script file="Postal.lua"/>
 	<Script file="QuestCompletist.lua"/>
 	<Script file="Recount.lua"/>
+	<Script file="RaidRoll.lua"/>
 	<Script file="SexyCooldown.lua"/>
 	<Script file="Skada.lua"/>
 	<Script file="Spy.lua"/>
