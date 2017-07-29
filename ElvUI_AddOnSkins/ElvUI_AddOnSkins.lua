@@ -184,7 +184,7 @@ local function getOptions()
 								type = "select",
 								name = L["Skada Template"],
 								values = {
-									["Default"] = L["Default"],
+									["Default"] = DEFAULT,
 									["Transparent"] = L["Transparent"],
 									["NONE"] = NONE
 								}
@@ -205,7 +205,7 @@ local function getOptions()
 								type = "select",
 								name = L["Skada Title Template"],
 								values = {
-									["Default"] = L["Default"],
+									["Default"] = DEFAULT,
 									["Transparent"] = L["Transparent"],
 									["NONE"] = NONE
 								}
