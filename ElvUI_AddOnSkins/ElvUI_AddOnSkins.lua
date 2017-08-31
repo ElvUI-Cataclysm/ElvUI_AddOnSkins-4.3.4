@@ -253,7 +253,7 @@ local function getOptions()
 							dbmFontSize = {
 								order = 5,
 								type = "range",
-								name = L["Font Size"],
+								name = FONT_SIZE,
 								min = 6, max = 22, step = 1
 							},
 							dbmFontOutline = {
