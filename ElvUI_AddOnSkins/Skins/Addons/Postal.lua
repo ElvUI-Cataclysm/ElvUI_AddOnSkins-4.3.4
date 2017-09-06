@@ -4,15 +4,17 @@ local S = E:GetModule("Skins")
 local function LoadSkin()
 	if(not E.private.addOnSkins.Postal) then return end
 
-	InboxPrevPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 45, 112)
-	InboxNextPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 295, 112)
+	InboxPrevPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 56, 112)
+	InboxNextPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 306, 112)
+
+	MailItem1:Point("TOPLEFT", 40, -68)
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local item = _G["MailItem"..i.."ExpireTime"]
 		if item then
-			item:SetPoint("TOPRIGHT", "MailItem"..i, "TOPRIGHT", -5, -10)
+			item:Point("TOPRIGHT", "MailItem"..i, "TOPRIGHT", -5, -10)
 			if item.returnicon then
-				item.returnicon:SetPoint("TOPRIGHT", item, "TOPRIGHT", 20, 0)
+				item.returnicon:Point("TOPRIGHT", item, "TOPRIGHT", 20, 0)
 			end
 		end
 		if _G["PostalInboxCB"..i] then
@@ -22,12 +24,12 @@ local function LoadSkin()
 
 	if PostalSelectOpenButton then
 		S:HandleButton(PostalSelectOpenButton, true)
-		PostalSelectOpenButton:Point("RIGHT", InboxFrame, "TOP", -41, -48)
+		PostalSelectOpenButton:Point("RIGHT", InboxFrame, "TOP", -30, -48)
 	end
 
 	if Postal_OpenAllMenuButton then
 		S:HandleNextPrevButton(Postal_OpenAllMenuButton, true)
-		Postal_OpenAllMenuButton:SetPoint("LEFT", PostalOpenAllButton, "RIGHT", 5, 0)
+		Postal_OpenAllMenuButton:Point("LEFT", PostalOpenAllButton, "RIGHT", 20, 0)
 	end
 
 	if PostalOpenAllButton then
@@ -37,17 +39,17 @@ local function LoadSkin()
 
 	if PostalSelectReturnButton then
 		S:HandleButton(PostalSelectReturnButton, true)
-		PostalSelectReturnButton:Point("LEFT", InboxFrame, "TOP", -5, -48)
+		PostalSelectReturnButton:Point("LEFT", InboxFrame, "TOP", 6, -48)
 	end
 
 	if Postal_ModuleMenuButton then
 		S:HandleNextPrevButton(Postal_ModuleMenuButton, true)
-		Postal_ModuleMenuButton:SetPoint("TOPRIGHT", MailFrame, -30, -4)
+		Postal_ModuleMenuButton:Point("TOPRIGHT", MailFrame, -30, -4)
 	end
 
 	if Postal_BlackBookButton then
 		S:HandleNextPrevButton(Postal_BlackBookButton, true)
-		Postal_BlackBookButton:SetPoint("LEFT", SendMailNameEditBox, "RIGHT", 5, 2)
+		Postal_BlackBookButton:Point("LEFT", SendMailNameEditBox, "RIGHT", 5, 2)
 	end
 
 	hooksecurefunc(Postal, "CreateAboutFrame", function()
