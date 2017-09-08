@@ -14,8 +14,6 @@ P.addOnSkins = {
 	weakAuraAuraBar = true,
 	weakAuraIconCooldown = true,
 
-	useOriginalCloseButton = false,
-
 	embed = {
 		embedType = "SINGLE",
 		left = "Skada",

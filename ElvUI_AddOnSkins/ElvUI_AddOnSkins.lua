@@ -85,7 +85,7 @@ end
 
 local function getOptions()
 	local options = {
-		order = 53,
+		order = 52,
 		type = "group",
 		name = ColorizeSettingName(L["AddOn Skins"]),
 		childGroups = "tab",
@@ -147,27 +147,8 @@ local function getOptions()
 						type = "header",
 						name = GAMEOPTIONS_MENU
 					},
-					general = {
-						order = 2,
-						type = "group",
-						name = L["General"],
-						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["General"]
-							},
-							useOriginalCloseButton = {
-								order = 1,
-								type = "toggle",
-								name = L["Original Close Button"],
-								get = function(info) return E.db.addOnSkins.useOriginalCloseButton end,
-								set = function(info, value) E.db.addOnSkins.useOriginalCloseButton = value; E:StaticPopup_Show("CONFIG_RL") end,
-							}
-						}
-					},
 					skadaGroup = {
-						order = 3,
+						order = 2,
 						type = "group",
 						name = "Skada",
 						get = function(info) return E.db.addOnSkins[info[#info]] end,
@@ -219,7 +200,7 @@ local function getOptions()
 						}
 					},
 					dbmGroup = {
-						order = 4,
+						order = 3,
 						type = "group",
 						name = "DBM",
 						get = function(info) return E.db.addOnSkins[info[#info]] end,
@@ -270,7 +251,7 @@ local function getOptions()
 						}
 					},
 					waGroup = {
-						order = 5,
+						order = 4,
 						type = "group",
 						name = "WeakAuras",
 						get = function(info) return E.db.addOnSkins[info[#info]] end,

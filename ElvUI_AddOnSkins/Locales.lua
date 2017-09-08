@@ -15,7 +15,6 @@ L["Embed Settings"] = true;
 L["Embed Type"] = true;
 L["Hide Chat Frame"] = true;
 L["Left Panel"] = true;
-L["Original Close Button"] = true;
 L["Right Panel"] = true;
 L["Single"] = true;
 L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = true;
@@ -43,7 +42,6 @@ if L then
 	L["Embed Type"] = true;
 	L["Hide Chat Frame"] = "Chatfenster ausblenden"
 	L["Left Panel"] = true;
-	L["Original Close Button"] = true;
 	L["Right Panel"] = true;
 	L["Single"] = true;
 	L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = "Einstellungen für eingebettete Addons\n\nVerfügbare Addons: Omen | Skada | Recount"
@@ -70,7 +68,6 @@ if L then
 	L["Embed Type"] = true;
 	L["Hide Chat Frame"] = true;
 	L["Left Panel"] = true;
-	L["Original Close Button"] = true;
 	L["Right Panel"] = true;
 	L["Single"] = true;
 	L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = true;
@@ -97,7 +94,6 @@ if L then
 	L["Embed Type"] = true;
 	L["Hide Chat Frame"] = "Cacher le panneau de discussion"
 	L["Left Panel"] = true;
-	L["Original Close Button"] = true;
 	L["Right Panel"] = true;
 	L["Single"] = true;
 	L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = "Réglages pour controler les intégrations d'AddOns\n\nIntégrations disponible: Omen | Skada | Recount"
@@ -124,7 +120,6 @@ if L then
 	L["Embed Type"] = true;
 	L["Hide Chat Frame"] = true;
 	L["Left Panel"] = true;
-	L["Original Close Button"] = true;
 	L["Right Panel"] = true;
 	L["Single"] = true;
 	L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = true;
@@ -151,7 +146,6 @@ if L then
 	L["Embed Type"] = true;
 	L["Hide Chat Frame"] = true;
 	L["Left Panel"] = true;
-	L["Original Close Button"] = true;
 	L["Right Panel"] = true;
 	L["Single"] = true;
 	L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = true;
@@ -178,7 +172,6 @@ if L then
 	L["Embed Type"] = "Тип встраивания"
 	L["Hide Chat Frame"] = "Скрыть фрейм чата"
 	L["Left Panel"] = "Левое окно"
-	L["Original Close Button"] = true;
 	L["Right Panel"] = "Правое окно"
 	L["Single"] = "Одинарный"
 	L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = "Настройки для конктроля встроенных аддонов\n\nДоступны для встраивания: Omen | Skada | Recount"
@@ -205,7 +198,6 @@ if L then
 	L["Embed Type"] = true;
 	L["Hide Chat Frame"] = true;
 	L["Left Panel"] = true;
-	L["Original Close Button"] = true;
 	L["Right Panel"] = true;
 	L["Single"] = true;
 	L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = true;
@@ -232,7 +224,6 @@ if L then
 	L["Embed Type"] = true;
 	L["Hide Chat Frame"] = true;
 	L["Left Panel"] = true;
-	L["Original Close Button"] = true;
 	L["Right Panel"] = true;
 	L["Single"] = true;
 	L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"] = true;
