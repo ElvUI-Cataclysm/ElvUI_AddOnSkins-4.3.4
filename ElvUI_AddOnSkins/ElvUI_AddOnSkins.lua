@@ -282,7 +282,7 @@ local function getOptions()
 				type = "group",
 				name = L["Embed Settings"],
 				get = function(info) return E.db.addOnSkins.embed[info[#info]] end,
-				set = function(info, value) E.db.addOnSkins.embed[info[#info]] = value E:GetModule("EmbedSystem"):Check() end,
+				set = function(info, value) E.db.addOnSkins.embed[info[#info]] = value E:GetModule("EmbedSystem"):EmbedUpdate() end,
 				args = {
 					header = {
 						order = 1,
@@ -294,12 +294,12 @@ local function getOptions()
 						type = "description",
 						name = L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"]
 					},
-					rightChat = {
+					rightChatPanel = {
 						order = 3,
 						type = "toggle",
 						name = L["Embed into Right Chat Panel"]
 					},
-					belowTop = {
+					belowTopTab = {
 						order = 4,
 						type = "toggle",
 						name = L["Embed Below Top Tab"]
@@ -320,7 +320,7 @@ local function getOptions()
 							["DOUBLE"] = L["Double"]
 						}
 					},
-					left = {
+					leftWindow = {
 						order = 7,
 						type = "select",
 						name = L["Left Panel"],
@@ -331,7 +331,7 @@ local function getOptions()
 						},
 						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
 					},
-					right = {
+					rightWindow = {
 						order = 8,
 						type = "select",
 						name = L["Right Panel"],
@@ -342,7 +342,7 @@ local function getOptions()
 						},
 						disabled = function() return E.db.addOnSkins.embed.embedType ~= "DOUBLE" end
 					},
-					leftWidth = {
+					leftWindowWidth = {
 						order = 9,
 						type = "range",
 						name = L["Embed Left Window Width"],
@@ -371,6 +371,28 @@ end
 
 function AS:Initialize()
 	EP:RegisterPlugin(AddOnName, getOptions)
+
+	if E.db.addOnSkins.embed.left then
+		E.db.addOnSkins.embed.leftWindow = E.db.addOnSkins.embed.left
+		E.db.addOnSkins.embed.left = nil
+	end
+	if E.db.addOnSkins.embed.right then
+		E.db.addOnSkins.embed.rightWindow = E.db.addOnSkins.embed.right
+		E.db.addOnSkins.embed.right = nil
+	end
+	if E.db.addOnSkins.embed.leftWidth then
+		E.db.addOnSkins.embed.leftWindowWidth = E.db.addOnSkins.embed.leftWidth
+		E.db.addOnSkins.embed.leftWidth = nil
+	end
+	if type(E.db.addOnSkins.embed.rightChat) == "boolean" then
+		E.db.addOnSkins.embed.rightChatPanel = E.db.addOnSkins.embed.rightChat
+		E.db.addOnSkins.embed.rightChat = nil
+	end
+	if type(E.db.addOnSkins.embed.belowTop) == "boolean" then
+		E.db.addOnSkins.embed.belowTopTab = E.db.addOnSkins.embed.belowTop
+		E.db.addOnSkins.embed.belowTop = nil
+	end
+	E.db.addOnSkins.embed.isShow = nil
 end
 
 local function InitializeCallback()
