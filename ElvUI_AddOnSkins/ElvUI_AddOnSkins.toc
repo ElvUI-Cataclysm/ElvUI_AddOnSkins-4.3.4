@@ -7,6 +7,5 @@
 Locales.lua
 Settings\Load_Settings.xml
 ElvUI_AddOnSkins.lua
-Utilities.lua
-Skins\Load_Skins.xml
 Modules\Load_Modules.xml
+Skins\Load_Skins.xml
