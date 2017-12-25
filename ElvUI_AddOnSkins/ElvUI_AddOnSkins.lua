@@ -304,24 +304,8 @@ local function getOptions()
 						type = "description",
 						name = L["Settings to control Embedded AddOns\n\nAvailable Embeds: Omen | Skada | Recount"]
 					},
-					rightChatPanel = {
-						order = 3,
-						type = "toggle",
-						name = L["Embed into Right Chat Panel"]
-					},
-					belowTopTab = {
-						order = 4,
-						type = "toggle",
-						name = L["Embed Below Top Tab"]
-					},
-					spacer = {
-						order = 5,
-						type = "description",
-						name = "",
-						width = "full"
-					},
 					embedType = {
-						order = 6,
+						order = 3,
 						type = "select",
 						name = L["Embed Type"],
 						values = {
@@ -330,8 +314,20 @@ local function getOptions()
 							["DOUBLE"] = L["Double"]
 						}
 					},
+					rightChatPanel = {
+						order = 4,
+						type = "toggle",
+						name = L["Embed into Right Chat Panel"],
+						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
+					},
+					belowTopTab = {
+						order = 5,
+						type = "toggle",
+						name = L["Embed Below Top Tab"],
+						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
+					},
 					leftWindow = {
-						order = 7,
+						order = 6,
 						type = "select",
 						name = L["Left Panel"],
 						values = {
@@ -342,7 +338,7 @@ local function getOptions()
 						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
 					},
 					rightWindow = {
-						order = 8,
+						order = 7,
 						type = "select",
 						name = L["Right Panel"],
 						values = {
@@ -352,19 +348,20 @@ local function getOptions()
 						},
 						disabled = function() return E.db.addOnSkins.embed.embedType ~= "DOUBLE" end
 					},
+					hideChat = {
+						order = 8,
+						type = "select",
+						name = L["Hide Chat Frame"],
+						values = E:GetModule("EmbedSystem"):GetChatWindowInfo(),
+						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
+					},
 					leftWindowWidth = {
 						order = 9,
 						type = "range",
 						name = L["Embed Left Window Width"],
 						min = 100,
 						max = 300,
-						step = 1
-					},
-					hideChat = {
-						order = 10,
-						type = "select",
-						name = L["Hide Chat Frame"],
-						values = E:GetModule("EmbedSystem"):GetChatWindowInfo(),
+						step = 1,
 						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
 					}
 				}
