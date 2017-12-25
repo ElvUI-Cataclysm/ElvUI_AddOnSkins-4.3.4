@@ -1,8 +1,10 @@
 ﻿local E, L, V, P, G = unpack(ElvUI)
 
 P.addOnSkins = {
+	skadaBackdrop = true,
 	skadaTemplate = "Default",
 	skadaTemplateGloss = false,
+	skadaTitleBackdrop = true,
 	skadaTitleTemplate = "Default",
 	skadaTitleTemplateGloss = true,
 

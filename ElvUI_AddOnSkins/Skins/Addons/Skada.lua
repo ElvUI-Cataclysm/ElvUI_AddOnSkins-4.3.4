@@ -9,7 +9,6 @@ local function LoadSkin()
 	local SkadaDisplayBar = Skada.displays["bar"]
 
 	hooksecurefunc(SkadaDisplayBar, "AddDisplayOptions", function(_, win, options)
-		options.baroptions.args.barspacing = nil
 		options.titleoptions.args.texture = nil
 		options.titleoptions.args.bordertexture = nil
 		options.titleoptions.args.thickness = nil
@@ -20,39 +19,59 @@ local function LoadSkin()
 
 	hooksecurefunc(SkadaDisplayBar, "ApplySettings", function(_, win)
 		local skada = win.bargroup
-		skada:SetSpacing(1)
-		skada:SetFrameLevel(5)
-		skada:SetBackdrop(nil)
 
+		-- Skada Title Frame
 		if win.db.enabletitle then
 			skada.button:SetBackdrop(nil)
+
 			if not skada.button.backdrop then
 				skada.button:CreateBackdrop()
+			end
+
+			if skada.button.backdrop then
 				skada.button.backdrop:SetFrameLevel(skada.button:GetFrameLevel())
-			end
-			if E.db.addOnSkins.skadaTitleTemplate == "NONE" then
-				skada.button.backdrop:SetBackdrop(nil)
-			else
 				skada.button.backdrop:SetTemplate(E.db.addOnSkins.skadaTitleTemplate, E.db.addOnSkins.skadaTitleTemplate == "Default" and E.db.addOnSkins.skadaTitleTemplateGloss or false)
+				skada.button.backdrop:ClearAllPoints()
+
+				if win.db.reversegrowth then
+					skada.button.backdrop:Point("TOPLEFT", skada.button, "TOPLEFT", -E.Border, -2)
+					skada.button.backdrop:Point("BOTTOMRIGHT", skada.button, "BOTTOMRIGHT", E.Border, -1)
+				else
+					skada.button.backdrop:Point("TOPLEFT", skada.button, "TOPLEFT", -E.Border, 1)
+					skada.button.backdrop:Point("BOTTOMRIGHT", skada.button, "BOTTOMRIGHT", E.Border, 2)
+				end
+
+				if not E.db.addOnSkins.skadaTitleBackdrop then
+					skada.button.backdrop:Hide()
+				else
+					skada.button.backdrop:Show()
+				end
 			end
 		end
+
+		-- Skada Frame
+		skada:SetBackdrop(nil)
+
 		if not skada.backdrop then
-			if E.db.addOnSkins.skadaTemplate == "NONE" then
-				skada:SetBackdrop(nil)
-			else
-				skada:SetTemplate(E.db.addOnSkins.skadaTemplate, E.db.addOnSkins.skadaTemplate == "Default" and E.db.addOnSkins.skadaTemplateGloss or false)
-			end
+			skada:CreateBackdrop()
 		end
+
 		if skada.backdrop then
+			skada.backdrop:SetTemplate(E.db.addOnSkins.skadaTemplate, E.db.addOnSkins.skadaTemplate == "Default" and E.db.addOnSkins.skadaTemplateGloss or false)
 			skada.backdrop:ClearAllPoints()
+
 			if win.db.reversegrowth then
-				skada.backdrop:Point("LEFT", skada.button, "LEFT", -E.Border, 0)
-				skada.backdrop:Point("RIGHT", skada.button, "RIGHT", E.Border, 0)
-				skada.backdrop:Point("BOTTOM", skada.button, "TOP", 0, win.db.enabletitle and (E.Spacing) or -win.db.barheight - E.Border)
+				skada.backdrop:Point("TOPLEFT", skada, "TOPLEFT", -E.Border, 0)
+				skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", E.Border, -1)
 			else
-				skada.backdrop:Point("LEFT", skada.button, "LEFT", -E.Border, 0)
-				skada.backdrop:Point("RIGHT", skada.button, "RIGHT", E.Border, 0)
-				skada.backdrop:Point("TOP", skada.button, "BOTTOM", 0, win.db.enabletitle and -(E.Spacing) or win.db.barheight + E.Border)
+				skada.backdrop:Point("TOPLEFT", skada, "TOPLEFT", -E.Border, E.Border)
+				skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", E.Border, 0)
+			end
+
+			if not E.db.addOnSkins.skadaBackdrop then
+				skada.backdrop:Hide()
+			else
+				skada.backdrop:Show()
 			end
 		end
 
@@ -79,7 +98,7 @@ local function LoadSkin()
 			EMB:EmbedSkada()
 		end
 	end)
-	
+
 	hooksecurefunc(Skada, "UpdateDisplay", function()
 		if AS:CheckAddOn("Skada") and not InCombatLockdown() then
 			EMB:EmbedSkada()

@@ -152,7 +152,7 @@ local function getOptions()
 						type = "group",
 						name = "Skada",
 						get = function(info) return E.db.addOnSkins[info[#info]] end,
-						set = function(info, value) E.db.addOnSkins[info[#info]] = value Skada:UpdateDisplay() end,
+						set = function(info, value) E.db.addOnSkins[info[#info]] = value Skada:ApplySettings() end,
 						disabled = function() return not AS:CheckAddOn("Skada") end,
 						args = {
 							header = {
@@ -160,42 +160,52 @@ local function getOptions()
 								type = "header",
 								name = "Skada"
 							},
-							skadaTemplate = {
+							skadaTitleBackdrop = {
 								order = 2,
-								type = "select",
-								name = L["Skada Template"],
-								values = {
-									["Default"] = DEFAULT,
-									["Transparent"] = L["Transparent"],
-									["NONE"] = NONE
-								}
-							},
-							skadaTemplateGloss = {
-								order = 3,
 								type = "toggle",
-								name = L["Skada Template Gloss"],
-								disabled = function() return E.db.addOnSkins.skadaTemplate == "Transparent" or E.db.addOnSkins.skadaTemplate == "NONE" or not AS:CheckAddOn("Skada") end
-							},
-							spacer = {
-								order = 4,
-								type = "description",
-								name = ""
+								name = L["Skada Title Backdrop"]
 							},
 							skadaTitleTemplate = {
-								order = 5,
+								order = 3,
 								type = "select",
 								name = L["Skada Title Template"],
 								values = {
 									["Default"] = DEFAULT,
-									["Transparent"] = L["Transparent"],
-									["NONE"] = NONE
-								}
+									["Transparent"] = L["Transparent"]
+								},
+								disabled = function() return not E.db.addOnSkins.skadaTitleBackdrop end
 							},
 							skadaTitleTemplateGloss = {
-								order = 6,
+								order = 4,
 								type = "toggle",
 								name = L["Skada Title Template Gloss"],
-								disabled = function() return E.db.addOnSkins.skadaTitleTemplate == "Transparent" or E.db.addOnSkins.skadaTitleTemplate == "NONE" or not AS:CheckAddOn("Skada") end
+								disabled = function() return E.db.addOnSkins.skadaTitleTemplate == "Transparent" or not E.db.addOnSkins.skadaTitleBackdrop end
+							},
+							spacer = {
+								order = 5,
+								type = "description",
+								name = ""
+							},
+							skadaBackdrop = {
+								order = 6,
+								type = "toggle",
+								name = L["Skada Backdrop"]
+							},
+							skadaTemplate = {
+								order = 7,
+								type = "select",
+								name = L["Skada Template"],
+								values = {
+									["Default"] = DEFAULT,
+									["Transparent"] = L["Transparent"]
+								},
+								disabled = function() return not E.db.addOnSkins.skadaBackdrop end
+							},
+							skadaTemplateGloss = {
+								order = 8,
+								type = "toggle",
+								name = L["Skada Template Gloss"],
+								disabled = function() return E.db.addOnSkins.skadaTemplate == "Transparent" or not E.db.addOnSkins.skadaBackdrop end
 							}
 						}
 					},

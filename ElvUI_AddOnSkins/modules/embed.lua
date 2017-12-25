@@ -6,7 +6,7 @@ local _G = _G
 local pairs, tonumber = pairs, tonumber
 local floor = math.floor
 local format, lower, match = string.format, string.lower, string.match
-local tinsert, twipe = table.insert, table.wipe
+local tinsert = table.insert
 
 local hooksecurefunc = hooksecurefunc
 local NUM_CHAT_WINDOWS = NUM_CHAT_WINDOWS
@@ -84,47 +84,11 @@ function EMB:EmbedUpdate()
 		self:EmbedCreate()
 	end
 
-	self:EmbedToggle()
 	self:WindowResize()
 
 	if self:CheckEmbed("Omen") then self:EmbedOmen() end
 	if self:CheckEmbed("Skada") then self:EmbedSkada() end
 	if self:CheckEmbed("Recount") then self:EmbedRecount() end
-end
-
-function EMB:EmbedToggle()
-	self.leftFrame.frameName = nil
-	self.rightFrame.frameName = nil
-
-	local left = lower(self.db.leftWindow)
-	if left ~= "skada" and left ~= "omen" and left ~= "recount" then
-		self.leftFrame.frameName = self.db.leftWindow
-	end
-
-	if self.db.embedType == "DOUBLE" then
-		local right = lower(self.db.rightWindow)
-		if right ~= "skada" and right ~= "omen" and right ~= "recount" then
-			self.rightFrame.frameName = self.db.rightWindow
-		end
-	end
-
-	if self.leftFrame.frameName then
-		local frame = _G[self.left.frameName]
-		if frame and frame:IsObjectType("Frame") and not frame:IsProtected() then
-			frame:ClearAllPoints()
-			frame:SetParent(self.leftFrame)
-			frame:SetInside(self.leftFrame, 0, 0)
-		end
-	end
-
-	if self.rightFrame.frameName then
-		local frame = _G[self.rightFrame.frameName]
-		if frame and frame:IsObjectType("Frame") and not frame:IsProtected() then
-			frame:ClearAllPoints()
-			frame:SetParent(self.rightFrame)
-			frame:SetInside(self.rightFrame, 0, 0)
-		end
-	end
 end
 
 function EMB:SetHooks()
@@ -249,7 +213,7 @@ function EMB:WindowResize()
 	if isDouble then
 		self.leftFrame:ClearAllPoints()
 		self.leftFrame:Point("TOPLEFT", self.mainFrame)
-		self.leftFrame:Point("BOTTOMRIGHT", self.mainFrame, "BOTTOMRIGHT", -(self.db.leftWindowWidth + SPACING), 0)
+		self.leftFrame:Point("BOTTOMRIGHT", self.mainFrame, "BOTTOMRIGHT", -(self.mainFrame:GetWidth() - self.db.leftWindowWidth  + SPACING), 0)
 
 		self.rightFrame:ClearAllPoints()
 		self.rightFrame:Point("TOPLEFT", self.leftFrame, "TOPRIGHT", SPACING, 0)
@@ -393,48 +357,49 @@ end
 
 if AS:CheckAddOn("Skada") then
 	EMB["skadaWindows"] = {}
+
+	local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+		if not window then return end
+
+		local barmod = Skada.displays["bar"]
+		local offsety
+		if window.db.reversegrowth then
+			offsety = 0
+		else
+			offsety = 1 + (window.db.enabletitle and window.db.title.height or 0)
+		end
+
+		window.db.barwidth = width
+		window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (E.PixelMode and 1 or 2)
+		window.db.spark = false
+		window.db.barslocked = true
+
+		window.bargroup.ClearAllPoints = nil
+		window.bargroup:ClearAllPoints()
+		window.bargroup.ClearAllPoints = function() end
+		window.bargroup.SetPoint = nil
+		window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
+		window.bargroup.SetPoint = function() end
+		window.bargroup:SetParent(relativeFrame)
+		window.bargroup:ClearAllPoints()
+		window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
+		window.bargroup:SetFrameStrata("LOW")
+
+		barmod.ApplySettings(barmod, window)
+	end
+
 	function EMB:EmbedSkada()
-		twipe(self["skadaWindows"])
-		for k, window in pairs(Skada:GetWindows()) do
+		wipe(self["skadaWindows"])
+		for _, window in pairs(Skada:GetWindows()) do
 			tinsert(self.skadaWindows, window)
 		end
 
 		local numberToEmbed = 0
 		if self.db.embedType == "SINGLE" then
 			numberToEmbed = 1
-		end
-		if self.db.embedType == "DOUBLE" then
+		elseif self.db.embedType == "DOUBLE" then
 			if self.db.rightWindow == "Skada" then numberToEmbed = numberToEmbed + 1 end
 			if self.db.leftWindow == "Skada" then numberToEmbed = numberToEmbed + 1 end
-		end
-
-		local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
-			if not window then return end
-			local barmod = Skada.displays["bar"]
-			local offsety
-			if window.db.reversegrowth then
-				offsety = 1
-			else
-				offsety = 1 + (window.db.enabletitle and window.db.title.height or 0)
-			end
-
-			window.db.barwidth = width
-			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (E.PixelMode and 1 or 2)
-			window.db.spark = false
-			window.db.barslocked = true
-
-			window.bargroup.ClearAllPoints = nil
-			window.bargroup:ClearAllPoints()
-			window.bargroup.ClearAllPoints = function() end
-			window.bargroup.SetPoint = nil
-			window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
-			window.bargroup.SetPoint = function() end
-			window.bargroup:SetParent(relativeFrame)
-			window.bargroup:ClearAllPoints()
-			window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
-			window.bargroup:SetFrameStrata("LOW")
-
-			barmod.ApplySettings(barmod, window)
 		end
 
 		if numberToEmbed == 1 then
@@ -442,6 +407,7 @@ if AS:CheckAddOn("Skada") then
 			if self.db.embedType == "DOUBLE" then
 				parent = self.db.rightWindow == "Skada" and self.rightFrame or self.leftFrame
 			end
+
 			EmbedWindow(self.skadaWindows[1], parent:GetWidth() -(E.Border*2), parent:GetHeight(), "TOPLEFT", parent, "TOPLEFT", E.Border, -E.Border)
 		elseif numberToEmbed == 2 then
 			EmbedWindow(self.skadaWindows[1], self.leftFrame:GetWidth() -(E.Border*2), self.leftFrame:GetHeight(), "TOPLEFT", self.leftFrame, "TOPLEFT", E.Border, -E.Border)
