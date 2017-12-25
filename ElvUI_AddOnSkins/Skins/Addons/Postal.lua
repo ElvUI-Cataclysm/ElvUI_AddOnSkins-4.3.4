@@ -44,7 +44,8 @@ local function LoadSkin()
 
 	if Postal_ModuleMenuButton then
 		S:HandleNextPrevButton(Postal_ModuleMenuButton, true)
-		Postal_ModuleMenuButton:Point("TOPRIGHT", MailFrame, -30, -4)
+		Postal_ModuleMenuButton:Point("TOPRIGHT", MailFrame, -55, -5)
+		Postal_ModuleMenuButton:Size(16)
 	end
 
 	if Postal_BlackBookButton then
