@@ -3,11 +3,7 @@ local AS = E:GetModule("AddOnSkins")
 local S = E:GetModule("Skins")
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.Recount) then return end
-
-	function Recount:ShowReset()
-		AS:AcceptFrame(L["Reset Recount?"], function(self) Recount:ResetData() self:GetParent():Hide() end)
-	end
+	if not E.private.addOnSkins.Recount then return end
 
 	local function SkinFrame(frame)
 		frame:SetBackdrop(nil)
@@ -16,7 +12,11 @@ local function LoadSkin()
 		backdrop:SetFrameLevel(frame:GetFrameLevel() - 1)
 		backdrop:Point("BOTTOMLEFT", frame, E.PixelMode and 1 or 0, E.PixelMode and 1 or 0)
 		backdrop:Point("TOPRIGHT", frame, E.PixelMode and -1 or 0, -(E.PixelMode and 31 or 30))
-		backdrop:SetTemplate("Transparent")
+		if frame == Recount.MainWindow then
+			backdrop:SetTemplate("Default")
+		else
+			backdrop:SetTemplate("Transparent")
+		end
 		frame.backdrop = backdrop
 
 		local header = CreateFrame("Frame", nil, backdrop)
@@ -30,11 +30,40 @@ local function LoadSkin()
 		frame.Title:FontTemplate()
 		frame.Title:SetTextColor(unpack(E.media.rgbvaluecolor))
 
-		frame.CloseButton:ClearAllPoints()
-		frame.CloseButton:SetPoint("RIGHT", header, -6, 0)
+		if frame.CloseButton then
+			frame.CloseButton:ClearAllPoints()
+			frame.CloseButton:SetPoint("RIGHT", header, -6, 0)
+		end
 	end
 
 	SkinFrame(Recount.MainWindow)
+
+	Recount.MainWindow.RightButton:SetNormalTexture([[Interface\Buttons\SquareButtonTextures]])
+	Recount.MainWindow.RightButton:GetNormalTexture():SetTexCoord(0.421, 0.234, 0.015, 0.203)
+	Recount.MainWindow.RightButton:GetNormalTexture():Point("TOPLEFT", 2, -4)
+	Recount.MainWindow.RightButton:GetNormalTexture():Point("BOTTOMRIGHT", -2, 4)
+	Recount.MainWindow.RightButton:SetPushedTexture([[Interface\Buttons\SquareButtonTextures]])
+	Recount.MainWindow.RightButton:GetPushedTexture():SetTexCoord(0.421, 0.234, 0.015, 0.203)
+	Recount.MainWindow.RightButton:GetPushedTexture():Point("TOPLEFT", 2, -4)
+	Recount.MainWindow.RightButton:GetPushedTexture():Point("BOTTOMRIGHT", -2, 4)
+
+	Recount.MainWindow.LeftButton:SetNormalTexture([[Interface\Buttons\SquareButtonTextures]])
+	Recount.MainWindow.LeftButton:GetNormalTexture():SetTexCoord(0.234, 0.421, 0.015, 0.203)
+	Recount.MainWindow.LeftButton:GetNormalTexture():Point("TOPLEFT", 2, -4)
+	Recount.MainWindow.LeftButton:GetNormalTexture():Point("BOTTOMRIGHT", -2, 4)
+	Recount.MainWindow.LeftButton:SetPushedTexture([[Interface\Buttons\SquareButtonTextures]])
+	Recount.MainWindow.LeftButton:GetPushedTexture():SetTexCoord(0.234, 0.421, 0.015, 0.203)
+	Recount.MainWindow.LeftButton:GetPushedTexture():Point("TOPLEFT", 2, -4)
+	Recount.MainWindow.LeftButton:GetPushedTexture():Point("BOTTOMRIGHT", -2, 4)
+
+	Recount.MainWindow.ResetButton:SetNormalTexture([[Interface\Buttons\SquareButtonTextures]])
+	Recount.MainWindow.ResetButton:GetNormalTexture():SetTexCoord(0.015, 0.203, 0.015, 0.203)
+	Recount.MainWindow.ResetButton:GetNormalTexture():Point("TOPLEFT", 2, -2)
+	Recount.MainWindow.ResetButton:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
+	Recount.MainWindow.ResetButton:SetPushedTexture([[Interface\Buttons\SquareButtonTextures]])
+	Recount.MainWindow.ResetButton:GetPushedTexture():SetTexCoord(0.015, 0.203, 0.015, 0.203)
+	Recount.MainWindow.ResetButton:GetPushedTexture():Point("TOPLEFT", 2, -2)
+	Recount.MainWindow.ResetButton:GetPushedTexture():Point("BOTTOMRIGHT", -2, -2)
 
 	local buttons = {
 		Recount.MainWindow.CloseButton,
@@ -91,6 +120,19 @@ local function LoadSkin()
 			AS:Desaturate(Recount.ConfigWindow.CloseButton)
 
 			Recount.ConfigWindow.isSkinned = true
+		end
+	end)
+
+	hooksecurefunc(Recount, "AddWindow", function(self, window)
+		if window.YesButton and not window.isSkinned then
+			SkinFrame(window)
+			window.Text:FontTemplate()
+			window.Text:SetPoint("TOP", window.backdrop, 0, -3)
+
+			S:HandleButton(window.YesButton)
+			window.YesButton:SetPoint("BOTTOMRIGHT", window, "BOTTOM", -3, 5)
+			S:HandleButton(window.NoButton)
+			window.NoButton:SetPoint("BOTTOMLEFT", window, "BOTTOM", 3, 5)
 		end
 	end)
 end
