@@ -1,21 +1,20 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
-local _G = _G;
-local pairs, unpack = pairs, unpack;
-local find = string.find;
+local _G = _G
+local pairs, unpack = pairs, unpack
+local find = string.find
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.PallyPower) then return end
+	if not E.private.addOnSkins.PallyPower then return end
 
 	local _applyskin = PallyPower.ApplySkin
 	function PallyPower:ApplySkin(skinname)
 		local needSkinning = {PallyPowerAutoBtn, PallyPowerRFBtn, PallyPowerAuraBtn}
 
 		for _, frame in pairs(needSkinning) do
-
 			frame:SetBackdrop({
-				bgFile = E.noop;
+				bgFile = E.noop,
 				insets = {left = 2, right = 2, top = 2, bottom = 2}
 			})
 
@@ -32,7 +31,7 @@ local function LoadSkin()
 				if fs then
 					local _, size = fs:GetFont()
 					fs:FontTemplate()
-					if not fname:find("PowerC%d+P%d+$") then
+					if not find(fname, "PowerC%d+P%d+$") then
 						if fontstring == "Text" then
 							fs:ClearAllPoints()
 							fs:SetJustifyH("LEFT")
@@ -59,7 +58,7 @@ local function LoadSkin()
 						else
 							oldicon:SetPoint("LEFT", 34, 0)
 						end
-					elseif fname:find("(Au[rt][ao])$") then
+					elseif find(fname, "(Au[rt][ao])$") then
 						oldicon:SetPoint("LEFT", 4, 0)
 					else
 						oldicon:SetPoint("TOPLEFT", 4, -4)
@@ -67,14 +66,14 @@ local function LoadSkin()
 
 					local panel = CreateFrame("Frame", fname.."New"..tex, frame)
 					panel:SetAllPoints(oldicon)
-					panel:SetTemplate('Default')
+					panel:SetTemplate("Default")
 
 					local icon = panel:CreateTexture()
 					panel.icon = panel
 
 					icon:SetPoint("TOPLEFT", panel, 2, -2)
 					icon:SetPoint("BOTTOMRIGHT", panel, -2, 2)
-					icon:SetTexCoord(unpack(E.TexCoords));
+					icon:SetTexCoord(unpack(E.TexCoords))
 					icon:SetTexture(oldicon:GetTexture())
 
 					oldicon.SetTexture = function(tex, texstring)
@@ -99,7 +98,7 @@ local function LoadSkin()
 		_updatelayout(self)
 
 		for _, button in pairs({PallyPowerAutoBtn, PallyPowerRFBtn, PallyPowerAuraBtn}) do
-			if not UnitAffectingCombat('player') then
+			if not UnitAffectingCombat("player") then
 				local a, p, b, x, y = button:GetPoint()
 				button:SetPoint(a, p, b, x, y + 3)
 			end

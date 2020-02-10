@@ -1,8 +1,11 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local _G = _G
+local unpack = unpack
+
 local function LoadSkin()
-	if(not E.private.addOnSkins.MinimalArchaeology) then return end
+	if not E.private.addOnSkins.MinimalArchaeology then return end
 
 	MinArchMain:StripTextures()
 	MinArchMain:SetTemplate("Transparent")
@@ -40,7 +43,7 @@ local function LoadSkin()
 
 	MinArchMainSkillBar:StripTextures()
 	MinArchMainSkillBar:CreateBackdrop()
-	MinArchMainSkillBar:SetStatusBarTexture(E["media"].normTex)
+	MinArchMainSkillBar:SetStatusBarTexture(E.media.normTex)
 	MinArchMainSkillBar:SetStatusBarColor(0.13, 0.35, 0.80)
 	MinArchMainSkillBar:Point("TOP", 2, -24)
 	MinArchMainSkillBar:Width(253)
@@ -51,7 +54,7 @@ local function LoadSkin()
 
 		bar:StripTextures()
 		bar:CreateBackdrop()
-		bar:SetStatusBarTexture(E["media"].normTex)
+		bar:SetStatusBarTexture(E.media.normTex)
 		bar:SetStatusBarColor(1.0, 0.4, 0)
 
 		S:HandleButton(button)
@@ -62,7 +65,7 @@ local function LoadSkin()
 		S:HandleCheckBox(_G["MinArchOptionPanelFragmentCap"..i])
 
 		if _G["MinArchOptionPanelUseKeystones"..i] then 
-			S:HandleCheckBox(_G["MinArchOptionPanelUseKeystones"..i]) 
+			S:HandleCheckBox(_G["MinArchOptionPanelUseKeystones"..i])
 		end
 	end
 

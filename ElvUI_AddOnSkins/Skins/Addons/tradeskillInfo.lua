@@ -1,10 +1,12 @@
-local E, L, V, P, G = unpack(ElvUI);
-local S = E:GetModule("Skins");
+local E, L, V, P, G = unpack(ElvUI)
+local S = E:GetModule("Skins")
 
-local find = string.find;
+local _G = _G
+local unpack = unpack
+local find = string.find
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.TradeskillInfo) then return; end
+	if not E.private.addOnSkins.TradeskillInfo then return end
 
 	TradeskillInfoFrame:SetTemplate("Transparent")
 
@@ -22,12 +24,14 @@ local function LoadSkin()
 
 	TradeskillInfoListScrollFrame:StripTextures()
 	S:HandleScrollBar(TradeskillInfoListScrollFrameScrollBar)
+
 	TradeskillInfoDetailScrollFrame:StripTextures()
 	S:HandleScrollBar(TradeskillInfoDetailScrollFrameScrollBar)
 
 	S:HandleEditBox(TradeskillInfoInputBox)
 
 	TradeskillInfoDetailScrollChildFrame:StripTextures()
+
 	TradeskillInfoSkillIcon:StyleButton(nil, true)
 	TradeskillInfoSkillIcon:SetTemplate("Default")
 
@@ -39,20 +43,20 @@ local function LoadSkin()
 	end)
 
 	for i = 1, 8 do
-		local reagent = _G["TradeskillInfoReagent" .. i]
-		local icon = _G["TradeskillInfoReagent" .. i .. "IconTexture"]
-		local count = _G["TradeskillInfoReagent" .. i .. "Count"]
-		local nameFrame = _G["TradeskillInfoReagent" .. i .. "NameFrame"]
-
-		icon:SetTexCoord(unpack(E.TexCoords))
-		icon:SetDrawLayer("OVERLAY")
+		local reagent = _G["TradeskillInfoReagent"..i]
+		local icon = _G["TradeskillInfoReagent"..i.."IconTexture"]
+		local count = _G["TradeskillInfoReagent"..i.."Count"]
+		local nameFrame = _G["TradeskillInfoReagent"..i.."NameFrame"]
 
 		icon.backdrop = CreateFrame("Frame", nil, reagent)
 		icon.backdrop:SetFrameLevel(reagent:GetFrameLevel() - 1)
 		icon.backdrop:SetTemplate("Default")
 		icon.backdrop:SetOutside(icon)
 
+		icon:SetTexCoord(unpack(E.TexCoords))
 		icon:SetParent(icon.backdrop)
+		icon:SetDrawLayer("OVERLAY")
+
 		count:SetParent(icon.backdrop)
 		count:SetDrawLayer("OVERLAY")
 
@@ -61,37 +65,40 @@ local function LoadSkin()
 
 	hooksecurefunc(TradeskillInfoUI, "DoFrameUpdate", function(self)
 		for i = 0, self.vars.numSkillButtons do
-			local c = _G["TradeskillInfoSkill"..i]
+			local button = _G["TradeskillInfoSkill"..i]
 
 			if i == 0 then
-				c = TradeskillInfoCollapseAllButton
+				button = TradeskillInfoCollapseAllButton
 			end
 
-			if not c.isHooked then
-				c:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons");
-				c.SetNormalTexture = E.noop;
-				c:GetNormalTexture():Size(11);
-				c:SetPushedTexture("")
-				c.SetPushedTexture = E.noop
-				c:SetHighlightTexture("")
-				c.SetHighlightTexture = E.noop
-				c:SetDisabledTexture("")
-				c.SetDisabledTexture = E.noop
+			if not button.isHooked then
+				button:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
+				button.SetNormalTexture = E.noop
+				button:GetNormalTexture():Size(11)
 
-				hooksecurefunc(c, "SetNormalTexture", function(self, texture)
-					if(find(texture, "MinusButton")) then
-						self:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375);
-					elseif(find(texture, "PlusButton")) then
-						self:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375);
+				button:SetPushedTexture("")
+				button.SetPushedTexture = E.noop
+
+				button:SetHighlightTexture("")
+				button.SetHighlightTexture = E.noop
+
+				button:SetDisabledTexture("")
+				button.SetDisabledTexture = E.noop
+
+				hooksecurefunc(button, "SetNormalTexture", function(self, texture)
+					if find(texture, "MinusButton") then
+						self:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375)
+					elseif find(texture, "PlusButton") then
+						self:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375)
 					else
-						self:GetNormalTexture():SetTexCoord(0, 0, 0, 0);
+						self:GetNormalTexture():SetTexCoord(0, 0, 0, 0)
  					end
 				end)
 
-				c.isHooked = true
+				button.isHooked = true
 			end
 		end
 	end)
 end
 
-S:AddCallbackForAddon("TradeskillInfoUI", "TradeskillInfoUI", LoadSkin);
+S:AddCallbackForAddon("TradeskillInfoUI", "TradeskillInfoUI", LoadSkin)

@@ -1,8 +1,11 @@
 ﻿local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local _G = _G
+local unpack = unpack
+
 local function LoadSkin()
-	if(not E.private.addOnSkins.Titan) then return end
+	if not E.private.addOnSkins.Titan then return end
 
 	E:Delay(1, function()
 		Titan_Bar__Display_Bar:StripTextures()
@@ -37,17 +40,17 @@ local function LoadSkin()
 			"TitanPanelTLButtonIcon",
 			"TitanPanelFHButtonIcon",
 			"TitanPanelSPButtonIcon"
-		};
+		}
 
 		for i = 1, #Icons do
-			if(_G[Icons[i]]) then
-				_G[Icons[i]]:SetTexCoord(unpack(E.TexCoords));
+			if _G[Icons[i]] then
+				_G[Icons[i]]:SetTexCoord(unpack(E.TexCoords))
 			end
 		end
 
 		for i = 0, 9 do
-			if(_G["TitanPanelA"..i.."ButtonIcon"]) then
-				_G["TitanPanelA"..i.."ButtonIcon"]:SetTexCoord(unpack(E.TexCoords));
+			if _G["TitanPanelA"..i.."ButtonIcon"] then
+				_G["TitanPanelA"..i.."ButtonIcon"]:SetTexCoord(unpack(E.TexCoords))
 			end
 		end
 	end)

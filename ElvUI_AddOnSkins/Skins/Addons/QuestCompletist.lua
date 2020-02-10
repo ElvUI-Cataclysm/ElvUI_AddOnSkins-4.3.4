@@ -1,9 +1,69 @@
-local E, L, V, P, G = unpack(ElvUI);
-local S = E:GetModule("Skins");
+local E, L, V, P, G = unpack(ElvUI)
+local S = E:GetModule("Skins")
+
+local _G = _G
+
+-- QuestCompletist v99.7
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.QuestCompletist) then return; end
+	if not E.private.addOnSkins.QuestCompletist then return end
 
+	-- Quest Log Button
+	S:HandleButton(qcQuestLogButton)
+
+	-- Main Frame
+	qcQuestCompletistUI:StripTextures()
+	qcQuestCompletistUI:SetTemplate("Transparent")
+	qcQuestCompletistUI:Size(315, 380)
+	qcQuestCompletistUI:CreateBackdrop("Transparent")
+	qcQuestCompletistUI.backdrop:Point("TOPLEFT", 18, -56)
+	qcQuestCompletistUI.backdrop:Point("BOTTOMRIGHT", -34, 62)
+	qcQuestCompletistUI.backdrop:SetFrameLevel(qcQuestCompletistUI:GetFrameLevel() + 1)
+	qcQuestCompletistUI:SetClampedToScreen(true)
+
+	qcQuestCompletistUI.qcTitleText:ClearAllPoints()
+	qcQuestCompletistUI.qcTitleText:Point("TOP", 0, -4)
+
+	qcQuestCompletistUI.qcCurrentCategoryQuestCount:ClearAllPoints()
+	qcQuestCompletistUI.qcCurrentCategoryQuestCount:Point("BOTTOMRIGHT", -10, 4)
+
+	qcQuestCompletistUI.qcSelectedCategory:Point("TOPLEFT", 20, -38)
+	qcQuestCompletistUI.qcSelectedCategory:SetJustifyH("LEFT")
+
+	S:HandleButton(qcOptionsButton)
+	qcOptionsButton:Point("TOPLEFT", 216, -323)
+
+	S:HandleButton(qcCategoryDropdownButton)
+	qcCategoryDropdownButton:Point("TOPLEFT", 171, -32)
+
+	S:HandleSliderFrame(qcMenuSlider)
+	qcMenuSlider:Point("TOPLEFT", 285, -56)
+	qcMenuSlider:Height(262)
+
+	S:HandleEditBox(qcSearchBox)
+	qcSearchBox:Size(160, 18)
+	qcSearchBox:Point("TOPLEFT", 19, -325)
+
+	S:HandleCloseButton(qcXButton)
+	qcXButton:Point("TOPLEFT", 286, 4)
+
+	for i = 1, 16 do
+		local button = _G["qcMenuButton"..i]
+
+		button:SetHighlightTexture(E.Media.Textures.Highlight)
+		button.SetHighlightTexture = E.noop
+
+		local Highlight = button:GetHighlightTexture()
+		Highlight:SetVertexColor(1, 1, 1, 0.35)
+		Highlight:Point("TOPLEFT", 0, -1)
+		Highlight:Point("BOTTOMRIGHT", 0, 1)
+
+		if i == 1 then
+			button:Point("TOPLEFT", 15, -60)
+		end
+	end
+
+	-- Tooltips
 	local tooltips = {
 		"qcMapTooltip",
 		"qcQuestInformationTooltip",
@@ -21,30 +81,7 @@ local function LoadSkin()
 		end
 	end
 
-	for i = 1, 16 do
-		_G["qcMenuButton"..i]:StyleButton()
-	end
-
-	qcQuestCompletistUI:StripTextures()
-	qcQuestCompletistUI:SetTemplate("Transparent")
-	qcQuestCompletistUI:Size(350, 435)
-
-	S:HandleEditBox(qcSearchBox)
-	qcSearchBox:Size(160, 20)
-
-	S:HandleButton(qcOptionsButton)
-	S:HandleButton(qcCategoryDropdownButton)
-
-	S:HandleCloseButton(qcXButton)
-	qcXButton:Point("TOPLEFT", 323, 4)
-
-	S:HandleSliderFrame(qcMenuSlider, 16)
-
-	qcMenuSlider:Point("TOPLEFT", 303, -90)
-	qcMenuSlider:Height(256)
-
-	S:HandleButton(qcQuestLogButton)
-
+	-- Options
 	S:HandleCheckBox(qcIO_M_SHOW_ICONS)
 	S:HandleCheckBox(qcIO_M_HIDE_COMPLETED)
 	S:HandleCheckBox(qcIO_M_HIDE_LOWLEVEL)
@@ -58,4 +95,4 @@ local function LoadSkin()
 	S:HandleCheckBox(qcIO_ML_HIDE_RACECLASS)
 end
 
-S:AddCallbackForAddon("QuestCompletist", "QuestCompletist", LoadSkin);
+S:AddCallbackForAddon("QuestCompletist", "QuestCompletist", LoadSkin)

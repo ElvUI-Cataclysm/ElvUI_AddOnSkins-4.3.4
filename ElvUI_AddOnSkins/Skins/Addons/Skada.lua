@@ -6,9 +6,9 @@ local EMB = E:GetModule("EmbedSystem")
 local function LoadSkin()
 	if not E.private.addOnSkins.Skada then return end
 
-	local SkadaDisplayBar = Skada.displays["bar"]
+	local db = E.db.addOnSkins.skada
 
-	hooksecurefunc(SkadaDisplayBar, "AddDisplayOptions", function(_, win, options)
+	hooksecurefunc(Skada.displays.bar, "AddDisplayOptions", function(_, _, options)
 		options.titleoptions.args.texture = nil
 		options.titleoptions.args.bordertexture = nil
 		options.titleoptions.args.thickness = nil
@@ -17,7 +17,7 @@ local function LoadSkin()
 		options.windowoptions = nil
 	end)
 
-	hooksecurefunc(SkadaDisplayBar, "ApplySettings", function(_, win)
+	hooksecurefunc(Skada.displays.bar, "ApplySettings", function(_, win)
 		local skada = win.bargroup
 
 		-- Skada Title Frame
@@ -30,7 +30,7 @@ local function LoadSkin()
 
 			if skada.button.backdrop then
 				skada.button.backdrop:SetFrameLevel(skada.button:GetFrameLevel())
-				skada.button.backdrop:SetTemplate(E.db.addOnSkins.skadaTitleTemplate, E.db.addOnSkins.skadaTitleTemplate == "Default" and E.db.addOnSkins.skadaTitleTemplateGloss or false)
+				skada.button.backdrop:SetTemplate(db.titleTemplate, db.titleTemplate == "Default" and db.titleTemplateGloss or false)
 				skada.button.backdrop:ClearAllPoints()
 
 				if win.db.reversegrowth then
@@ -41,7 +41,7 @@ local function LoadSkin()
 					skada.button.backdrop:Point("BOTTOMRIGHT", skada.button, "BOTTOMRIGHT", E.Border, 2)
 				end
 
-				if not E.db.addOnSkins.skadaTitleBackdrop then
+				if not db.titleBackdrop then
 					skada.button.backdrop:Hide()
 				else
 					skada.button.backdrop:Show()
@@ -57,7 +57,7 @@ local function LoadSkin()
 		end
 
 		if skada.backdrop then
-			skada.backdrop:SetTemplate(E.db.addOnSkins.skadaTemplate, E.db.addOnSkins.skadaTemplate == "Default" and E.db.addOnSkins.skadaTemplateGloss or false)
+			skada.backdrop:SetTemplate(db.template, db.template == "Default" and db.templateGloss or false)
 			skada.backdrop:ClearAllPoints()
 
 			if win.db.reversegrowth then
@@ -68,7 +68,7 @@ local function LoadSkin()
 				skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", E.Border, 0)
 			end
 
-			if not E.db.addOnSkins.skadaBackdrop then
+			if not db.backdrop then
 				skada.backdrop:Hide()
 			else
 				skada.backdrop:Show()
@@ -88,25 +88,18 @@ local function LoadSkin()
 	end)
 
 	hooksecurefunc(Skada, "CreateWindow", function()
-		if AS:CheckAddOn("Skada") then
-			EMB:EmbedSkada()
-		end
+		if AS:CheckAddOn("Skada") then EMB:EmbedSkada() end
 	end)
-
 	hooksecurefunc(Skada, "DeleteWindow", function()
-		if AS:CheckAddOn("Skada") then
-			EMB:EmbedSkada()
-		end
+		if AS:CheckAddOn("Skada") then EMB:EmbedSkada() end
 	end)
-
 	hooksecurefunc(Skada, "UpdateDisplay", function()
-		if AS:CheckAddOn("Skada") and not InCombatLockdown() then
-			EMB:EmbedSkada()
-		end
+		if AS:CheckAddOn("Skada") and not InCombatLockdown() then EMB:EmbedSkada() end
 	end)
 
 	hooksecurefunc(Skada, "SetTooltipPosition", function(self, tt)
 		local p = self.db.profile.tooltippos
+
 		if p == "default" then
 			if not E:HasMoverBeenMoved("TooltipMover") then
 				if ElvUI_ContainerFrame and ElvUI_ContainerFrame:IsShown() then

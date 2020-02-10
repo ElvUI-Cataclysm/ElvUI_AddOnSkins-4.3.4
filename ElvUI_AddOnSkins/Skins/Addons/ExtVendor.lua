@@ -2,7 +2,7 @@ local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.ExtVendor or not E.private.skins.blizzard.merchant) then return end
+	if not E.private.addOnSkins.ExtVendor or not E.private.skins.blizzard.merchant then return end
 
 	MerchantFrame:Size(720, 525)
 
@@ -18,14 +18,14 @@ local function LoadSkin()
 	S:HandleButton(ExtVendor_SellJunkPopupNoButton)
 
 	for i = 13, 20 do
-		local item = _G["MerchantItem" .. i]
-		local itemButton = _G["MerchantItem" .. i .. "ItemButton"]
-		local iconTexture = _G["MerchantItem" .. i .. "ItemButtonIconTexture"]
-		local moneyFrame = _G["MerchantItem" .. i .. "MoneyFrame"]
+		local item = _G["MerchantItem"..i]
+		local itemButton = _G["MerchantItem"..i.."ItemButton"]
+		local iconTexture = _G["MerchantItem"..i.."ItemButtonIconTexture"]
+		local moneyFrame = _G["MerchantItem"..i.."MoneyFrame"]
 		local altCurrencyFrame = _G["MerchantItem"..i.."AltCurrencyFrame"]
-		local altCurrencyItem1 = _G["MerchantItem" .. i .. "AltCurrencyFrameItem1"]
-		local altCurrencyTex1 = _G["MerchantItem" .. i .. "AltCurrencyFrameItem1Texture"]
-		local altCurrencyTex2 = _G["MerchantItem" .. i .. "AltCurrencyFrameItem2Texture"]
+		local altCurrencyItem1 = _G["MerchantItem"..i.."AltCurrencyFrameItem1"]
+		local altCurrencyTex1 = _G["MerchantItem"..i.."AltCurrencyFrameItem1Texture"]
+		local altCurrencyTex2 = _G["MerchantItem"..i.."AltCurrencyFrameItem2Texture"]
 
 		item:StripTextures(true)
 		item:CreateBackdrop("Default")
@@ -50,18 +50,19 @@ local function LoadSkin()
 
 	hooksecurefunc("MerchantFrame_UpdateMerchantInfo", function()
 		for i = 13, 20 do
-			local itemButton = _G["MerchantItem" .. i .. "ItemButton"]
-			local itemName = _G["MerchantItem" .. i .. "Name"]
+			local itemButton = _G["MerchantItem"..i.."ItemButton"]
+			local itemName = _G["MerchantItem"..i.."Name"]
 
-			if(itemButton.link) then
+			if itemButton.link then
 				local _, _, quality = GetItemInfo(itemButton.link)
 				local r, g, b = GetItemQualityColor(quality)
 
-				itemName:SetTextColor(r, g, b)
-				if(quality > 1) then
+				if quality and quality > 1 then
 					itemButton:SetBackdropBorderColor(r, g, b)
+					itemName:SetTextColor(r, g, b)
 				else
-					itemButton:SetBackdropBorderColor(unpack(E["media"].bordercolor))
+					itemButton:SetBackdropBorderColor(unpack(E.media.bordercolor))
+					itemName:SetTextColor(1, 1, 1)
 				end
 			end
 		end

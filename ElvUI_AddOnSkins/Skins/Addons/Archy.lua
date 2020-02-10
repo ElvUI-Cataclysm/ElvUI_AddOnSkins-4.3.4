@@ -1,8 +1,10 @@
 ﻿local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local pairs, unpack = pairs, unpack
+
 local function LoadSkin()
-	if(not E.private.addOnSkins.Archy) then return end
+	if not E.private.addOnSkins.Archy then return end
 
 	for _, object in pairs({ArchyArtifactFrame, ArchyDigSiteFrame}) do
 		object:SetTemplate("Transparent")
@@ -18,7 +20,7 @@ local function LoadSkin()
 	if ArchyArtifactFrameSkillBar then
 		ArchyArtifactFrameSkillBar:StripTextures()
 		ArchyArtifactFrameSkillBar:CreateBackdrop()
-		ArchyArtifactFrameSkillBar:SetStatusBarTexture(E["media"].normTex)
+		ArchyArtifactFrameSkillBar:SetStatusBarTexture(E.media.normTex)
 		ArchyArtifactFrameSkillBar.text:SetTextColor(1, 1, 1)
 		ArchyArtifactFrameSkillBar.text.SetTextColor = E.noop
 		ArchyArtifactFrameSkillBar.text:FontTemplate(nil, 14, "OUTLINE")
@@ -34,7 +36,7 @@ local function LoadSkin()
 
 					fragmentBar:StripTextures()
 					fragmentBar:CreateBackdrop("Transparent", true)
-					fragmentBar:SetStatusBarTexture(E["media"].normTex)
+					fragmentBar:SetStatusBarTexture(E.media.normTex)
 					fragmentBar.isSkinned = true
 
 					if not solveButton.isSkinned then
@@ -47,6 +49,7 @@ local function LoadSkin()
 						icon:CreateBackdrop()
 						icon.texture:SetTexCoord(unpack(E.TexCoords))
 						icon.texture:SetAllPoints()
+
 						icon.isSkinned = true
 					end
 
@@ -56,7 +59,8 @@ local function LoadSkin()
 					end
 
 					icon:Size(solveButton:GetHeight(),solveButton:GetHeight())
-					fragmentBar:SetPoint('TOPLEFT', icon, 'TOPRIGHT', 7, -2)
+
+					fragmentBar:Point("TOPLEFT", icon, "TOPRIGHT", 7, -2)
 				end
 			end
 		end)

@@ -1,8 +1,10 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local _G = _G
+
 local function LoadSkin()
-	if(not E.private.addOnSkins.ACP) then return end
+	if not E.private.addOnSkins.ACP then return end
 
 	ACP_AddonList:StripTextures()
 	ACP_AddonList:SetTemplate("Transparent")

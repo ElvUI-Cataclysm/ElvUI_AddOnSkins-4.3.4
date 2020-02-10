@@ -1,11 +1,13 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local select = select
+
 local function LoadSkin()
-	if(not E.private.addOnSkins._NPCScan) then return end
+	if not E.private.addOnSkins._NPCScan then return end
 
 	_NPCScanButton:StripTextures()
-	_NPCScanButton:SetTemplate("Transparent", true)
+	_NPCScanButton:SetTemplate("Transparent")
 
 	_NPCScanButton:SetScale(1)
 	_NPCScanButton.SetScale = E.noop
@@ -15,7 +17,7 @@ local function LoadSkin()
 
 	for i = 1, _NPCScanButton:GetNumChildren() do
 		local child = select(i, _NPCScanButton:GetChildren())
-		if(child and child:IsObjectType("Button")) then
+		if child and child:IsObjectType("Button") then
 			S:HandleCloseButton(child)
 			child:ClearAllPoints()
 			child:SetPoint("TOPRIGHT", _NPCScanButton, "TOPRIGHT", 4, 4)
@@ -40,7 +42,7 @@ local function LoadSkin()
 	S:HandleCheckBox(_NPCScanSearchAchievementAddFoundCheckbox)
 
 	for i = 1, 3 do
- 	   S:HandleTab(_G["_NPCScanSearchTab" .. i])
+ 	   S:HandleTab(_G["_NPCScanSearchTab"..i])
 	end
 
 	S:HandleEditBox(_NPCScanSearchNpcName)

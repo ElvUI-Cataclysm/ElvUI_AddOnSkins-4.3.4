@@ -1,15 +1,21 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local _G = _G
+local ipairs = ipairs
+
 local function LoadSkin()
-	if(not E.private.addOnSkins.AtlasQuest) then return end
+	if not E.private.addOnSkins.AtlasQuest then return end
 
 	local buttons = {
 		STORYbutton,
 		OPTIONbutton,
 		CLOSEbutton3,
-		AQOptionCloseButton,
+		AQOptionCloseButton
 	}
+	for _, button in ipairs(buttons) do
+		S:HandleButton(button)
+	end
 
 	local checkBoxes = {
 		AQACB,
@@ -22,20 +28,16 @@ local function LoadSkin()
 		AQCheckQuestlogButton,
 		AQAutoQueryOption,
 		AQNoQuerySpamOption,
-		AQCompareTooltipOption,
+		AQCompareTooltipOption
 	}
-
-	local closeButtons = {
-		CLOSEbutton,
-		CLOSEbutton2,
-	}
-
-	for _, button in ipairs(buttons) do
-		S:HandleButton(button)
-	end
 	for _, checkBox in ipairs(checkBoxes) do
 		S:HandleCheckBox(checkBox)
 	end
+
+	local closeButtons = {
+		CLOSEbutton,
+		CLOSEbutton2
+	}
 	for _, closeButton in ipairs(closeButtons) do
 		S:HandleCloseButton(closeButton)
 	end
@@ -65,9 +67,13 @@ local function LoadSkin()
 	AtlasQuestTooltip:SetTemplate("Transparent")
 
 	for i = 1, 6 do
-		_G["AtlasQuestItemframe"..i]:StyleButton()
-		_G["AtlasQuestItemframe"..i.."_Icon"]:SetTexCoord(unpack(E.TexCoords));
-		_G["AtlasQuestItemframe"..i.."_Icon"]:Size(28)
+		local button = _G["AtlasQuestItemframe"..i]
+		local icon = _G["AtlasQuestItemframe"..i.."_Icon"]
+
+		button:StyleButton()
+
+		icon:SetTexCoord(unpack(E.TexCoords))
+		icon:Size(28)
 	end
 
 	for i = 1, 22 do

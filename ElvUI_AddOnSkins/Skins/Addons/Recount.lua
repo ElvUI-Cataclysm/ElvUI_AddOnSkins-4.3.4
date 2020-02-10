@@ -27,8 +27,6 @@ local function LoadSkin()
 
 		frame.Title:ClearAllPoints()
 		frame.Title:SetPoint("LEFT", header, 6, 0)
-		frame.Title:FontTemplate()
-		frame.Title:SetTextColor(unpack(E.media.rgbvaluecolor))
 
 		if frame.CloseButton then
 			frame.CloseButton:ClearAllPoints()
@@ -63,7 +61,7 @@ local function LoadSkin()
 	Recount.MainWindow.ResetButton:SetPushedTexture([[Interface\Buttons\SquareButtonTextures]])
 	Recount.MainWindow.ResetButton:GetPushedTexture():SetTexCoord(0.015, 0.203, 0.015, 0.203)
 	Recount.MainWindow.ResetButton:GetPushedTexture():Point("TOPLEFT", 2, -2)
-	Recount.MainWindow.ResetButton:GetPushedTexture():Point("BOTTOMRIGHT", -2, -2)
+	Recount.MainWindow.ResetButton:GetPushedTexture():Point("BOTTOMRIGHT", -2, 2)
 
 	local buttons = {
 		Recount.MainWindow.CloseButton,

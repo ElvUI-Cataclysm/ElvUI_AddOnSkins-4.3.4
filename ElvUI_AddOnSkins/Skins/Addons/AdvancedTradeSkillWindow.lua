@@ -1,12 +1,12 @@
-local E, L, V, P, G = unpack(ElvUI);
-local S = E:GetModule("Skins");
+local E, L, V, P, G = unpack(ElvUI)
+local S = E:GetModule("Skins")
 
 local _G = _G
 local ipairs = ipairs
 local find = string.find
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.AdvancedTradeSkillWindow) then return; end
+	if not E.private.addOnSkins.AdvancedTradeSkillWindow then return end
 
 	local scrollBars = {
 		-- Main Frame
@@ -114,14 +114,14 @@ local function LoadSkin()
 	for _, statusBar in ipairs(statusBars) do
 		_G[statusBar]:StripTextures()
 		_G[statusBar]:CreateBackdrop()
-		_G[statusBar]:SetStatusBarTexture(E["media"].normTex)
+		_G[statusBar]:SetStatusBarTexture(E.media.normTex)
 		E:RegisterStatusBar(_G[statusBar])
 	end
 
 	ATSWScanDelayFrame:StripTextures()
 	ATSWScanDelayFrame:SetTemplate("Transparent")
 
-	ATSWOptionsFrame:SetParent(E.UIParent);
+	ATSWOptionsFrame:SetParent(E.UIParent)
 	ATSWOptionsFrame:StripTextures()
 	ATSWOptionsFrame:SetTemplate("Transparent")
 
@@ -152,172 +152,170 @@ local function LoadSkin()
 	ATSWFramePortrait:Kill()
 
 	for i = 1, 23 do
-		local button = _G["ATSWSkill" .. i]
+		local button = _G["ATSWSkill"..i]
 
-		button:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons");
-		button.SetNormalTexture = E.noop;
-		button:GetNormalTexture():Size(11);
-		button:GetNormalTexture():Point("LEFT", 3, 1);
+		button:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
+		button.SetNormalTexture = E.noop
+		button:GetNormalTexture():Size(11)
+		button:GetNormalTexture():Point("LEFT", 3, 1)
 
 		button:GetHighlightTexture():SetAlpha(0)
 
-		button:SetDisabledTexture("Interface\\Buttons\\UI-PlusMinus-Buttons");
-		button.SetDisabledTexture = E.noop;
-		button:GetDisabledTexture():Point("LEFT", 3, 2);
-		button:GetDisabledTexture():Size(12);
-		button:GetDisabledTexture():SetDesaturated(true);
+		button:SetDisabledTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
+		button.SetDisabledTexture = E.noop
+		button:GetDisabledTexture():Point("LEFT", 3, 2)
+		button:GetDisabledTexture():Size(12)
+		button:GetDisabledTexture():SetDesaturated(true)
 
 		hooksecurefunc(button, "SetNormalTexture", function(self, texture)
 			if find(texture, "MinusButton") then
-				self:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375);
+				self:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375)
 			elseif find(texture, "PlusButton") then
-				self:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375);
+				self:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375)
 			else
-				self:GetNormalTexture():SetTexCoord(0, 0, 0, 0);
+				self:GetNormalTexture():SetTexCoord(0, 0, 0, 0)
 			end
-		end);
+		end)
 	end
 
 	ATSWExpandButtonFrame:StripTextures()
 
 	ATSWCollapseAllButton:Point("LEFT", ATSWExpandTabLeft, "RIGHT", 0, -18)
 
-	ATSWCollapseAllButton:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons");
-	ATSWCollapseAllButton.SetNormalTexture = E.noop;
-	ATSWCollapseAllButton:GetNormalTexture():Size(11);
-	ATSWCollapseAllButton:GetNormalTexture():Point("LEFT", 3, 1);
-	ATSWCollapseAllButton:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375);
+	ATSWCollapseAllButton:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
+	ATSWCollapseAllButton.SetNormalTexture = E.noop
+	ATSWCollapseAllButton:GetNormalTexture():Size(11)
+	ATSWCollapseAllButton:GetNormalTexture():Point("LEFT", 3, 1)
+	ATSWCollapseAllButton:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375)
 
-	ATSWCollapseAllButton:SetHighlightTexture("");
-	ATSWCollapseAllButton.SetHighlightTexture = E.noop;
+	ATSWCollapseAllButton:SetHighlightTexture("")
+	ATSWCollapseAllButton.SetHighlightTexture = E.noop
 
-	ATSWCollapseAllButton:SetDisabledTexture("Interface\\Buttons\\UI-PlusMinus-Buttons");
-	ATSWCollapseAllButton.SetDisabledTexture = E.noop;
-	ATSWCollapseAllButton:GetDisabledTexture():Point("LEFT", 3, 2);
-	ATSWCollapseAllButton:GetDisabledTexture():Size(12);
-	ATSWCollapseAllButton:GetDisabledTexture():SetDesaturated(true);
+	ATSWCollapseAllButton:SetDisabledTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
+	ATSWCollapseAllButton.SetDisabledTexture = E.noop
+	ATSWCollapseAllButton:GetDisabledTexture():Point("LEFT", 3, 2)
+	ATSWCollapseAllButton:GetDisabledTexture():Size(12)
+	ATSWCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 
 	ATSWCollapseAllButton:HookScript("OnClick", function(self)
-		if(self.collapsed) then
-			self:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375);
+		if self.collapsed then
+			self:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375)
 		else
-			self:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375);
+			self:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375)
 		end
-	end);
+	end)
 
 	ATSWRankFrameBorder:StripTextures()
 	ATSWRankFrameBorder:Hide()
 
 	local function SkinIcon(reagent, icon, count)
 		reagent:StripTextures()
-		reagent:CreateBackdrop("Transparent", true);
+		reagent:CreateBackdrop("Transparent", true)
 		reagent.backdrop:SetAllPoints()
-		reagent:StyleButton(nil, true);
-		reagent:Size(reagent:GetWidth(), reagent:GetHeight() + 1);
+		reagent:StyleButton(nil, true)
+		reagent:Size(reagent:GetWidth(), reagent:GetHeight() + 1)
 
-		icon:SetTexCoord(unpack(E.TexCoords));
-		icon:SetDrawLayer("OVERLAY");
-		icon:Size(38);
-		icon:Point("TOPLEFT", 2, -2);
+		icon:SetTexCoord(unpack(E.TexCoords))
+		icon:SetDrawLayer("OVERLAY")
+		icon:Size(38)
+		icon:Point("TOPLEFT", 2, -2)
 
 		icon.backdrop = CreateFrame("Frame", nil, reagent)
 		icon.backdrop:SetFrameLevel(reagent:GetFrameLevel() - 1)
 		icon.backdrop:SetTemplate("Default")
 		icon.backdrop:SetOutside(icon)
 
-		icon:SetParent(icon.backdrop);
-		count:SetParent(icon.backdrop);
-		count:SetDrawLayer("OVERLAY");
+		icon:SetParent(icon.backdrop)
+		count:SetParent(icon.backdrop)
+		count:SetDrawLayer("OVERLAY")
 	end
 
 	for i = 1, ATSW_MAX_TRADE_SKILL_REAGENTS do
-		local reagent = _G["ATSWReagent" .. i]
-		local icon = _G["ATSWReagent" .. i .. "IconTexture"]
-		local count = _G["ATSWReagent" .. i .. "Count"]
+		local reagent = _G["ATSWReagent"..i]
+		local icon = _G["ATSWReagent"..i.."IconTexture"]
+		local count = _G["ATSWReagent"..i.."Count"]
 
 		SkinIcon(reagent, icon, count)
 	end
 
 	for i = 1, 17 do
-		local buttonDelete = _G["ATSWCSCSkill" .. i .. "Delete"]
-		local buttonUp = _G["ATSWCSCSkill" .. i .. "MoveUp"]
-		local buttonDown = _G["ATSWCSCSkill" .. i .. "MoveDown"]
+		local buttonDelete = _G["ATSWCSCSkill"..i.."Delete"]
+		local buttonUp = _G["ATSWCSCSkill"..i.."MoveUp"]
+		local buttonDown = _G["ATSWCSCSkill"..i.."MoveDown"]
 
 		buttonDelete:Size(17)
 		buttonUp:Size(24)
 		buttonDown:Size(24)
 
 		S:HandleButton(buttonDelete)
-		S:HandleNextPrevButton(buttonUp, "UP")
-		SquareButton_SetIcon(buttonUp, "UP")
-		S:HandleNextPrevButton(buttonDown, "DOWN")
-		SquareButton_SetIcon(buttonDown, "DOWN")
+		S:HandleNextPrevButton(buttonUp)
+		S:HandleNextPrevButton(buttonDown)
 	end
 
-	ATSWSkillIcon:StyleButton(nil, true);
-	ATSWSkillIcon:SetTemplate();
-	
-	ATSWRequirementLabel:SetTextColor(1, 0.80, 0.10);
+	ATSWSkillIcon:StyleButton(nil, true)
+	ATSWSkillIcon:SetTemplate()
+
+	ATSWRequirementLabel:SetTextColor(1, 0.80, 0.10)
 
 	hooksecurefunc("ATSWFrame_SetSelection", function(id)
-		ATSWRankFrame:SetStatusBarColor(0.13, 0.35, 0.80);
+		ATSWRankFrame:SetStatusBarColor(0.13, 0.35, 0.80)
 
-		if(ATSWSkillIcon:GetNormalTexture()) then
-			ATSWSkillIcon:SetAlpha(1);
-			ATSWSkillIcon:GetNormalTexture():SetTexCoord(unpack(E.TexCoords));
-			ATSWSkillIcon:GetNormalTexture():SetInside();
+		if ATSWSkillIcon:GetNormalTexture() then
+			ATSWSkillIcon:SetAlpha(1)
+			ATSWSkillIcon:GetNormalTexture():SetTexCoord(unpack(E.TexCoords))
+			ATSWSkillIcon:GetNormalTexture():SetInside()
 		else
-			ATSWSkillIcon:SetAlpha(0);
+			ATSWSkillIcon:SetAlpha(0)
 		end
 
 		local skillLink = GetTradeSkillItemLink(id)
-		if(skillLink) then
-			local quality = select(3, GetItemInfo(skillLink));
-			if(quality and quality > 1) then
-				ATSWSkillIcon:SetBackdropBorderColor(GetItemQualityColor(quality));
-				ATSWSkillName:SetTextColor(GetItemQualityColor(quality));
+		if skillLink then
+			local quality = select(3, GetItemInfo(skillLink))
+			if quality and quality > 1 then
+				ATSWSkillIcon:SetBackdropBorderColor(GetItemQualityColor(quality))
+				ATSWSkillName:SetTextColor(GetItemQualityColor(quality))
 			else
-				ATSWSkillIcon:SetBackdropBorderColor(unpack(E["media"].bordercolor));
-				ATSWSkillName:SetTextColor(1, 1, 1);
+				ATSWSkillIcon:SetBackdropBorderColor(unpack(E.media.bordercolor))
+				ATSWSkillName:SetTextColor(1, 1, 1)
 			end
 		end
 
-		local numReagents = GetTradeSkillNumReagents(id);
+		local numReagents = GetTradeSkillNumReagents(id)
 		for i = 1, numReagents, 1 do
-			local reagentName, reagentTexture, reagentCount, playerReagentCount = GetTradeSkillReagentInfo(id, i);
-			local reagentLink = GetTradeSkillReagentItemLink(id, i);
-			local icon = _G["ATSWReagent" .. i .. "IconTexture"];
-			local name = _G["ATSWReagent" .. i .. "Name"];
+			local reagentName, reagentTexture, reagentCount, playerReagentCount = GetTradeSkillReagentInfo(id, i)
+			local reagentLink = GetTradeSkillReagentItemLink(id, i)
+			local icon = _G["ATSWReagent"..i.."IconTexture"]
+			local name = _G["ATSWReagent"..i.."Name"]
 
-			if(reagentLink) then
-				local quality = select(3, GetItemInfo(reagentLink));
-				if(quality and quality > 1) then
-					icon.backdrop:SetBackdropBorderColor(GetItemQualityColor(quality));
-					 if(playerReagentCount < reagentCount) then
-						name:SetTextColor(0.5, 0.5, 0.5);
+			if reagentLink then
+				local quality = select(3, GetItemInfo(reagentLink))
+				if quality and quality > 1 then
+					icon.backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
+					 if playerReagentCount < reagentCount then
+						name:SetTextColor(0.5, 0.5, 0.5)
 					else
-						name:SetTextColor(GetItemQualityColor(quality));
+						name:SetTextColor(GetItemQualityColor(quality))
 					end
 				else
-					icon.backdrop:SetBackdropBorderColor(unpack(E["media"].bordercolor));
+					icon.backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
  				end
 			end
 		end
-	end);
+	end)
 
-	ATSWReagent1:Point("TOPLEFT", ATSWReagentLabel, "BOTTOMLEFT", -2, -3);
-	ATSWReagent2:Point("LEFT", ATSWReagent1, "RIGHT", 3, 0);
-	ATSWReagent4:Point("LEFT", ATSWReagent3, "RIGHT", 3, 0);
-	ATSWReagent6:Point("LEFT", ATSWReagent5, "RIGHT", 3, 0);
-	ATSWReagent8:Point("LEFT", ATSWReagent7, "RIGHT", 3, 0);
+	ATSWReagent1:Point("TOPLEFT", ATSWReagentLabel, "BOTTOMLEFT", -2, -3)
+	ATSWReagent2:Point("LEFT", ATSWReagent1, "RIGHT", 3, 0)
+	ATSWReagent4:Point("LEFT", ATSWReagent3, "RIGHT", 3, 0)
+	ATSWReagent6:Point("LEFT", ATSWReagent5, "RIGHT", 3, 0)
+	ATSWReagent8:Point("LEFT", ATSWReagent7, "RIGHT", 3, 0)
 
 	ATSWRankFrame:Size(330, 17)
 	ATSWRankFrame:ClearAllPoints()
 	ATSWRankFrame:Point("TOPLEFT", ATSWFrame, "TOPRIGHT", -400, -43)
 
-	ATSWRankFrameSkillRank:FontTemplate(nil, 12, "OUTLINE");
-	ATSWRankFrameSkillRank:ClearAllPoints();
-	ATSWRankFrameSkillRank:Point("CENTER", ATSWRankFrame, "CENTER", 50, 0);
+	ATSWRankFrameSkillRank:FontTemplate(nil, 12, "OUTLINE")
+	ATSWRankFrameSkillRank:ClearAllPoints()
+	ATSWRankFrameSkillRank:Point("CENTER", ATSWRankFrame, "CENTER", 50, 0)
 
 	ATSWRankFrameSkillName:Hide()
 
@@ -391,7 +389,7 @@ local function LoadSkin()
 	-- ChatLink fix
 	ATSWTradeSkillLinkButton:SetScript("OnClick", function()
 		local ChatFrameEditBox = ChatEdit_ChooseBoxForSend()
-		if (not ChatFrameEditBox:IsShown()) then
+		if not ChatFrameEditBox:IsShown() then
 			ChatEdit_ActivateChat(ChatFrameEditBox)
 		end
 
@@ -399,4 +397,4 @@ local function LoadSkin()
 	end)
 end
 
-S:AddCallbackForAddon("AdvancedTradeSkillWindow", "AdvancedTradeSkillWindow", LoadSkin);
+S:AddCallbackForAddon("AdvancedTradeSkillWindow", "AdvancedTradeSkillWindow", LoadSkin)

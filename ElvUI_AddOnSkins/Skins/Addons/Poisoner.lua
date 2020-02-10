@@ -1,8 +1,10 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local unpack = unpack
+
 local function LoadSkin()
-	if(not E.private.addOnSkins.Poisoner) then return end
+	if not E.private.addOnSkins.Poisoner then return end
 
 	--Options Menu
 	PoisonerOptions_SettingsFrame:StripTextures()
@@ -103,7 +105,7 @@ local function LoadSkin()
 	PoisonerOptions_OrientationButton.backdrop:Point("TOPLEFT", PoisonerOptions_OrientationButton, "TOPLEFT", 0, 0)
 	PoisonerOptions_OrientationButton.backdrop:Point("BOTTOMRIGHT", PoisonerOptions_OrientationButton, "BOTTOMRIGHT", 0, 0)
 	PoisonerOptions_OrientationButton.backdrop:SetFrameLevel(PoisonerOptions_OrientationButton:GetFrameLevel())
-	PoisonerOptions_OrientationButton.icon = PoisonerOptions_OrientationButton:CreateTexture(nil, "OVERLAY");
+	PoisonerOptions_OrientationButton.icon = PoisonerOptions_OrientationButton:CreateTexture(nil, "OVERLAY")
 	PoisonerOptions_OrientationButton.icon:SetTexCoord(unpack(E.TexCoords))
 	PoisonerOptions_OrientationButton.icon:SetPoint("TOPLEFT", PoisonerOptions_OrientationButton, "TOPLEFT", 0, 0)
 	PoisonerOptions_OrientationButton.icon:SetPoint("BOTTOMRIGHT", PoisonerOptions_OrientationButton, "BOTTOMRIGHT", 0, 0)

@@ -1,10 +1,13 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local pairs = pairs
 local find = string.find
 
+-- Factionazier v4.3.0.1
+
 local function LoadSkin()
-	if(not E.private.addOnSkins.Factionizer) then return end
+	if not E.private.addOnSkins.Factionizer then return end
 
 	FIZ_ReputationDetailFrame:StripTextures()
 	FIZ_ReputationDetailFrame:SetTemplate("Transparent")
@@ -32,6 +35,10 @@ local function LoadSkin()
 		FIZ_ClearSessionGainButton
 	}
 
+	for _, button in pairs(buttons) do
+		S:HandleButton(button)
+	end
+
 	local checkboxes = {
 		FIZ_OrderByStandingCheckBox,
 		FIZ_EnableMissingBox,
@@ -54,10 +61,6 @@ local function LoadSkin()
 		FIZ_ReputationDetailAtWarCheckBox
 	}
 
-	for _, button in pairs(buttons) do
-		S:HandleButton(button)
-	end
-
 	for _, checkbox in pairs(checkboxes) do
 		S:HandleCheckBox(checkbox)
 	end
@@ -75,17 +78,14 @@ local function LoadSkin()
 	for i = 1, 13 do
 		local entryTex = _G["FIZ_UpdateEntry"..i.."Texture"]
 
-		entryTex:SetTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
-		entryTex.SetTexture = E.noop
-		entryTex:Size(11)
+		entryTex:SetTexture(E.Media.Textures.Plus)
+		entryTex:Size(14)
 
 		hooksecurefunc(entryTex, "SetTexture", function(self, texture)
-			if(find(texture, "MinusButton")) then
-				self:SetTexCoord(0.5625, 1, 0, 0.4375)
-			elseif(find(texture, "PlusButton")) then
-				self:SetTexCoord(0, 0.4375, 0, 0.4375)
-			else
-				self:SetTexCoord(0, 0, 0, 0)
+			if find(texture, "MinusButton") then
+				self:SetTexture(E.Media.Textures.Minus)
+			elseif find(texture, "PlusButton") then
+				self:SetTexture(E.Media.Textures.Plus)
  			end
 		end)
 	end

@@ -1,6 +1,8 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local _G = _G
+
 local function LoadSkin()
 	if not E.private.addOnSkins.RaidRoll then return end
 
@@ -72,8 +74,10 @@ local function LoadSkin()
 	S:HandleCheckBox(RaidRollCheckBox_RankPrio_panel)
 
 	for i = 1, 11 do
-		S:HandleButton(_G["Raid_Roll_GuildPriority"..i])
-		_G["Raid_Roll_GuildPriority"..i]:Size(15)
+		local button = _G["Raid_Roll_GuildPriority"..i]
+
+		S:HandleButton(button)
+		button:Size(15)
 	end
 end
 
@@ -92,15 +96,17 @@ local function LootTrackerSkin()
 	S:HandleButton(RR_Loot_ButtonLast)
 
 	for i = 1, 4 do
-		_G["RR_Loot_Announce_1_Button_"..i]:Show()
-		_G["RR_Loot_Announce_2_Button_"..i]:Show()
-		_G["RR_Loot_Announce_3_Button_"..i]:Show()
-		_G["RR_Loot_RaidRollButton_"..i]:Show()
+		local raidRollButton = _G["RR_Loot_RaidRollButton_"..i]
 
-		S:HandleButton(_G["RR_Loot_Announce_1_Button_"..i])
-		S:HandleButton(_G["RR_Loot_Announce_2_Button_"..i])
-		S:HandleButton(_G["RR_Loot_Announce_3_Button_"..i])
-		S:HandleButton(_G["RR_Loot_RaidRollButton_"..i])
+		raidRollButton:Show()
+		S:HandleButton(raidRollButton)
+		
+		for j = 1, 3 do
+			local announceButton = _G["RR_Loot_Announce_"..j.."_Button_"..i]
+
+			announceButton:Show()
+			S:HandleButton(announceButton)
+		end
 	end
 
 	for i = 1, RR_LOOT_FRAME:GetNumChildren() do

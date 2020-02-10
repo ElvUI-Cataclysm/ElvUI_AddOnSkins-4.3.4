@@ -1,64 +1,66 @@
-local E, L, V, P, G = unpack(ElvUI);
-local S = E:GetModule("Skins");
+local E, L, V, P, G = unpack(ElvUI)
+local S = E:GetModule("Skins")
+
+local _G = _G
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.KHunterTimers) then return; end
+	if not E.private.addOnSkins.KHunterTimers then return; end
 
-	KHunterTimersAnchor:StripTextures();
-	KHunterTimersAnchor:SetTemplate("Transparent");
+	KHunterTimersAnchor:StripTextures()
+	KHunterTimersAnchor:SetTemplate("Transparent")
 
-	KHunterTimersFrame:StripTextures();
-	KHunterTimersFrame:CreateBackdrop("Transparent");
+	KHunterTimersFrame:StripTextures()
+	KHunterTimersFrame:CreateBackdrop("Transparent")
 
-	KHunterTimersOptions:StripTextures();
-	KHunterTimersOptions:SetTemplate("Transparent");
+	KHunterTimersOptions:StripTextures()
+	KHunterTimersOptions:SetTemplate("Transparent")
 
-	KHunterTimersOptionsTimers:StripTextures();
-	KHunterTimersOptionsTimers:SetTemplate("Transparent");
+	KHunterTimersOptionsTimers:StripTextures()
+	KHunterTimersOptionsTimers:SetTemplate("Transparent")
 
-	KHunterTimersOptionsBars:StripTextures();
-	KHunterTimersOptionsBars:SetTemplate("Transparent");
+	KHunterTimersOptionsBars:StripTextures()
+	KHunterTimersOptionsBars:SetTemplate("Transparent")
 
-	S:HandleButton(KHunterTimersOptionsButtonOkay);
-	S:HandleButton(KHunterTimersOptionsButtonApply);
-	S:HandleButton(KHunterTimersOptionsButtonCancel);
+	S:HandleButton(KHunterTimersOptionsButtonOkay)
+	S:HandleButton(KHunterTimersOptionsButtonApply)
+	S:HandleButton(KHunterTimersOptionsButtonCancel)
 
-	S:HandleScrollBar(KHunterTimers1ScrollBarScrollBar);
-	S:HandleScrollBar(KHunterTimers2ScrollBarScrollBar);
-	S:HandleScrollBar(KHunterTimers3ScrollBarScrollBar);
-	S:HandleScrollBar(KHunterTimers4ScrollBarScrollBar);
-	S:HandleScrollBar(KHunterTimers5ScrollBarScrollBar);
-	S:HandleScrollBar(KHunterTimers6ScrollBarScrollBar);
+	S:HandleScrollBar(KHunterTimers1ScrollBarScrollBar)
+	S:HandleScrollBar(KHunterTimers2ScrollBarScrollBar)
+	S:HandleScrollBar(KHunterTimers3ScrollBarScrollBar)
+	S:HandleScrollBar(KHunterTimers4ScrollBarScrollBar)
+	S:HandleScrollBar(KHunterTimers5ScrollBarScrollBar)
+	S:HandleScrollBar(KHunterTimers6ScrollBarScrollBar)
 
-	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider1Slider);
-	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider2Slider);
-	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider3Slider);
-	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider4Slider);
-	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider5Slider);
-	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider6Slider);
-	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider7Slider);
+	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider1Slider)
+	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider2Slider)
+	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider3Slider)
+	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider4Slider)
+	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider5Slider)
+	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider6Slider)
+	S:HandleSliderFrame(KHunterTimersOptionsBarsSlider7Slider)
 
-	KHunterTimersOptionsBarsEditBox1:StripTextures();
-	KHunterTimersOptionsBarsEditBox1:Height(22);
-	KHunterTimersOptionsBarsEditBox2:StripTextures();
-	KHunterTimersOptionsBarsEditBox2:Height(22);
-	S:HandleEditBox(KHunterTimersOptionsBarsEditBox1);
-	S:HandleEditBox(KHunterTimersOptionsBarsEditBox2);
+	KHunterTimersOptionsBarsEditBox1:StripTextures()
+	KHunterTimersOptionsBarsEditBox1:Height(22)
+	KHunterTimersOptionsBarsEditBox2:StripTextures()
+	KHunterTimersOptionsBarsEditBox2:Height(22)
+	S:HandleEditBox(KHunterTimersOptionsBarsEditBox1)
+	S:HandleEditBox(KHunterTimersOptionsBarsEditBox2)
 
 	for i = 1, 11 do
 		local Status = _G["KHunterTimersStatus"..i]
 		local Bar = _G["KHunterTimersStatus"..i.."Bar"]
 		local Icon = _G["KHunterTimersStatus"..i.."Icon"]
-	
+
 		Bar:CreateBackdrop()
-		--Bar:SetStatusBarTexture(nil);
+		--Bar:SetStatusBarTexture(nil)
 		--Bar.SetStatusBarTexture = E.noop
-		--Bar:SetStatusBarTexture(E["media"].normTex);
-		
+		--Bar:SetStatusBarTexture(E.Media.normTex)
+
 		Status:CreateBackdrop()
 		Status.backdrop:SetOutside(Icon)
 
-		Icon:SetTexCoord(unpack(E.TexCoords));
+		Icon:SetTexCoord(unpack(E.TexCoords))
 		Icon:SetParent(Status.backdrop)
 	end
 
@@ -154,10 +156,10 @@ local function LoadSkin()
 		"KHunterTimersOptionsTimers6CheckButton11",
 		"KHunterTimersOptionsTimers6CheckButton12",
 		"KHunterTimersOptionsTimers6CheckButton13",
-	};
+	}
 
 	for i = 1, #kHunterTimersCheck do
-		S:HandleCheckBox(_G[kHunterTimersCheck[i]]);
+		S:HandleCheckBox(_G[kHunterTimersCheck[i]])
 	end
 
 	local kHunterTimersTabs = {
@@ -167,13 +169,13 @@ local function LoadSkin()
 		"KHunterTimersOptionsTimersTab4",
 		"KHunterTimersOptionsTimersTab5",
 		"KHunterTimersOptionsTimersTab6",
-	};
+	}
 
 	for i = 1, #kHunterTimersTabs do
-		S:HandleTab(_G[kHunterTimersTabs[i]]);
-		_G[kHunterTimersTabs[i] .. "Text"]:Point("CENTER", 0, 1);
+		S:HandleTab(_G[kHunterTimersTabs[i]])
+		_G[kHunterTimersTabs[i].."Text"]:Point("CENTER", 0, 1)
 	end
 
 end
 
-S:AddCallbackForAddon("KHunterTimers", "KHunterTimers", LoadSkin);
+S:AddCallbackForAddon("KHunterTimers", "KHunterTimers", LoadSkin)

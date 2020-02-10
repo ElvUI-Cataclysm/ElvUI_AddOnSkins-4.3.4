@@ -1,21 +1,6 @@
 ﻿local E, L, V, P, G = unpack(ElvUI)
 
 P.addOnSkins = {
-	skadaBackdrop = true,
-	skadaTemplate = "Default",
-	skadaTemplateGloss = false,
-	skadaTitleBackdrop = true,
-	skadaTitleTemplate = "Default",
-	skadaTitleTemplateGloss = true,
-
-	dbmBarHeight = 22,
-	dbmFont = "PT Sans Narrow",
-	dbmFontSize = 12,
-	dbmFontOutline = "OUTLINE",
-
-	weakAuraAuraBar = true,
-	weakAuraIconCooldown = true,
-
 	embed = {
 		embedType = "SINGLE",
 		leftWindow = "Skada",
@@ -24,5 +9,23 @@ P.addOnSkins = {
 		leftWindowWidth = 200,
 		belowTopTab = false,
 		hideChat = "NONE"
+	},
+	skada = {
+		backdrop = true,
+		template = "Default",
+		templateGloss = false,
+		titleBackdrop = true,
+		titleTemplate = "Default",
+		titleTemplateGloss = true
+	},
+	dbm = {
+		barHeight = 22,
+		font = "PT Sans Narrow",
+		fontSize = 12,
+		fontOutline = "OUTLINE"
+	},
+	weakAura = {
+		auraBar = true,
+		iconCooldown = true
 	}
 }

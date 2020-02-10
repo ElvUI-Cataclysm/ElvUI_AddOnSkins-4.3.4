@@ -1,8 +1,11 @@
-local E, L, V, P, G = unpack(ElvUI);
-local S = E:GetModule("Skins");
+local E, L, V, P, G = unpack(ElvUI)
+local S = E:GetModule("Skins")
+
+local _G = _G
+local ipairs = ipairs
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.KarniCrap) then return; end
+	if not E.private.addOnSkins.KarniCrap then return end
 
 	KarniCrap:StripTextures(true)
 	KarniCrap:SetTemplate("Transparent")
@@ -174,4 +177,4 @@ local function LoadSkin()
 	S:HandleCloseButton(KarniCrapCloseButton)
 end
 
-S:AddCallbackForAddon("KarniCrap", "KarniCrap", LoadSkin);
+S:AddCallbackForAddon("KarniCrap", "KarniCrap", LoadSkin)

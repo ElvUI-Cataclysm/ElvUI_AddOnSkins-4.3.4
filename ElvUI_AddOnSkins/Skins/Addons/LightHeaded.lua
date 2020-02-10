@@ -3,10 +3,8 @@ local S = E:GetModule("Skins")
 
 local cos, pi = math.cos, math.pi
 
-local SquareButton_SetIcon = SquareButton_SetIcon
-
 local function LoadSkin()
-	if(not E.private.addOnSkins.LightHeaded) then return end
+	if not E.private.addOnSkins.LightHeaded then return end
 
 	LightHeadedFrame:StripTextures()
 	LightHeadedFrame:SetTemplate("Transparent")
@@ -30,14 +28,13 @@ local function LoadSkin()
 
 	S:HandleNextPrevButton(LightHeadedFrameSub.next)
 	S:HandleNextPrevButton(LightHeadedFrameSub.prev)
-	SquareButton_SetIcon(LightHeadedFrameSub.prev, "LEFT")
 
 	S:HandleScrollBar(LightHeadedScrollFrameScrollBar)
 
 	LightHeadedTooltip:SetTemplate("Transparent")
 	hooksecurefunc(LightHeaded, "OnHyperlinkEnter", function()
-		local backdrop = E["media"].backdropfadecolor
-		local border = E["media"].bordercolor
+		local backdrop = E.media.backdropfadecolor
+		local border = E.media.bordercolor
 		LightHeadedTooltip:SetBackdropColor(backdrop[1], backdrop[2], backdrop[3], backdrop[4])
 		LightHeadedTooltip:SetBackdropBorderColor(border[1], border[2], border[3])
 	end)

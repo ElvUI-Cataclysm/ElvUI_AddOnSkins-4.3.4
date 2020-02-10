@@ -2,7 +2,7 @@ local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
 local function LoadSkin()
-	if(not E.private.addOnSkins.EveryGoldToBanker) then return end
+	if not E.private.addOnSkins.EveryGoldToBanker then return end
 
 	TitleFrame:StripTextures()
 	AmountFrame:StripTextures()

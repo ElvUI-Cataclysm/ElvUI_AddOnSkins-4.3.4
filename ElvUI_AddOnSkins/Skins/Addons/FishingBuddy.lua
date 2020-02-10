@@ -1,8 +1,11 @@
 local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 
+local _G = _G
+local find = string.find
+
 local function LoadSkin()
-	if(not E.private.addOnSkins.FishingBuddy) then return end
+	if not E.private.addOnSkins.FishingBuddy then return end
 
 	FishingBuddyFrame:CreateBackdrop("Transparent")
 	FishingBuddyFrame.backdrop:Point("TOPLEFT", 14, -14)
@@ -31,15 +34,13 @@ local function LoadSkin()
 
 	S:HandleCheckBox(FishingBuddyOptionSLZ)
 
-	--FishingPetFrameButton
 	S:HandleSliderFrame(FishingBuddyOption_MaxVolumeSlider)
 	FishingPetFrame:StripTextures()
 	FishingPetFrame:CreateBackdrop("Default")
 	FishingPetFrame.backdrop:Point("TOPLEFT", 10, -2)
 	FishingPetFrame.backdrop:Point("BOTTOMRIGHT", -13, 9)
 
-	S:HandleNextPrevButton(FishingPetFrameButton);
-	SquareButton_SetIcon(FishingPetFrameButton, "DOWN");
+	S:HandleNextPrevButton(FishingPetFrameButton)
 	FishingPetFrameButton:Point("TOPRIGHT", FishingPetFrameRight, "TOPRIGHT", -16, -21)
 
 	FishingPetsMenu:StripTextures()
@@ -47,6 +48,7 @@ local function LoadSkin()
 
 	local function SkinCheckBoxes()
 		local checkBox
+
 		for i = 1, 14 do
 			checkBox = _G["FishingBuddyOption"..i]
 			if checkBox and not checkBox.isSkinned then
@@ -79,35 +81,41 @@ local function LoadSkin()
 		frame:HookScript("OnClick", function(self)
 			if not self.isSkinned then
 				SkinCheckBoxes()
+
 				self.isSkinned = true
 			end
 		end)
 	end
 
 	for i = 0, 21 do
-		local c = _G["FishingLocations"..i]
+		local button = _G["FishingLocations"..i]
+
 		if i == 0 then
-			c = FishingLocationsCollapseAllButton
+			button = FishingLocationsCollapseAllButton
 		end
-		if c then
-			c:SetNormalTexture("")
-			c.SetNormalTexture = E.noop
-			c:SetPushedTexture("")
-			c.SetPushedTexture = E.noop
-			c:SetHighlightTexture("")
-			c.SetHighlightTexture = E.noop
-			c:SetDisabledTexture("")
-			c.SetDisabledTexture = E.noop
 
-			c.Text = c:CreateFontString(nil, "OVERLAY")
-			c.Text:FontTemplate(nil, 22)
-			c.Text:Point("LEFT", 5, 0)
-			c.Text:SetText("")
+		if button then
+			button:SetNormalTexture("")
+			button.SetNormalTexture = E.noop
 
-			hooksecurefunc(c, "SetNormalTexture", function(self, texture)
-				if string.find(texture, "MinusButton") then
+			button:SetPushedTexture("")
+			button.SetPushedTexture = E.noop
+
+			button:SetHighlightTexture("")
+			button.SetHighlightTexture = E.noop
+
+			button:SetDisabledTexture("")
+			button.SetDisabledTexture = E.noop
+
+			button.Text = button:CreateFontString(nil, "OVERLAY")
+			button.Text:FontTemplate(nil, 22)
+			button.Text:Point("LEFT", 5, 0)
+			button.Text:SetText("")
+
+			hooksecurefunc(button, "SetNormalTexture", function(self, texture)
+				if find(texture, "MinusButton") then
 					self.Text:SetText("-")
-				elseif string.find(texture, "PlusButton") then
+				elseif find(texture, "PlusButton") then
 					self.Text:SetText("+")
 				else
 					self.Text:SetText("")

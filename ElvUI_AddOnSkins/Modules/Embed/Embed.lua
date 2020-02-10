@@ -1,11 +1,13 @@
 local E, L, V, P, G = unpack(ElvUI)
 local EMB = E:NewModule("EmbedSystem")
 local AS = E:GetModule("AddOnSkins")
+local Chat = E:GetModule("Chat")
+local Layout = E:GetModule("Layout")
 
 local _G = _G
 local pairs, tonumber = pairs, tonumber
-local floor = math.floor
 local format, lower, match = string.format, string.lower, string.match
+local floor = math.floor
 local tinsert = table.insert
 
 local hooksecurefunc = hooksecurefunc
@@ -92,12 +94,12 @@ function EMB:EmbedUpdate()
 end
 
 function EMB:SetHooks()
-	hooksecurefunc(E:GetModule("Chat"), "PositionChat", function(self, override)
+	hooksecurefunc(Chat, "PositionChat", function(self, override)
 		if override then
 			EMB:EmbedUpdate()
 		end
 	end)
-	hooksecurefunc(E:GetModule("Layout"), "ToggleChatPanels", function() EMB:EmbedUpdate() end)
+	hooksecurefunc(Layout, "ToggleChatPanels", function() EMB:EmbedUpdate() end)
 
 	hooksecurefunc(LeftChatPanel, "fadeFunc", function()
 		LeftChatPanel:Hide()
@@ -226,9 +228,9 @@ function EMB:WindowResize()
 
 	self:UpdateSwitchButton()
 
-	if IsAddOnLoaded("ElvUI_Config") then
-		E.Options.args.addOnSkins.args.embed.args.leftWindowWidth.min = floor(chatPanel:GetWidth() * .25)
-		E.Options.args.addOnSkins.args.embed.args.leftWindowWidth.max = floor(chatPanel:GetWidth() * .75)
+	if IsAddOnLoaded("ElvUI_OptionsUI") then
+		E.Options.args.elvuiPlugins.args.addOnSkins.args.embed.args.leftWindowWidth.min = floor(chatPanel:GetWidth() * 0.25)
+		E.Options.args.elvuiPlugins.args.addOnSkins.args.embed.args.leftWindowWidth.max = floor(chatPanel:GetWidth() * 0.75)
 	end
 end
 
@@ -267,7 +269,7 @@ function EMB:EmbedCreate()
 
 	self.switchButton.text = self.switchButton:CreateFontString(nil, "OVERLAY")
 	self.switchButton.text:FontTemplate(E.LSM:Fetch("font", E.db.chat.tabFont), E.db.chat.tabFontSize, E.db.chat.tabFontOutline)
-	self.switchButton.text:SetTextColor(unpack(E["media"].rgbvaluecolor))
+	self.switchButton.text:SetTextColor(unpack(E.media.rgbvaluecolor))
 	self.switchButton.text:SetPoint("LEFT", 16, -5)
 
 	self.switchButton:SetScript("OnClick", function(self, button)
@@ -343,7 +345,7 @@ if AS:CheckAddOn("Omen") then
 		OmenAnchor:ClearAllPoints()
 		OmenAnchor:SetAllPoints()
 
-		hooksecurefunc(Omen, "SetAnchors", function(self, useDB)
+		hooksecurefunc(Omen, "SetAnchors", function(self)
 			self.Anchor:SetParent(parent)
 			self.Anchor:SetInside(parent, 0, 0)
 
@@ -356,12 +358,12 @@ if AS:CheckAddOn("Omen") then
 end
 
 if AS:CheckAddOn("Skada") then
-	EMB["skadaWindows"] = {}
+	EMB.skadaWindows = {}
 
 	local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 		if not window then return end
 
-		local barmod = Skada.displays["bar"]
+		local barmod = Skada.displays.bar
 		local offsety
 		if window.db.reversegrowth then
 			offsety = 0
@@ -389,7 +391,7 @@ if AS:CheckAddOn("Skada") then
 	end
 
 	function EMB:EmbedSkada()
-		wipe(self["skadaWindows"])
+		wipe(self.skadaWindows)
 		for _, window in pairs(Skada:GetWindows()) do
 			tinsert(self.skadaWindows, window)
 		end
