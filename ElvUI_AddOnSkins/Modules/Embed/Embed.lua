@@ -1,4 +1,5 @@
 local E, L, V, P, G = unpack(ElvUI)
+local Loc = E.Libs.ACL:GetLocale("ElvUI", E.global.general.locale or "enUS")
 local EMB = E:NewModule("EmbedSystem")
 local AS = E:GetModule("AddOnSkins")
 local Chat = E:GetModule("Chat")
@@ -13,8 +14,9 @@ local tinsert = table.insert
 local hooksecurefunc = hooksecurefunc
 local NUM_CHAT_WINDOWS = NUM_CHAT_WINDOWS
 
+
 function EMB:GetChatWindowInfo()
-	local chatTabInfo = {["NONE"] = "NONE"}
+	local chatTabInfo = {["NONE"] = Loc["NONE"]}
 	for i = 1, NUM_CHAT_WINDOWS do
 		chatTabInfo["ChatFrame"..i] = _G["ChatFrame"..i.."Tab"]:GetText()
 	end
@@ -22,7 +24,7 @@ function EMB:GetChatWindowInfo()
 end
 
 function EMB:ToggleChatFrame(hide)
-	local chatFrame = self.db.hideChat
+	local chatFrame = E.db.addOnSkins.embed.hideChat
 	if chatFrame == "NONE" then return end
 
 	if hide then
@@ -44,7 +46,7 @@ function EMB:EmbedShow()
 		_G[self.leftFrame.frameName]:Show()
 	end
 
-	if self.db.embedType == "DOUBLE" then
+	if E.db.addOnSkins.embed.embedType == "DOUBLE" then
 		if _G[self.rightFrame.frameName] then
 			_G[self.rightFrame.frameName]:Show()
 		end
@@ -59,7 +61,7 @@ function EMB:EmbedHide()
 		_G[self.leftFrame.frameName]:Hide()
 	end
 
-	if self.db.embedType == "DOUBLE" then
+	if E.db.addOnSkins.embed.embedType == "DOUBLE" then
 		if _G[self.rightFrame.frameName] then
 			_G[self.rightFrame.frameName]:Hide()
 		end
@@ -70,9 +72,10 @@ function EMB:EmbedHide()
 end
 
 function EMB:CheckEmbed(addon)
-	local left, right, embed = lower(E.db.addOnSkins.embed.leftWindow), lower(E.db.addOnSkins.embed.rightWindow), lower(addon)
+	local db = E.db.addOnSkins.embed
+	local left, right, embed = lower(db.leftWindow), lower(db.rightWindow), lower(addon)
 
-	if AS:CheckAddOn(addon) and ((self.db.embedType == "SINGLE" and match(left, embed)) or self.db.embedType == "DOUBLE" and (match(left, embed) or match(right, embed))) then
+	if AS:CheckAddOn(addon) and ((db.embedType == "SINGLE" and match(left, embed)) or db.embedType == "DOUBLE" and (match(left, embed) or match(right, embed))) then
 		return true
 	else
 		return false
@@ -80,7 +83,7 @@ function EMB:CheckEmbed(addon)
 end
 
 function EMB:EmbedUpdate()
-	if self.db.embedType == "DISABLE" then return end
+	if E.db.addOnSkins.embed.embedType == "DISABLE" then return end
 
 	if not self.embedCreated then
 		self:EmbedCreate()
@@ -89,8 +92,8 @@ function EMB:EmbedUpdate()
 	self:WindowResize()
 
 	if self:CheckEmbed("Omen") then self:EmbedOmen() end
-	if self:CheckEmbed("Skada") then self:EmbedSkada() end
 	if self:CheckEmbed("Recount") then self:EmbedRecount() end
+	if self:CheckEmbed("Skada") then self:EmbedSkada() end
 end
 
 function EMB:SetHooks()
@@ -115,7 +118,7 @@ function EMB:SetHooks()
 	end)
 
 	RightChatToggleButton:RegisterForClicks("AnyDown")
-	RightChatToggleButton:SetScript("OnClick", function(self, btn)
+	RightChatToggleButton:HookScript("OnClick", function(self, btn)
 		if btn == "RightButton" then
 			if E.db.addOnSkins.embed.rightChatPanel then
 				if EMB.mainFrame:IsShown() then
@@ -123,17 +126,6 @@ function EMB:SetHooks()
 				else
 					EMB.mainFrame:Show()
 				end
-			end
-		else
-			if E.db[self.parent:GetName().."Faded"] then
-				E.db[self.parent:GetName().."Faded"] = nil
-				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
-				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-			else
-				E.db[self.parent:GetName().."Faded"] = true
-				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
 			end
 		end
 		EMB:UpdateSwitchButton()
@@ -148,7 +140,7 @@ function EMB:SetHooks()
 	end)
 
 	LeftChatToggleButton:RegisterForClicks("AnyDown")
-	LeftChatToggleButton:SetScript("OnClick", function(self, btn)
+	LeftChatToggleButton:HookScript("OnClick", function(self, btn)
 		if btn == "RightButton" then
 			if not E.db.addOnSkins.embed.rightChatPanel then
 				if EMB.mainFrame:IsShown() then
@@ -156,17 +148,6 @@ function EMB:SetHooks()
 				else
 					EMB.mainFrame:Show()
 				end
-			end
-		else
-			if E.db[self.parent:GetName().."Faded"] then
-				E.db[self.parent:GetName().."Faded"] = nil
-				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
-				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-			else
-				E.db[self.parent:GetName().."Faded"] = true
-				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
 			end
 		end
 		EMB:UpdateSwitchButton()
@@ -179,43 +160,31 @@ function EMB:SetHooks()
 			EMB:UpdateSwitchButton()
 		end
 	end)
-
-	function HideLeftChat()
-		LeftChatToggleButton:Click()
-	end
-
-	function HideRightChat()
-		RightChatToggleButton:Click()
-	end
-
-	function HideBothChat()
-		LeftChatToggleButton:Click()
-		RightChatToggleButton:Click()
-	end
 end
 
 function EMB:WindowResize()
 	if not self.embedCreated then return end
 
+	local db = E.db.addOnSkins.embed
 	local SPACING = E.Border + E.Spacing
-	local chatPanel = self.db.rightChatPanel and RightChatPanel or LeftChatPanel
-	local chatTab = self.db.rightChatPanel and RightChatTab or LeftChatTab
-	local chatData = self.db.rightChatPanel and RightChatDataPanel or LeftChatToggleButton
+	local chatPanel = db.rightChatPanel and RightChatPanel or LeftChatPanel
+	local chatTab = db.rightChatPanel and RightChatTab or LeftChatTab
+	local chatData = db.rightChatPanel and RightChatDataPanel or LeftChatToggleButton
 	local topRight = chatData == RightChatDataPanel and (E.db.datatexts.rightChatPanel and "TOPLEFT" or "BOTTOMLEFT") or chatData == LeftChatToggleButton and (E.db.datatexts.leftChatPanel and "TOPLEFT" or "BOTTOMLEFT")
 	local yOffset = (chatData == RightChatDataPanel and E.db.datatexts.rightChatPanel and SPACING) or (chatData == LeftChatToggleButton and E.db.datatexts.leftChatPanel and SPACING) or 0
-	local xOffset = (E.db.chat.panelBackdrop == "RIGHT" and self.db.rightChatPanel and 0) or (E.db.chat.panelBackdrop == "LEFT" and not self.db.rightChatPanel and 0) or (E.db.chat.panelBackdrop == "SHOWBOTH" and 0) or E.Border*3 - E.Spacing
-	local isDouble = self.db.embedType == "DOUBLE"
+
+	local isDouble = db.embedType == "DOUBLE"
 
 	self.mainFrame:SetParent(chatPanel)
 	self.mainFrame:ClearAllPoints()
 
 	self.mainFrame:Point("BOTTOMLEFT", chatData, topRight, 0, yOffset)
-	self.mainFrame:Point("TOPRIGHT", chatTab, self.db.belowTopTab and "BOTTOMRIGHT" or "TOPRIGHT", xOffset, self.db.belowTopTab and -SPACING or 0)
+	self.mainFrame:Point("TOPRIGHT", chatTab, db.belowTopTab and "BOTTOMRIGHT" or "TOPRIGHT", 0, db.belowTopTab and -SPACING or 0)
 
 	if isDouble then
 		self.leftFrame:ClearAllPoints()
 		self.leftFrame:Point("TOPLEFT", self.mainFrame)
-		self.leftFrame:Point("BOTTOMRIGHT", self.mainFrame, "BOTTOMRIGHT", -(self.mainFrame:GetWidth() - self.db.leftWindowWidth  + SPACING), 0)
+		self.leftFrame:Point("BOTTOMRIGHT", self.mainFrame, "BOTTOMRIGHT", -(self.mainFrame:GetWidth() - db.leftWindowWidth  + SPACING), 0)
 
 		self.rightFrame:ClearAllPoints()
 		self.rightFrame:Point("TOPLEFT", self.leftFrame, "TOPRIGHT", SPACING, 0)
@@ -235,21 +204,22 @@ function EMB:WindowResize()
 end
 
 function EMB:UpdateSwitchButton()
-	local chatPanel = self.db.rightChatPanel and RightChatPanel or LeftChatPanel
-	local chatTab = self.db.rightChatPanel and RightChatTab or LeftChatTab
-	local isDouble = self.db.embedType == "DOUBLE"
+	local db = E.db.addOnSkins.embed
+	local chatPanel = db.rightChatPanel and RightChatPanel or LeftChatPanel
+	local chatTab = db.rightChatPanel and RightChatTab or LeftChatTab
+	local isDouble = db.embedType == "DOUBLE"
 
 	self.switchButton:SetParent(chatPanel)
 
-	if self.db.belowTopTab and chatPanel:IsShown() then
+	if db.belowTopTab and chatPanel:IsShown() then
 		self.switchButton:Show()
-		self.switchButton.text:SetText(isDouble and self.db.leftWindow.." / "..self.db.rightWindow or self.db.leftWindow)
+		self.switchButton.text:SetText(isDouble and db.leftWindow.." / "..db.rightWindow or db.leftWindow)
 		self.switchButton:ClearAllPoints()
 
 		if E.Chat.RightChatWindowID and _G["ChatFrame"..E.Chat.RightChatWindowID.."Tab"]:IsVisible() then
 			self.switchButton:Point("LEFT", _G["ChatFrame"..E.Chat.RightChatWindowID.."Tab"], "RIGHT", 0, 0)
 		else
-			self.switchButton:Point(self.db.rightChatPanel and "LEFT" or "RIGHT", chatTab, 5, 4)
+			self.switchButton:Point(db.rightChatPanel and "LEFT" or "RIGHT", chatTab, 5, 4)
 		end
 	elseif self.switchButton:IsShown() then
 		self.switchButton:Hide()
@@ -299,8 +269,8 @@ end
 if AS:CheckAddOn("Recount") then
 	function EMB:EmbedRecount()
 		local parent = self.leftFrame
-		if self.db.embedType == "DOUBLE" then
-			parent = self.db.rightWindow == "Recount" and self.rightFrame or self.leftFrame
+		if E.db.addOnSkins.embed.embedType == "DOUBLE" then
+			parent = E.db.addOnSkins.embed.rightWindow == "Recount" and self.rightFrame or self.leftFrame
 		end
 		parent.frameName = "Recount_MainWindow"
 
@@ -325,8 +295,8 @@ end
 if AS:CheckAddOn("Omen") then
 	function EMB:EmbedOmen()
 		local parent = self.leftFrame
-		if self.db.embedType == "DOUBLE" then
-			parent = self.db.rightWindow == "Omen" and self.rightFrame or self.leftFrame
+		if E.db.addOnSkins.embed.embedType == "DOUBLE" then
+			parent = E.db.addOnSkins.embed.rightWindow == "Omen" and self.rightFrame or self.leftFrame
 		end
 		parent.frameName = "OmenAnchor"
 
@@ -396,18 +366,19 @@ if AS:CheckAddOn("Skada") then
 			tinsert(self.skadaWindows, window)
 		end
 
+		local db = E.db.addOnSkins.embed
 		local numberToEmbed = 0
-		if self.db.embedType == "SINGLE" then
+		if db.embedType == "SINGLE" then
 			numberToEmbed = 1
-		elseif self.db.embedType == "DOUBLE" then
-			if self.db.rightWindow == "Skada" then numberToEmbed = numberToEmbed + 1 end
-			if self.db.leftWindow == "Skada" then numberToEmbed = numberToEmbed + 1 end
+		elseif db.embedType == "DOUBLE" then
+			if db.rightWindow == "Skada" then numberToEmbed = numberToEmbed + 1 end
+			if db.leftWindow == "Skada" then numberToEmbed = numberToEmbed + 1 end
 		end
 
 		if numberToEmbed == 1 then
 			local parent = self.leftFrame
-			if self.db.embedType == "DOUBLE" then
-				parent = self.db.rightWindow == "Skada" and self.rightFrame or self.leftFrame
+			if db.embedType == "DOUBLE" then
+				parent = db.rightWindow == "Skada" and self.rightFrame or self.leftFrame
 			end
 
 			EmbedWindow(self.skadaWindows[1], parent:GetWidth() -(E.Border*2), parent:GetHeight(), "TOPLEFT", parent, "TOPLEFT", E.Border, -E.Border)
@@ -419,11 +390,9 @@ if AS:CheckAddOn("Skada") then
 end
 
 function EMB:Initialize()
-	self.db = E.db.addOnSkins.embed
+	if E.db.addOnSkins.embed.embedType == "DISABLE" then return end
 
-	if self.db.embedType ~= "DISABLE" then
-		self:EmbedCreate()
-	end
+	self:EmbedCreate()
 end
 
 local function InitializeCallback()
