@@ -62,7 +62,7 @@ AS.addonList = {
 function AS:RegisterAddonOption(AddonName, options)
 	if select(6, GetAddOnInfo(AddonName)) == "MISSING" then return end
 
-	options.args.skins.args.addOns.args[AddonName] = {
+	options.args.addOns.args[AddonName] = {
 		type = "toggle",
 		name = AddonName,
 		desc = L["TOGGLESKIN_DESC"],
@@ -71,8 +71,6 @@ function AS:RegisterAddonOption(AddonName, options)
 end
 
 function AS:InsertOptions()
-	local ACD = E.Libs.AceConfigDialog
-
 	if not E.Options.args.elvuiPlugins then
 		E.Options.args.elvuiPlugins = {
 			order = 50,
@@ -93,35 +91,13 @@ function AS:InsertOptions()
 		name = "|cffff7000A|r|cffe5e3e3ddOn |r|cffff7000S|r|cffe5e3e3kins|r",
 		childGroups = "tab",
 		args = {
-			skins = {
+			addOns = {
 				order = 1,
 				type = "group",
-				name = L["Skins"],
-				childGroups = "tab",
-				args = {
-					addOns = {
-						order = 1,
-						type = "group",
-						name = L["AddOn Skins"],
-						get = function(info) return E.private.addOnSkins[info[#info]] end,
-						set = function(info, value) E.private.addOnSkins[info[#info]] = value E:StaticPopup_Show("PRIVATE_RL") end,
-						args = {}
-					},
-					blizzard = {
-						order = 2,
-						type = "group",
-						name = L["Blizzard Skins"],
-						get = function(info) return E.private.addOnSkins[info[#info]] end,
-						set = function(info, value) E.private.addOnSkins[info[#info]] = value E:StaticPopup_Show("PRIVATE_RL") end,
-						args = {
-							Blizzard_WorldStateFrame = {
-								type = "toggle",
-								name = L["WorldState Frame"],
-								desc = L["TOGGLESKIN_DESC"]
-							}
-						}
-					}
-				}
+				name = L["AddOn Skins"],
+				get = function(info) return E.private.addOnSkins[info[#info]] end,
+				set = function(info, value) E.private.addOnSkins[info[#info]] = value E:StaticPopup_Show("PRIVATE_RL") end,
+				args = {}
 			},
 			misc = {
 				order = 2,

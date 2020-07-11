@@ -5,7 +5,6 @@ if not L then return end
 L["AddOn Skins"] = "Скины аддонов"
 L["AuraBar Backdrop"] = true
 L["Bar Height"] = true
-L["Blizzard Skins"] = "Скины Blizzard"
 L["Double"] = "Двойной"
 L["Embed Below Top Tab"] = "Не перекрывать панель вкладок"
 L["Embed into Right Chat Panel"] = true
@@ -24,4 +23,3 @@ L["Title Backdrop"] = true
 L["Title Gloss Template"] = true
 L["Title Template"] = true
 L["WeakAura Cooldowns"] = true
-L["WorldState Frame"] = true
