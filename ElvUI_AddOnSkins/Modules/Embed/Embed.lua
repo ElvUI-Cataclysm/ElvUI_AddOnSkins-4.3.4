@@ -70,7 +70,7 @@ function EMB:EmbedHide()
 end
 
 function EMB:CheckEmbed(addon)
-	local left, right, embed = lower(self.db.leftWindow), lower(self.db.rightWindow), lower(addon)
+	local left, right, embed = lower(E.db.addOnSkins.embed.leftWindow), lower(E.db.addOnSkins.embed.rightWindow), lower(addon)
 
 	if AS:CheckAddOn(addon) and ((self.db.embedType == "SINGLE" and match(left, embed)) or self.db.embedType == "DOUBLE" and (match(left, embed) or match(right, embed))) then
 		return true
